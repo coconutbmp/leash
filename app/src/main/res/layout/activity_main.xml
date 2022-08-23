@@ -4,15 +4,251 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/hexagons"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imgCreditCard1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginTop="-30dp"
+        android:layout_marginEnd="-120dp"
+        android:adjustViewBounds="true"
+        android:rotation="-30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/samsungmoneycard" />
+
+    <ImageView
+        android:id="@+id/imgCreditCard2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-45dp"
+        android:layout_marginEnd="-120dp"
+        android:adjustViewBounds="true"
+        android:rotation="-15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/samsungmoneycard" />
+
+    <TextView
+        android:id="@+id/lblWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="64dp"
+        android:fontFamily="@font/convergence"
+        android:text="Welcome to Leash"
+        android:textColor="@color/shadow"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCreditCard1" />
+
+    <TextView
+        android:id="@+id/lblSlogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Keep a Leash on your finances"
+        android:textColor="@color/dark_grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblWelcome" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/facebookCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="32dp"
+        app:layout_constraintStart_toEndOf="@+id/googleCard"
+        app:layout_constraintTop_toBottomOf="@+id/lblSlogan">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_facebook" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/googleCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintStart_toEndOf="@+id/btnShowSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/lblSlogan">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_google_logo" />
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnShowSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/convergence"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:stateListAnimator="@null"
+        android:text="Sign In"
+        android:textAllCaps="false"
+        android:textColor="@color/shadow"
+        android:textSize="16sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSlogan" />
+
+    <Button
+        android:id="@+id/btnShowSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/convergence"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="@color/shadow"
+        android:textSize="16sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintStart_toEndOf="@+id/btnShowSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/lblSlogan" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/SignInCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:elevation="1dp"
+        android:visibility="invisible"
+        app:cardBackgroundColor="@color/smokey_white"
+        app:cardCornerRadius="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/convergence"
+                android:text="Sign In"
+                android:textAlignment="center"
+                android:textColor="@color/dark_grey"
+                android:textSize="34sp" />
+
+            <EditText
+                android:id="@+id/editTextTextEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:textColor="@color/shadow"
+                android:textColorHint="@color/dark_grey" />
+
+            <EditText
+                android:id="@+id/editTextTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:textColor="@color/shadow"
+                android:textColorHint="@color/dark_grey" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/convergence"
+                android:text="Sign In"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:cornerRadius="32dp" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:buttonTint="@color/shadow"
+                android:text="Remember Me"
+                android:textColor="@color/shadow"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/dark_grey" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Not Registered?"
+                android:textAlignment="center"
+                android:textColor="@color/dark_grey"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="Sign Up Here"
+                android:textAlignment="center"
+                android:textColor="@color/shadow"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
