@@ -1,2 +1,2 @@
 # leash
-[![coconutbmp](https://circleci.com/gh/coconutbmp/leash.svg?branch=circle-ci-test&style=shield)](https://circleci.com/gh/coconutbmp/leash)
+[![coconutbmp](https://circleci.com/gh/coconutbmp/leash/circle-ci-test?style=svg)](https://circleci.com/gh/coconutbmp/leash)
