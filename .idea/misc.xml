@@ -3,13 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_facebook.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_google_logo.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_home.xml" value="0.25" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_main.xml" value="0.25" />
       </map>
     </option>
   </component>

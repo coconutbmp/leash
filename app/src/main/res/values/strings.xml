@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Leash</string>
+    <string name="sign_up">Not Registered? <u>Sign Up</u></string>
+    <string name="sign_in">Already Registered? <u>Sign In</u></string>
 </resources>
