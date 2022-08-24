@@ -9,13 +9,29 @@ version: 2.1
 orbs:
   android: circleci/android@1.0.3
   codecov: codecov/codecov@3.2.3
+  browser-tools: circleci/browser-tools@1.2.3
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  upload-to-codecov:
+    build:
+      docker:
+        - image: cimg/openjdk:17.0-browsers
+      steps:
+      - build-and-test
+      - store-coverage-data
+      - upload-coverage
+
+commands:
+  store-coverage-data:
     steps:
-      - file: coverage/coverage-final.json
+      - store_artifacts:
+          path: coverage
+
+  upload-coverage:
+    steps:
+      - codecov/upload:
+          file: coverage/coverage-final.json
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test:
     # These next lines define the Android machine image executor.
@@ -47,11 +63,7 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  build-and-test: # This is the name of the workflow, feel free to change it to better match your workflow.
+  test: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - build-and-test
-  upload-to-codecov:
-    jobs:
-      - checkout
-      - codecov/upload
+      - build
