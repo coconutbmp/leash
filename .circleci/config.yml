@@ -46,8 +46,8 @@ jobs:
       docker:
         - image: cimg/openjdk:17.0-browsers
       steps:
-      - store-coverage-data
-      - upload-coverage
+        - store-coverage-data
+        - upload-coverage
 
 commands:
   store-coverage-data:
