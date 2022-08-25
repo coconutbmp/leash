@@ -58,7 +58,7 @@ commands:
   upload-coverage:
     steps:
       - codecov/upload:
-          file: coverage/coverage-final.json
+          file: leash/coverage/coverage-final.json
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
