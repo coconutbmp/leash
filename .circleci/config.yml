@@ -56,7 +56,6 @@ commands:
           path: coverage
 
   upload-coverage:
-    echo gonna try upload
     steps:
       - codecov/upload:
           file: coverage/coverage-final.json
