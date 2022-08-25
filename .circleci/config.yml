@@ -58,7 +58,6 @@ commands:
   upload-coverage:
     steps:
       - codecov/upload:
-          run: ls; echo "uploading"; 
           file: coverage/coverage-final.json
 
 # Invoke jobs via workflows
