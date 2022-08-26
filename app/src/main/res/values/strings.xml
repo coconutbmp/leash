@@ -13,7 +13,10 @@
     <string name="liability_name_hint">liability name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
+    <string name="loan_details_prompt">Loan Details:</string>
+    <string name="interest_details_prompt">Interest Details:</string>
+    <string name="rate_prompt">Rate:</string>
+
     <string-array name="predefined_categories">
         <item>Living Expenses</item>
         <item>Leisure</item>

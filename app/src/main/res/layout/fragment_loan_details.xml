@@ -16,7 +16,7 @@
             android:id="@+id/loan_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loan Details:"
+            android:text="@string/loan_details_prompt"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -59,8 +59,8 @@
                 android:id="@+id/principle_label2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Interest Details"
+                android:layout_marginStart="5dp"
+                android:text="@string/interest_details_prompt"
                 android:textSize="20sp" />
 
             <Spinner
@@ -80,9 +80,9 @@
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="Rate:"
+                    android:text="@string/rate_prompt"
                     android:textSize="18sp" />
 
                 <EditText
@@ -97,7 +97,7 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:text="%"
                     android:textSize="18sp" />
