@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/hexagons"
+    android:backgroundTint="#25CF5151"
+    android:backgroundTintMode="src_in"
     android:paddingLeft="10pt"
     android:paddingRight="10pt">
 
     <ScrollView
         android:layout_width="409dp"
         android:layout_height="729dp"
+        android:backgroundTint="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,12 +47,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:autofillHints=""
                     android:ems="10"
                     android:hint="@string/liability_name_hint"
                     android:inputType="textPersonName"
                     android:textColorHint="#78909C"
-                    android:textSize="20sp"
-                    android:autofillHints="" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
