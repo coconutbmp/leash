@@ -11,4 +11,36 @@
     <string name="category_prompt">Category :</string>
     <string name="type_prompt">Type :</string>
     <string name="liability_name_hint">liability name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string-array name="predefined_categories">
+        <item>Living Expenses</item>
+        <item>Leisure</item>
+        <item>Groceries</item>
+        <item>Gaming</item>
+        <item>Utility Bills</item>
+        <item>Water Bills</item>
+    </string-array>
+
+    <string-array name="liability_type">
+        <item>Loan</item>
+        <item>Recurring Payment</item>
+    </string-array>
+
+    <string-array name="interest_types">
+        <item>Types</item>
+        <item>Simple</item>
+        <item>Compound</item>
+    </string-array>
+    
+    <string-array name="calculation_frequencies">
+        <item>Select Frequency</item>
+        <item>Yearly</item>
+        <item>Monthly</item>
+        <item>Bi-Monthly</item>
+        <item>Quaterly</item>
+        <item>Weekly</item>
+        <item>Daily</item>
+    </string-array>
 </resources>

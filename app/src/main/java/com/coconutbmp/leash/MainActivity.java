@@ -3,6 +3,7 @@ package com.coconutbmp.leash;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    protected void changeAct(){
+        //todo: remove this temporary page change
+        Intent switchAct = new Intent(getBaseContext(), AddLiabilityActivity.class);
+        startActivity(switchAct);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         showSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 signUpCard.setVisibility(View.GONE);
                 signInCard.setVisibility(View.VISIBLE);
             }
@@ -35,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
         showSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signInCard.setVisibility(View.GONE);
-                signUpCard.setVisibility(View.VISIBLE);
+                changeAct();
+                //signInCard.setVisibility(View.GONE);
+                //signUpCard.setVisibility(View.VISIBLE);
             }
         });
 

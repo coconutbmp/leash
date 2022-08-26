@@ -8,7 +8,8 @@
     android:backgroundTint="#25CF5151"
     android:backgroundTintMode="src_in"
     android:paddingLeft="10pt"
-    android:paddingRight="10pt">
+    android:paddingRight="10pt"
+    tools:context=".AddLiabilityActivity">
 
     <ScrollView
         android:layout_width="409dp"
@@ -85,6 +86,7 @@
                         android:layout_marginRight="10pt"
                         android:layout_weight="1"
                         android:contentDescription="@string/select_cat"
+                        android:entries="@array/predefined_categories"
                         android:spinnerMode="dropdown" />
 
                     <Button
@@ -122,8 +124,15 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:contentDescription="@string/select_liability_type" />
+                    android:contentDescription="@string/select_liability_type"
+                    android:entries="@array/liability_type" />
             </LinearLayout>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+                android:name="com.coconutbmp.leash.AddLoanDetailsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </ScrollView>
