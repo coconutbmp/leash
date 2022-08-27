@@ -9,56 +9,99 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 public class MainActivity extends AppCompatActivity {
+    Button openSignIn, openSignUp;
+    ImageView closeSignIn, closeSignUp;
+    TextView moveSignIn, moveSignUp;
+    CardView SignInCard, SignUpCard, googleLogIn, facebookLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button showSignIn = findViewById(R.id.btnShowSignIn);
-        Button showSignUp = findViewById(R.id.btnShowSignUp);
-        ImageView closeSignIn = findViewById(R.id.imgCloseSignIn);
-        ImageView closeSignUp = findViewById(R.id.imgCloseSignUp);
-        TextView signUpFromSignIn = findViewById(R.id.lblOpenSignUp);
-        CardView signInCard = findViewById(R.id.SignInCard);
-        CardView signUpCard = findViewById(R.id.SignUpCard);
+        SignInCard = findViewById(R.id.SignInCard);
+        SignUpCard = findViewById(R.id.SignUpCard);
+        openSignIn = findViewById(R.id.btnShowSignIn);
+        openSignUp = findViewById(R.id.btnShowSignUp);
+        moveSignIn = findViewById(R.id.lblOpenSignIn);
+        moveSignUp = findViewById(R.id.lblOpenSignUp);
+        closeSignIn = findViewById(R.id.imgCloseSignIn);
+        closeSignUp = findViewById(R.id.imgCloseSignUp);
+        googleLogIn = findViewById(R.id.googleCard);
+        facebookLogIn = findViewById(R.id.facebookCard);
 
-        showSignIn.setOnClickListener(new View.OnClickListener() {
+        openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUpCard.setVisibility(View.GONE);
-                signInCard.setVisibility(View.VISIBLE);
+                SignInCard.setVisibility(View.VISIBLE);
+                SignUpCard.setVisibility(View.GONE);
+                openSignIn.setVisibility(View.GONE);
+                openSignUp.setVisibility(View.GONE);
+                googleLogIn.setVisibility(View.GONE);
+                facebookLogIn.setVisibility(View.GONE);
             }
         });
 
-        showSignUp.setOnClickListener(new View.OnClickListener() {
+        openSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signInCard.setVisibility(View.GONE);
-                signUpCard.setVisibility(View.VISIBLE);
+                SignUpCard.setVisibility(View.VISIBLE);
+                SignInCard.setVisibility(View.GONE);
+                openSignIn.setVisibility(View.GONE);
+                openSignUp.setVisibility(View.GONE);
+                googleLogIn.setVisibility(View.GONE);
+                facebookLogIn.setVisibility(View.GONE);
             }
         });
 
         closeSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signInCard.setVisibility(View.GONE);
+                SignUpCard.setVisibility(View.GONE);
+                SignInCard.setVisibility(View.GONE);
+                openSignIn.setVisibility(View.VISIBLE);
+                openSignUp.setVisibility(View.VISIBLE);
+                googleLogIn.setVisibility(View.VISIBLE);
+                facebookLogIn.setVisibility(View.VISIBLE);
             }
         });
 
         closeSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUpCard.setVisibility(View.GONE);
+                SignUpCard.setVisibility(View.GONE);
+                SignInCard.setVisibility(View.GONE);
+                openSignIn.setVisibility(View.VISIBLE);
+                openSignUp.setVisibility(View.VISIBLE);
+                googleLogIn.setVisibility(View.VISIBLE);
+                facebookLogIn.setVisibility(View.VISIBLE);
             }
         });
 
-        signUpFromSignIn.setOnClickListener(new View.OnClickListener() {
+        moveSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signInCard.setVisibility(View.GONE);
-                signUpCard.setVisibility(View.VISIBLE);
+                SignInCard.setVisibility(View.VISIBLE);
+                SignUpCard.setVisibility(View.GONE);
+                openSignIn.setVisibility(View.GONE);
+                openSignUp.setVisibility(View.GONE);
+                googleLogIn.setVisibility(View.GONE);
+                facebookLogIn.setVisibility(View.GONE);
+            }
+        });
+
+        moveSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignUpCard.setVisibility(View.VISIBLE);
+                SignInCard.setVisibility(View.GONE);
+                openSignIn.setVisibility(View.GONE);
+                openSignUp.setVisibility(View.GONE);
+                googleLogIn.setVisibility(View.GONE);
+                facebookLogIn.setVisibility(View.GONE);
             }
         });
     }

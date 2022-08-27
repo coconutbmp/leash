@@ -4,9 +4,9 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/shadow</item>
         <item name="colorPrimaryVariant">@color/dark_grey</item>
-        <item name="colorOnPrimary">@color/smokey_white</item>
+        <item name="colorOnPrimary">@color/grey</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/smokey_white</item>
+        <item name="colorSecondary">@color/grey</item>
         <item name="colorSecondaryVariant">@color/beige</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
