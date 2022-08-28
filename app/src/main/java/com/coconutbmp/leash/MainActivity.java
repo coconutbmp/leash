@@ -3,24 +3,30 @@ package com.coconutbmp.leash;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class MainActivity extends AppCompatActivity {
+    SharedPreferences prefs;
     Button openSignIn, openSignUp;
     ImageView closeSignIn, closeSignUp;
     TextView moveSignIn, moveSignUp;
     CardView SignInCard, SignUpCard, googleLogIn, facebookLogIn;
+    CheckBox StaySignedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         SignInCard = findViewById(R.id.SignInCard);
         SignUpCard = findViewById(R.id.SignUpCard);
@@ -32,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         closeSignUp = findViewById(R.id.imgCloseSignUp);
         googleLogIn = findViewById(R.id.googleCard);
         facebookLogIn = findViewById(R.id.facebookCard);
+        StaySignedIn = findViewById(R.id.cbxStaySignedIn);
+
+        StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
 
         openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +111,16 @@ public class MainActivity extends AppCompatActivity {
                 openSignUp.setVisibility(View.GONE);
                 googleLogIn.setVisibility(View.GONE);
                 facebookLogIn.setVisibility(View.GONE);
+            }
+        });
+
+        StaySignedIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = prefs.edit();
+                if(StaySignedIn.isChecked() == true){
+                    editor.putBoolean("StaySignedIn", true);
+                }
             }
         });
     }
