@@ -200,14 +200,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    boolean validateEmail(String email){
+    public boolean validateEmail(String email){
         if(!email.contains("@") || !email.contains(".")){
             return false;
         }
         return true;
     }
 
-    boolean validatePass(String pass){
+    public boolean validatePass(String pass){
         boolean capitalFlag = false, numFlag = false, lowerFlag = false;
         if(pass.length() < 8){
             return false;
