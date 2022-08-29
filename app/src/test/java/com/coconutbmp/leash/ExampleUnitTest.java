@@ -14,22 +14,4 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
-
-    @Test
-    public void incorrectEmail_noAt(){
-        MainActivity main = new MainActivity();
-        assertFalse(main.validateEmail("WrongEmail.com"));
-    }
-
-    @Test
-    public void incorrectEmail_noDot(){
-        MainActivity main = new MainActivity();
-        assertFalse(main.validateEmail("WrongEmail@gmailcom"));
-    }
-
-    @Test
-    public void correctEmail(){
-        MainActivity main = new MainActivity();
-        assertTrue(main.validateEmail("RightEmail@gmail.com"));
-    }
 }
