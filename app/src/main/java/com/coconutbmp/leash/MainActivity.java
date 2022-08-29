@@ -1,14 +1,18 @@
 package com.coconutbmp.leash;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences prefs;
@@ -139,6 +149,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        googleLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doGoogleLogIn();
+            }
+        });
+
         logInEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -152,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!validateEmail()){
+                if(!validateEmail(editable.toString())){
                     logInEmail.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 50), PorterDuff.Mode.SRC_ATOP);
                 }
                 else{
@@ -173,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!validatePass()){
+                if(!validatePass(editable.toString())){
                     logInPass.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 50), PorterDuff.Mode.SRC_ATOP);
                 }
                 else{
@@ -183,16 +200,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    boolean validateEmail(){
-        String email = logInEmail.getText().toString();
+    boolean validateEmail(String email){
         if(!email.contains("@") || !email.contains(".")){
             return false;
         }
         return true;
     }
 
-    boolean validatePass(){
-        String pass = logInPass.getText().toString();
+    boolean validatePass(String pass){
         boolean capitalFlag = false, numFlag = false, lowerFlag = false;
         if(pass.length() < 8){
             return false;
@@ -214,4 +229,30 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    void doGoogleLogIn(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null){
+            Toast.makeText(this, "logged in", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Intent googleSignIn = googleSignInClient.getSignInIntent();
+            startActivity(googleSignIn);
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(googleSignIn);
+
+            try {
+                account = task.getResult(ApiException.class);
+                Toast.makeText(this, "logged in", Toast.LENGTH_LONG).show();
+
+            } catch (ApiException e) {
+                // The ApiException status code indicates the detailed failure reason.
+                // Please refer to the GoogleSignInStatusCodes class reference for more information.
+                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+                Toast.makeText(this, "logged in", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 }
