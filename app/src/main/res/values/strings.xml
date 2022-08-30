@@ -16,6 +16,7 @@
     <string name="loan_details_prompt">Loan Details:</string>
     <string name="interest_details_prompt">Interest Details:</string>
     <string name="rate_prompt">Rate:</string>
+    <string name="recurring_payment_details_prompt">Recurring Payment Details:</string>
 
     <string-array name="predefined_categories">
         <item>Living Expenses</item>
@@ -36,7 +37,7 @@
         <item>Simple</item>
         <item>Compound</item>
     </string-array>
-    
+
     <string-array name="calculation_frequencies">
         <item>Select Frequency</item>
         <item>Yearly</item>

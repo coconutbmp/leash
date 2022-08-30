@@ -13,7 +13,7 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/loan_ll"
+            android:id="@+id/recurring_payment_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/loan_details_prompt"
@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/principle_label"
+                android:id="@+id/payment_amount_prompt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -146,7 +146,7 @@
                 android:textSize="20sp" />
 
             <LinearLayout
-                android:id="@+id/principle_ll"
+                android:id="@+id/start_date_ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
