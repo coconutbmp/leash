@@ -2,16 +2,26 @@ package com.coconutbmp.leash;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,15 +32,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
+    private static final String EMAIL = "email";
     SharedPreferences prefs;
     boolean validLogIn, validSignUp;
     Button openSignIn, openSignUp;
@@ -39,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     CardView SignInCard, SignUpCard, googleLogIn, facebookLogIn;
     CheckBox StaySignedIn;
     EditText logInEmail, logInPass;
+    ActivityResultLauncher<Intent> activityResultLauncher;
+    GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
         logInPass = findViewById(R.id.edtSignInPass);
 
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
+        activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        completeGoogleSignIn(data);
+                    }
+                }
+            }
+        );
 
         openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +192,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        facebookLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doFacebookLogIn();
+            }
+        });
+
         logInEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -232,27 +275,47 @@ public class MainActivity extends AppCompatActivity {
 
     void doGoogleLogIn(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInClient.signOut();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null){
+        Intent googleSignIn = googleSignInClient.getSignInIntent();
+        activityResultLauncher.launch(googleSignIn);
+    }
+
+    public void completeGoogleSignIn(Intent data){
+        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+        try {
+            GoogleSignInAccount account = task.getResult(ApiException.class);
             Toast.makeText(this, "logged in", Toast.LENGTH_LONG).show();
-        }
-        else{
-            Intent googleSignIn = googleSignInClient.getSignInIntent();
-            startActivity(googleSignIn);
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(googleSignIn);
 
-            try {
-                account = task.getResult(ApiException.class);
-                Toast.makeText(this, "logged in", Toast.LENGTH_LONG).show();
-
-            } catch (ApiException e) {
-                // The ApiException status code indicates the detailed failure reason.
-                // Please refer to the GoogleSignInStatusCodes class reference for more information.
-                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-                Toast.makeText(this, "logged in", Toast.LENGTH_LONG).show();
-            }
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult: failed code= " + e.getStatusCode() + e.getStatus().toString());
+            Toast.makeText(this, "failed", Toast.LENGTH_LONG).show();
         }
     }
+
+    public void doFacebookLogIn(){
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(@NonNull FacebookException e) {
+
+            }
+        });
+    }
+
 
 }

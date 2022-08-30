@@ -2,4 +2,7 @@
     <string name="app_name">Leash</string>
     <string name="sign_up">Not Registered? <u>Sign Up</u></string>
     <string name="sign_in">Already Registered? <u>Sign In</u></string>
+
+    <string name="facebook_app_id">1440156773128030</string>
+    <string name="fb_login_protocol_scheme">fb1440156773128030</string>
 </resources>
