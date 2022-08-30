@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         moveSignUp = findViewById(R.id.lblOpenSignUp);
         closeSignIn = findViewById(R.id.imgCloseSignIn);
         closeSignUp = findViewById(R.id.imgCloseSignUp);
+        signIn = findViewById(R.id.btnSignIn);
+        signUp = findViewById(R.id.btnRegister);
         googleLogIn = findViewById(R.id.googleCard);
         facebookLogIn = findViewById(R.id.facebookCard);
         StaySignedIn = findViewById(R.id.cbxStaySignedIn);
