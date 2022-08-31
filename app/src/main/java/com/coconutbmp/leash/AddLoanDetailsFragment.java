@@ -7,52 +7,32 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import org.json.JSONObject;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddLoanDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment for the loan section for the liability page
  */
-public class AddLoanDetailsFragment extends Fragment {
+public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    EditText principal_amt_edit;
+    EditText interest_rate_edit;
+    EditText begin_date_edit, end_date_edit;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    Spinner interest_type_spinner;
+    Spinner calculation_freq_spinner;
+    Spinner payment_freq_spinner;
+
 
     public AddLoanDetailsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoanDetails.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddLoanDetailsFragment newInstance(String param1, String param2) {
-        AddLoanDetailsFragment fragment = new AddLoanDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -60,5 +40,18 @@ public class AddLoanDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_loan_details, container, false);
+    }
+
+    @Override
+    public JSONObject getJSONRepresentation() throws Exception{
+        JSONObject rep = new JSONObject();
+        rep.put("principal_amt", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
+        rep.put("interest_type", interest_type_spinner.getSelectedItem());
+        rep.put("interest_rate_percent", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
+        rep.put("interest_calc_freq", calculation_freq_spinner.getSelectedItem());
+        rep.put("start_date", begin_date_edit.getText());
+        rep.put("end_date", begin_date_edit.getText());
+        rep.put("payment_frequency", payment_freq_spinner.getSelectedItem());
+        return rep;
     }
 }

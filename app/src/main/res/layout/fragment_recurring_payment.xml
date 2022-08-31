@@ -85,15 +85,15 @@
                 android:id="@+id/end_date_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Start Date:"
+                android:layout_marginStart="5dp"
+                android:text="@string/start_date_prompt"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/end_date_select"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:ems="10"
                 android:inputType="date" />
 
@@ -108,9 +108,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="Payment Fequency:"
+                android:text="@string/payment_frequency_prompt"
                 android:textSize="18sp" />
 
             <Spinner

@@ -9,10 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainer;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -30,15 +31,35 @@ public class AddLiabilityActivity extends AppCompatActivity {
 
     FragmentManager frag_man;
     FragmentTransaction frag_tran;
+    JSONObject json_rep;
 
+    private void createJSONRepresentation() throws Exception {
+        json_rep = new JSONObject();
+        json_rep.put("liability_name", name_edit.getText());
+        json_rep.put("liability_category", category_spinner.getSelectedItem());
+        json_rep.put("liability_type", liability_type_spinner.getSelectedItem());
+
+        LiabilityDetails details_container = (LiabilityDetails) frag_container;
+        JSONObject details = details_container.getJSONRepresentation();
+        for (int i = 0; i < Objects.requireNonNull(details.names()).length(); i++) {
+            json_rep.put(Objects.requireNonNull(details.names()).getString(i), details.get(details.names().getString(i)));
+        }
+
+        System.out.println(json_rep);
+    }
+
+    /**
+     *
+     * @param type liability type
+     *
+     * display fragment corresponding to the type of liability selected
+     *
+     */
     public void displayByContext(String type){
-        System.out.printf("\n\n %s \n\n", type);
-
         frag_man = getSupportFragmentManager();
-        frag_tran = frag_man.beginTransaction();
+        frag_tran = frag_man.beginTransaction(); // allows for switching elements with a fragment
 
         if(Objects.equals(type, "Loan")){
-            System.out.println("performing transaction");
             AddLoanDetailsFragment loan_frag = new AddLoanDetailsFragment();
             frag_tran.replace(frag_container.getId(), loan_frag).commit();
         } else if (Objects.equals(type, "Recurring Payment")){
@@ -61,13 +82,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
         name_edit = findViewById(R.id.name_edit);
         frag_container = findViewById(R.id.frag_container_ll);
 
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("olo");
-            }
-        });
-
+        cancel_button.setOnClickListener(view -> finish()); // close this activity when cancel clicked
 
         displayByContext(liability_type_spinner.getSelectedItem().toString());
 
@@ -84,6 +99,5 @@ public class AddLiabilityActivity extends AppCompatActivity {
                 System.out.println("nothing selected");
             }
         });
-
     }
 }

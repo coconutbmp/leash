@@ -7,13 +7,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import org.json.JSONObject;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddRecurringPaymentFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment for the recurring payment section for the liability page
+ * implements {@link LiabilityDetails}
  */
-public class AddRecurringPaymentFragment extends Fragment {
+public class AddRecurringPaymentFragment extends Fragment implements LiabilityDetails {
+
+    EditText rp_edit;
+    EditText begin_date_edit;
+    EditText end_date_edit;
+
+    Spinner payment_freq_spinner;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +70,17 @@ public class AddRecurringPaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recurring_payment, container, false);
+    }
+
+    @Override
+    public JSONObject getJSONRepresentation() throws Exception{
+        JSONObject rep = new JSONObject();
+
+        rep.put("recurring_payment_amt", Double.parseDouble(String.valueOf(rp_edit.getText())));
+        rep.put("payment_frequency", payment_freq_spinner.getSelectedItem());
+        rep.put("start_date", begin_date_edit.getText());
+        rep.put("end_date", end_date_edit.getText());
+
+        return rep;
     }
 }

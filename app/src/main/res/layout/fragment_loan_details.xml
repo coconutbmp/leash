@@ -37,7 +37,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editTextNumberDecimal"
+                android:id="@+id/principal_amt_edit"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
@@ -64,7 +64,7 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/interest_type_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
