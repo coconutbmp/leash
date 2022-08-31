@@ -40,6 +40,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -103,6 +107,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         );
+        InternetRequest internetRequest = new InternetRequest();
+        internetRequest.doRequest("http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/test.php",
+                this, "Liam",new RequestHandler() {
+                    @Override
+                    public void processResponse(String response) {
+                        String g = "";
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for(int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
+                                g = g + jsonObject.getString("name");
+                                Toast.makeText(MainActivity.this, g, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
 
         openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
