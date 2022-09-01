@@ -30,6 +30,8 @@ jobs:
       # The next step will run the unit tests
       - android/run-tests:
           test-command: ./gradlew lint testDebug --continue
+      - android/run-tests:
+          test-command: ./gradlew jacocoTestReport
 
       # Then start the emulator and run the Instrumentation tests!
       - android/start-emulator-and-run-tests:
@@ -37,8 +39,6 @@ jobs:
           system-image: system-images;android-25;google_apis;x86
 
       # And finally run the release build
-      - run:
-          - command: ./gradlew jacocoTestReport
       - run:
           name: Assemble release build
           command: |
