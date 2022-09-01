@@ -38,6 +38,8 @@ jobs:
 
       # And finally run the release build
       - run:
+          - command: ./gradlew jacocoTestReport
+      - run:
           name: Assemble release build
           command: |
             ./gradlew assembleRelease
@@ -58,7 +60,9 @@ commands:
   upload-coverage:
     steps:
       - codecov/upload:
-          file: coverage/coverage-final.json
+          file: 'app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+      - codecov/upload:
+          file: '/app/build/reports/coverage/androidTest/debug/report.xml'
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
