@@ -18,6 +18,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String EMAIL = "email";
     SharedPreferences prefs;
     Button openSignIn, openSignUp, signIn, signUp;
-    ImageView closeSignIn, closeSignUp;
+    ImageView closeSignIn, closeSignUp, signInShowPass, signUpShowPass, signUpShowConfirm;
     TextView moveSignIn, moveSignUp, invalidName, invalidSurname, invalidEmail,invalidPass, invalidConfirm;
     CardView SignInCard, SignUpCard, googleLogIn, facebookLogIn;
     CheckBox StaySignedIn;
@@ -93,8 +96,10 @@ public class MainActivity extends AppCompatActivity {
         invalidEmail = findViewById(R.id.lblInvalidEmail);
         invalidPass = findViewById(R.id.lblInvalidPass);
         invalidConfirm = findViewById(R.id.lblInvalidConfirm);
+        signInShowPass = findViewById(R.id.imgLogInViewPass);
 
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
+
         activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -107,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         );
+
         InternetRequest internetRequest = new InternetRequest();
         internetRequest.doRequest("http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/test.php",
                 this, "Liam",new RequestHandler() {
@@ -135,6 +141,13 @@ public class MainActivity extends AppCompatActivity {
                 openSignUp.setVisibility(View.GONE);
                 googleLogIn.setVisibility(View.GONE);
                 facebookLogIn.setVisibility(View.GONE);
+
+                if(StaySignedIn.isChecked()){
+                    String userEmail = prefs.getString("email", "");
+                    String userPass = prefs.getString("pass", "");
+                    logInEmail.setText(userEmail);
+                    logInPass.setText(userPass);
+                }
             }
         });
 
@@ -212,6 +225,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        signInShowPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePassVisibility(logInPass, signInShowPass);
+            }
+        });
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -248,7 +268,8 @@ public class MainActivity extends AppCompatActivity {
         facebookLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doFacebookLogIn();
+                Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(i);
             }
         });
 
@@ -484,5 +505,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void changePassVisibility(EditText edtPass, ImageView sender){
+        if(edtPass.getTransformationMethod() == HideReturnsTransformationMethod.getInstance()){
+            edtPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        }
+        else{
+            edtPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        }
     }
 }
