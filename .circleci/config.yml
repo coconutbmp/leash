@@ -27,23 +27,50 @@ jobs:
       # Checkout the code as the first step.
       - checkout
 
-      # The next step will run the unit tests
-      - android/run-tests:
-          test-command: ./gradlew lint testDebug --continue
-      - android/run-tests:
-          test-command: ./gradlew jacocoTestReport
-
-      # Then start the emulator and run the Instrumentation tests!
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-25;google_apis;x86
-
-      # And finally run the release build
+      # Create an AVD named "myavd"
+      - android/create-avd:
+          avd-name: myavd
+          system-image: system-images;android-30;google_apis;x86
+          install: true
+      # By default, after starting up the emulator, a cache will be restored,
+      # "./gradlew assembleDebugAndroidTest" will be run and then a script
+      # will be run to wait for the emulator to start up.
+      # Specify the "post-emulator-launch-assemble-command" command to override
+      # the gradle command run, or set "wait-for-emulator" to false to disable
+      # waiting for the emulator altogether.
+      - android/start-emulator:
+          avd-name: myavd
+          restore-gradle-cache-prefix: v1a
       - run:
-          name: Assemble release build
           command: |
-            ./gradlew assembleRelease
+            adb shell settings put global window_animation_scale 0.0
+            adb shell settings put global transition_animation_scale 0.0
+            adb shell settings put global animator_duration_scale 0.0
+            adb shell input keyevent 82
 
+
+          # The next step will run the unit tests
+          - android/run-tests:
+              test-command: ./gradlew lint testDebug
+          - android/run-tests:
+              test-command: ./gradlew connectedDebugAndroidTest
+          - run:
+              command: adb shell monkey -p com.coconutbmp.leash 1
+
+          # And finally run the release build
+          - run:
+              command: ./gradlew jacocoTestReport
+          - run:
+              name: Assemble release build
+              command: |
+                ./gradlew assembleRelease
+          - codecov/upload:
+              file: '/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+          - codecov/upload:
+              file: '/app/build/reports/coverage/androidTest/debug/report.xml'
+
+          - android/save-gradle-cache:
+              cache-prefix: v1a
   build:
       docker:
         - image: cimg/openjdk:17.0-browsers
@@ -55,7 +82,7 @@ commands:
   store-coverage-data:
     steps:
       - store_artifacts:
-          path: coverage
+          path: coverage/coverage_final.json
 
   upload-coverage:
     steps:
