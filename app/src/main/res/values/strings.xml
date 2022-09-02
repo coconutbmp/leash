@@ -5,4 +5,52 @@
 
     <string name="facebook_app_id">1440156773128030</string>
     <string name="fb_login_protocol_scheme">fb1440156773128030</string>
+    <string name="add">+</string>
+    <string name="select_cat">Select Category</string>
+    <string name="create_cat">Create New Custom Category</string>
+    <string name="add_liability_name">Add Liability Name</string>
+    <string name="select_liability_type">Select a Liability type</string>
+    <string name="name_prompt">Name :</string>
+    <string name="category_prompt">Category :</string>
+    <string name="type_prompt">Type :</string>
+    <string name="liability_name_hint">liability name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loan_details_prompt">Loan Details:</string>
+    <string name="interest_details_prompt">Interest Details:</string>
+    <string name="rate_prompt">Rate:</string>
+    <string name="recurring_payment_details_prompt">Recurring Payment Details:</string>
+    <string name="start_date_prompt">Start Date:</string>
+    <string name="payment_frequency_prompt">Payment Frequency:</string>
+    <string name="add_budget">Add Budget</string>
+
+    <string-array name="predefined_categories">
+        <item>Living Expenses</item>
+        <item>Leisure</item>
+        <item>Groceries</item>
+        <item>Gaming</item>
+        <item>Utility Bills</item>
+        <item>Water Bills</item>
+    </string-array>
+
+    <string-array name="liability_type">
+        <item>Loan</item>
+        <item>Recurring Payment</item>
+    </string-array>
+
+    <string-array name="interest_types">
+        <item>Types</item>
+        <item>Simple</item>
+        <item>Compound</item>
+    </string-array>
+
+    <string-array name="calculation_frequencies">
+        <item>Select Frequency</item>
+        <item>Yearly</item>
+        <item>Monthly</item>
+        <item>Bi-Monthly</item>
+        <item>Quaterly</item>
+        <item>Weekly</item>
+        <item>Daily</item>
+    </string-array>
 </resources>
