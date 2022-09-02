@@ -3,9 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_bank_sign_svgrepo_com.xml" value="0.1315" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1315" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1315" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.133" />
@@ -16,12 +13,16 @@
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_google_logo.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_leash.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_logo_foreground.xml" value="0.133" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_add_liability.xml" value="0.25" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/fragment_loan_details.xml" value="0.22" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/fragment_recurring_payment.xml" value="0.33" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/mipmap-anydpi-v26/ic_logo.xml" value="0.133" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_add_liability.xml" value="0.37771739130434784" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_home.xml" value="0.2" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_main.xml" value="0.4801587301587302" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/add_budget_activity.xml" value="0.19293478260869565" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/add_budget_dialog.xml" value="0.18" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/fragment_loan_details.xml" value="0.25" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/fragment_recurring_payment.xml" value="0.22" />
       </map>
     </option>
   </component>

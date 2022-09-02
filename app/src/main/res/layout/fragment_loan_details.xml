@@ -241,7 +241,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/textView2"
+                                android:id="@+id/loan_start_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -356,7 +356,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/textView3"
+                                android:id="@+id/loan_end_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
