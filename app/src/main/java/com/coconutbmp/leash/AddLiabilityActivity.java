@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -20,7 +21,7 @@ import java.util.Objects;
 public class AddLiabilityActivity extends AppCompatActivity {
 
     Button continue_button;
-    Button cancel_button;
+    CardView cancel_button;
 
     Spinner liability_type_spinner;
     Spinner category_spinner;
@@ -78,7 +79,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_liability);
 
-        cancel_button = findViewById(R.id.cancel_button);
+        cancel_button = findViewById(R.id.ReturnCard);
         continue_button = findViewById(R.id.continue_button);
         liability_type_spinner = findViewById(R.id.liability_type_spinner);
         category_spinner = findViewById(R.id.category_spinner);

@@ -26,6 +26,7 @@
     <string name="end_date_prompt">End Date:</string>
 
     <string-array name="predefined_categories">
+        <item> -- Category -- </item>
         <item>Living Expenses</item>
         <item>Leisure</item>
         <item>Groceries</item>
@@ -40,13 +41,13 @@
     </string-array>
 
     <string-array name="interest_types">
-        <item> -- Types -- </item>
+        <item> -- Type -- </item>
         <item>Simple</item>
         <item>Compound</item>
     </string-array>
 
     <string-array name="calculation_frequencies">
-        <item> -- Frequency -- </item>
+        <item> --Frequency-- </item>
         <item>Yearly</item>
         <item>Monthly</item>
         <item>Bi-Monthly</item>
