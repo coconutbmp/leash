@@ -51,9 +51,9 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         interest_type_spinner = view.findViewById(R.id.liability_type_spinner);
         calculation_freq_spinner = view.findViewById(R.id.calculation_freq_spinner);
         begin_date_edit = view.findViewById(R.id.loan_begin_date_edit);
-        end_date_edit = view.findViewById(R.id.end_date_select);
+        end_date_edit = view.findViewById(R.id.loan_repayment_edit);
         repayment_amount_edit = view.findViewById(R.id.loan_repayment_edit);
-        custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
+        //custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
 
         return view;
     }
@@ -62,7 +62,7 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
     public JSONObject getJSONRepresentation() throws Exception{
         JSONObject rep = new JSONObject();
         rep.put("principal_amt", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
-        rep.put("interest_type", interest_type_spinner.getSelectedItem());
+        rep.put("interest_type", interest_type_spinner.getSelectedItem().toString());
         rep.put("interest_rate_percent", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
         rep.put("interest_calc_freq", calculation_freq_spinner.getSelectedItem());
         rep.put("start_date", begin_date_edit.getText());

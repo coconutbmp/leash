@@ -69,7 +69,12 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recurring_payment, container, false);
+        View view = inflater.inflate(R.layout.fragment_recurring_payment, container, false);
+        rp_edit = view.findViewById(R.id.rp_edit);
+        payment_freq_spinner = view.findViewById(R.id.payment_freq_spinner);
+        begin_date_edit = view.findViewById(R.id.rp_begin_date_edit);
+        end_date_edit = view.findViewById(R.id.end_date_ll);
+        return view;
     }
 
     @Override

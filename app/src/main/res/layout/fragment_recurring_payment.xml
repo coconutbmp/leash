@@ -36,7 +36,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editTextNumberDecimal"
+                android:id="@+id/rp_edit"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
@@ -63,7 +63,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/loan_begin_date_edit"
+                android:id="@+id/rp_begin_date_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -86,11 +86,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="@string/start_date_prompt"
+                android:text="@string/end_date_prompt"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/end_date_select"
+                android:id="@+id/rp_end_date_select"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
