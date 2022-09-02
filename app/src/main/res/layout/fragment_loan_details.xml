@@ -238,7 +238,7 @@
                                 android:textSize="16sp" />
 
                             <Button
-                                android:id="@+id/button2"
+                                android:id="@+id/start_button"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -254,6 +254,7 @@
                     </LinearLayout>
 
                     <DatePicker
+                        android:id="@+id/loan_start_dp"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
@@ -358,7 +359,7 @@
                                 android:textSize="16sp" />
 
                             <Button
-                                android:id="@+id/button3"
+                                android:id="@+id/end_button"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -373,6 +374,7 @@
                     </LinearLayout>
 
                     <DatePicker
+                        android:id="@+id/loan_end_dp"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_margin="8dp"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,45 +24,16 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
     EditText rp_edit;
     TextView begin_date_edit, end_date_edit;
     Spinner payment_freq_spinner;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    Button start_button, end_button;
+    DatePicker start_dp, end_dp;
 
     public AddRecurringPaymentFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment recurring_payment_fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddRecurringPaymentFragment newInstance(String param1, String param2) {
-        AddRecurringPaymentFragment fragment = new AddRecurringPaymentFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -73,6 +45,16 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
         payment_freq_spinner = view.findViewById(R.id.payment_freq_spinner);
         begin_date_edit = view.findViewById(R.id.rp_start_label);
         end_date_edit = view.findViewById(R.id.rp_end_label);
+
+        start_button = view.findViewById(R.id.set_rp_start_date_button);
+        end_button = view.findViewById(R.id.set_rp_end_date_button);
+
+        start_dp = view.findViewById(R.id.loan_start_dp);
+        end_dp = view.findViewById(R.id.loan_end_dp);
+
+        start_button.setOnClickListener(v1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_edit));
+        end_button.setOnClickListener(v2 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_edit));
+
         return view;
     }
 
