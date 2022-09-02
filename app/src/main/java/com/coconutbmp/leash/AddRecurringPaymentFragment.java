@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 
@@ -19,11 +21,8 @@ import org.json.JSONObject;
 public class AddRecurringPaymentFragment extends Fragment implements LiabilityDetails {
 
     EditText rp_edit;
-    EditText begin_date_edit;
-    EditText end_date_edit;
-
+    TextView begin_date_edit, end_date_edit;
     Spinner payment_freq_spinner;
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,8 +71,8 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
         View view = inflater.inflate(R.layout.fragment_recurring_payment, container, false);
         rp_edit = view.findViewById(R.id.rp_edit);
         payment_freq_spinner = view.findViewById(R.id.payment_freq_spinner);
-        begin_date_edit = view.findViewById(R.id.rp_begin_date_edit);
-        end_date_edit = view.findViewById(R.id.end_date_ll);
+        begin_date_edit = view.findViewById(R.id.rp_start_label);
+        end_date_edit = view.findViewById(R.id.rp_end_label);
         return view;
     }
 

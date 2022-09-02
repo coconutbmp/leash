@@ -20,7 +20,7 @@
     <string name="interest_details_prompt">Interest Details:</string>
     <string name="rate_prompt">Rate:</string>
     <string name="recurring_payment_details_prompt">Recurring Payment Details:</string>
-    <string name="start_date_prompt">Start Date:</string>
+    <string name="start_date_prompt">When do payments start?</string>
     <string name="payment_frequency_prompt">Payment Frequency:</string>
     <string name="add_budget">Add Budget</string>
     <string name="end_date_prompt">End Date:</string>
@@ -40,13 +40,13 @@
     </string-array>
 
     <string-array name="interest_types">
-        <item>Types</item>
+        <item> -- Types -- </item>
         <item>Simple</item>
         <item>Compound</item>
     </string-array>
 
     <string-array name="calculation_frequencies">
-        <item>Select Frequency</item>
+        <item> -- Frequency -- </item>
         <item>Yearly</item>
         <item>Monthly</item>
         <item>Bi-Monthly</item>
