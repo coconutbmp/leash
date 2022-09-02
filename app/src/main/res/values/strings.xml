@@ -23,6 +23,7 @@
     <string name="start_date_prompt">When do payments start?</string>
     <string name="payment_frequency_prompt">Payment Frequency:</string>
     <string name="add_budget">Add Budget</string>
+    <string name="end_date_prompt">End Date:</string>
 
     <string-array name="predefined_categories">
         <item>Living Expenses</item>
