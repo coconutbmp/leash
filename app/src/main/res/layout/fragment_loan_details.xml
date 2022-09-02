@@ -91,7 +91,8 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="0.0" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -146,13 +147,10 @@
                 android:textSize="20sp" />
 
             <LinearLayout
-                android:id="@+id/start_date_ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/begin_date_label"
@@ -163,12 +161,22 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/begin_date_select"
+                    android:id="@+id/loan_begin_date_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:ems="10"
                     android:inputType="date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/start_date_ll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -191,6 +199,73 @@
                         android:layout_weight="1"
                         android:entries="@array/calculation_frequencies" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/loan_end_date_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="End Date:"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/loan_end_date_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="5dp"
+                        android:ems="10"
+                        android:inputType="date" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/repayment_amount_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:text="Repayment Amount:"
+                            android:textSize="20sp" />
+
+                        <Switch
+                            android:id="@+id/custom_value_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:text="Custom Amount" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/loan_repayment_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="0.00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"></LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

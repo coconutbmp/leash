@@ -22,6 +22,7 @@
     <string name="recurring_payment_details_prompt">Recurring Payment Details:</string>
     <string name="start_date_prompt">Start Date:</string>
     <string name="payment_frequency_prompt">Payment Frequency:</string>
+    <string name="add_budget">Add Budget</string>
 
     <string-array name="predefined_categories">
         <item>Living Expenses</item>

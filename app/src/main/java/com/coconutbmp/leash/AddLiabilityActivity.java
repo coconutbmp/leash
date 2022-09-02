@@ -32,6 +32,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
     FragmentManager frag_man;
     FragmentTransaction frag_tran;
     JSONObject json_rep;
+    LiabilityDetails ld_container;
 
     private void createJSONRepresentation() throws Exception {
         json_rep = new JSONObject();
@@ -39,7 +40,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
         json_rep.put("liability_category", category_spinner.getSelectedItem());
         json_rep.put("liability_type", liability_type_spinner.getSelectedItem());
 
-        LiabilityDetails details_container = (LiabilityDetails) frag_container;
+        LiabilityDetails details_container = ld_container;
         JSONObject details = details_container.getJSONRepresentation();
         for (int i = 0; i < Objects.requireNonNull(details.names()).length(); i++) {
             json_rep.put(Objects.requireNonNull(details.names()).getString(i), details.get(details.names().getString(i)));
@@ -61,9 +62,11 @@ public class AddLiabilityActivity extends AppCompatActivity {
 
         if(Objects.equals(type, "Loan")){
             AddLoanDetailsFragment loan_frag = new AddLoanDetailsFragment();
+            ld_container = loan_frag;
             frag_tran.replace(frag_container.getId(), loan_frag).commit();
         } else if (Objects.equals(type, "Recurring Payment")){
             AddRecurringPaymentFragment recurring_payment_frag = new AddRecurringPaymentFragment();
+            ld_container = recurring_payment_frag;
             frag_tran.replace(frag_container.getId(), recurring_payment_frag).commit();
         } else {
             System.out.println("failed");
@@ -83,7 +86,15 @@ public class AddLiabilityActivity extends AppCompatActivity {
         frag_container = findViewById(R.id.frag_container_ll);
 
         cancel_button.setOnClickListener(view -> finish()); // close this activity when cancel clicked
+        continue_button.setOnClickListener(view -> {
+            try{
+                createJSONRepresentation();
+            } catch (Exception e){
+                System.out.println("json parsing failed");
+                e.printStackTrace();
+            }
 
+        });
         displayByContext(liability_type_spinner.getSelectedItem().toString());
 
         liability_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
