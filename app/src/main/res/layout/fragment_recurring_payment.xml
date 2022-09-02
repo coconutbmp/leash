@@ -1,125 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".AddRecurringPaymentFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="72dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hexagons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/recurring_payment_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/recurring_payment_details_prompt"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:id="@+id/payment_freq_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/payment_amount_prompt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Ammount:"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/editTextNumberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                tools:text="0.00" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/start_date_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/begin_date_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Start Date:"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/loan_begin_date_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:ems="10"
-                android:inputType="date" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/end_date_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/end_date_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/start_date_prompt"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/end_date_select"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:ems="10"
-                android:inputType="date" />
-
-        </LinearLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="vertical">
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:text="@string/payment_frequency_prompt"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/payment_freq_spinner"
+                android:id="@+id/lblRecurringTitle"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:entries="@array/calculation_frequencies" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/convergence"
+                android:text="@string/recurring_payment_details_prompt"
+                android:textColor="@color/grey"
+                android:textSize="28sp" />
 
-    </LinearLayout>
-</FrameLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/beige"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/payment_freq_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblRecurringAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="How Much Must You Pay?"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/edtRecurringAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:ems="10"
+                        android:hint="0.00"
+                        android:inputType="numberDecimal"
+                        android:minHeight="48dp"
+                        android:textColor="@color/shadow"
+                        android:textColorHint="@color/dark_grey" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/beige"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/start_date_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblRecurringStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="When Do Payments Begin?"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/lblRecurringStartDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:text="00/00/0000"
+                            android:textSize="20sp" />
+
+                        <Button
+                            android:id="@+id/btnRecurringSetStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0"
+                            android:backgroundTint="@color/white"
+                            android:fontFamily="@font/convergence"
+                            android:text="Set Date"
+                            android:textAllCaps="false"
+                            android:textColor="@color/shadow"
+                            app:cornerRadius="16dp" />
+                    </LinearLayout>
+
+                    <DatePicker
+                        android:id="@+id/dtpRecurringStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="8dp"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/beige"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/end_date_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblRecurringEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="When Do Payments End?"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/lblRecurringEndDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:text="00/00/0000"
+                            android:textSize="20sp" />
+
+                        <Button
+                            android:id="@+id/btnRecurringSetEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0"
+                            android:backgroundTint="@color/white"
+                            android:fontFamily="@font/convergence"
+                            android:text="Set Date"
+                            android:textAllCaps="false"
+                            android:textColor="@color/shadow"
+                            app:cornerRadius="16dp" />
+                    </LinearLayout>
+
+                    <DatePicker
+                        android:id="@+id/dtpRecurringEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="8dp"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/RecurringFrequencyCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/beige"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblRecurringFrequency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="How Often Must You Make Payments?"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/sprRecurringFrequency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_weight="1"
+                        android:entries="@array/calculation_frequencies"
+                        android:minHeight="48dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

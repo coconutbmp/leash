@@ -1,274 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loan_fl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
     tools:context=".AddLoanDetailsFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="5dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="72dp"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/recurring_payment_label"
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="@color/smokey_white"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:src="@drawable/ic_baseline_arrow_back_24" />
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hexagons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/loan_details_prompt"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:id="@+id/payment_freq_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
-                android:id="@+id/payment_amount_prompt"
+                android:id="@+id/lblLoanTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Principal Amount"
-                android:textSize="20sp" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/convergence"
+                android:text="Loan Details"
+                android:textColor="@color/grey"
+                android:textSize="34sp" />
 
-            <EditText
-                android:id="@+id/principal_amt_edit"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                tools:text="0.00" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/interest_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/principle_label2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/interest_details_prompt"
-                android:textSize="20sp" />
-
-            <Spinner
-                android:id="@+id/interest_type_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:entries="@array/interest_types" />
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/rate_prompt"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/interest_rate_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:text="0.0" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="%"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:text="Incremented:"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/calculation_freq_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:entries="@array/calculation_frequencies" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/payment_details_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/principle_label4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Payment Details:"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/begin_date_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Start Date:"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/loan_begin_date_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:ems="10"
-                    android:inputType="date" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/start_date_ll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:orientation="vertical">
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/beige"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/payment_freq_ll"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:text="Incremented:"
-                        android:textSize="18sp" />
-
-                    <Spinner
-                        android:id="@+id/payment_freq_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:entries="@array/calculation_frequencies" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/loan_end_date_label"
+                        android:id="@+id/lblRecurringAmount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="End Date:"
-                        android:textSize="20sp" />
+                        android:text="Principal Amount"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="24sp" />
 
                     <EditText
-                        android:id="@+id/loan_end_date_edit"
+                        android:id="@+id/principal_amt_edit"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_margin="8dp"
+                        android:backgroundTint="@color/grey"
+                        android:backgroundTintMode="src_atop"
                         android:ems="10"
-                        android:inputType="date" />
+                        android:hint="0.00"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/shadow"
+                        android:textColorHint="@color/dark_grey" />
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/beige"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/interest_ll"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/principle_label2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Interest Details"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="24sp" />
+
+                    <Spinner
+                        android:id="@+id/interest_type_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:entries="@array/interest_types"
+                        android:minHeight="48dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_margin="4dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/repayment_amount_label"
+                            android:id="@+id/textView8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:text="Repayment Amount:"
-                            android:textSize="20sp" />
+                            android:text="@string/rate_prompt"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/shadow"
+                            android:textSize="16sp" />
 
-                        <Switch
-                            android:id="@+id/custom_value_switch"
+                        <EditText
+                            android:id="@+id/interest_rate_edit"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:text="Custom Amount" />
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:minHeight="48dp"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:text="0.0" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%"
+                            android:textColor="@color/shadow"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/loan_repayment_edit"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:editable="false"
-                        android:ems="10"
-                        android:inputType="numberDecimal"
-                        android:text="0.00" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Incremented:"
+                            android:textColor="@color/shadow"
+                            android:textSize="16sp" />
+
+                        <Spinner
+                            android:id="@+id/calculation_freq_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/calculation_frequencies"
+                            android:minHeight="48dp" />
+                    </LinearLayout>
+
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/beige"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/payment_details_ll"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="10dp"></LinearLayout>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/principle_label4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Payment Details"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/lblRecurringStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Start Date"
+                            android:textColor="@color/shadow"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/button2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/convergence"
+                            android:text="Set Date"
+                            android:textAllCaps="false"
+                            app:cornerRadius="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/start_date_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:text="Incremented:"
+                                android:textSize="18sp" />
+
+                            <Spinner
+                                android:id="@+id/sprRecurringFrequency"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:entries="@array/calculation_frequencies" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/loan_end_date_label"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="End Date:"
+                                android:textSize="20sp" />
+
+                            <EditText
+                                android:id="@+id/loan_end_date_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="5dp"
+                                android:ems="10"
+                                android:inputType="date" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/repayment_amount_label"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:text="Repayment Amount:"
+                                    android:textSize="20sp" />
+
+                                <Switch
+                                    android:id="@+id/custom_value_switch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:text="Custom Amount" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/loan_repayment_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:editable="false"
+                                android:ems="10"
+                                android:inputType="numberDecimal"
+                                android:text="0.00" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp"></LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-</FrameLayout>
+</LinearLayout>

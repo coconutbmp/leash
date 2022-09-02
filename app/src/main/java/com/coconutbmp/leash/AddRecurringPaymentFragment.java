@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -21,9 +22,7 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
     EditText rp_edit;
     EditText begin_date_edit;
     EditText end_date_edit;
-
     Spinner payment_freq_spinner;
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
