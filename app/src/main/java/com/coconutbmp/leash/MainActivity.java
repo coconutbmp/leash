@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     EditText logInEmail, logInPass, signUpName, signUpSurname, signUpEmail, signUpPass, signUpPassConfirm;
     ActivityResultLauncher<Intent> activityResultLauncher;
     GoogleSignInClient googleSignInClient;
+    InternetRequest internetRequest;
+    String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
         signInShowPass = findViewById(R.id.imgLogInViewPass);
 
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
-        InternetRequest internetRequest = new InternetRequest();
+        internetRequest = new InternetRequest();
+        Intent home = new Intent(MainActivity.this, HomeActivity.class);
 
         activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -222,7 +225,38 @@ public class MainActivity extends AppCompatActivity {
                 String email = logInEmail.getText().toString();
                 String pass = logInPass.getText().toString();
                 if(loginUtils.validateEmail(email) && loginUtils.validatePass(pass, null)){
-                    // add database stuff here
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("email", email);
+                        internetRequest.doRequest(url+"login.php", MainActivity.this, jsonObject, new RequestHandler() {
+                            @Override
+                            public void processResponse(String response) {
+                                try {
+                                    boolean valid = false;
+                                    JSONArray jsonArray = new JSONArray(response);
+                                    for (int i = 0; i < jsonArray.length(); i ++){
+                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                        if (jsonObject.getString("user_Password").equals(pass)){
+                                            valid = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if(valid){
+                                        Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                                        startActivity(i);
+                                    }
+                                    else{
+                                        Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -235,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
                 String email = signUpEmail.getText().toString();
                 String pass = signUpPass.getText().toString();
                 String confirmPass = signUpPassConfirm.getText().toString();
+
                 boolean valid = loginUtils.validateName(name)
                         && loginUtils.validateName(surname)
                         && loginUtils.validateEmail(email)
@@ -248,19 +283,18 @@ public class MainActivity extends AppCompatActivity {
                         jsonObject.put("LName", surname);
                         jsonObject.put("email", email);
                         jsonObject.put("pass", pass);
-                        internetRequest.doRequest("http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/register.php",
-                                MainActivity.this, jsonObject, new RequestHandler() {
-                                    @Override
-                                    public void processResponse(String response) {
-                                        if(response.equals("Success")){
-                                            Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                                            startActivity(i);
-                                        }
-                                        else{
-                                            Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
+                        internetRequest.doRequest(url+"register.php", MainActivity.this, jsonObject, new RequestHandler() {
+                            @Override
+                            public void processResponse(String response) {
+                                if(response.equals("Success")){
+                                    Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
+                                    startActivity(home);
+                                }
+                                else{
+                                    Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -423,27 +457,25 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
-            String password = prefs.getString("pass", "N/A");
+            String password = prefs.getString("googlePass", "googlePass");
             String name = account.getGivenName();
             String surname = account.getFamilyName();
             String email = account.getEmail();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("email", email);
+            internetRequest.doRequest(url + "login.php", MainActivity.this, jsonObject, new RequestHandler() {
+                @Override
+                public void processResponse(String response) {
 
-            if(password.equals("N/A")){ //if user not in database, make up a pass for database
-                //put database stuff here
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("pass", password);//store password locally for next time
-                editor.commit();
-            }
-            else{ //else sign in
-                //put database stuff here
-            }
-
-            Toast.makeText(this, "Welcome "+name+" "+surname, Toast.LENGTH_LONG).show();
+                }
+            });
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             Log.w(TAG, "signInResult: failed code= " + e.getStatusCode() + e.getStatus().toString());
             Toast.makeText(this, "Unexpected Error", Toast.LENGTH_LONG).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
