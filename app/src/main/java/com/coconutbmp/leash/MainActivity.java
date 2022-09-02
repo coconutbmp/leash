@@ -46,6 +46,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         signInShowPass = findViewById(R.id.imgLogInViewPass);
 
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
+        InternetRequest internetRequest = new InternetRequest();
 
         activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -112,25 +115,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         );
-
-        InternetRequest internetRequest = new InternetRequest();
-        internetRequest.doRequest("http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/test.php",
-                this, "Liam",new RequestHandler() {
-                    @Override
-                    public void processResponse(String response) {
-                        String g = "";
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for(int i = 0; i < jsonArray.length(); i++){
-                                JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
-                                g = g + jsonObject.getString("name");
-                                Toast.makeText(MainActivity.this, g, Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
 
         openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = logInEmail.getText().toString();
                 String pass = logInPass.getText().toString();
-                if(validateEmail(email) && validatePass(pass, null)){
+                if(loginUtils.validateEmail(email) && loginUtils.validatePass(pass, null)){
                     // add database stuff here
                 }
             }
@@ -251,9 +235,35 @@ public class MainActivity extends AppCompatActivity {
                 String email = signUpEmail.getText().toString();
                 String pass = signUpPass.getText().toString();
                 String confirmPass = signUpPassConfirm.getText().toString();
+                boolean valid = loginUtils.validateName(name)
+                        && loginUtils.validateName(surname)
+                        && loginUtils.validateEmail(email)
+                        && loginUtils.validatePass(pass, null)
+                        && loginUtils.validatePass(pass, confirmPass);
 
-                if(validateName(name) && validateName(surname) && validateEmail(email) && validatePass(pass, null) && validatePass(pass, confirmPass)){
-                    // add database stuff here
+                if(valid){
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("FName", name);
+                        jsonObject.put("LName", surname);
+                        jsonObject.put("email", email);
+                        jsonObject.put("pass", pass);
+                        internetRequest.doRequest("http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/register.php",
+                                MainActivity.this, jsonObject, new RequestHandler() {
+                                    @Override
+                                    public void processResponse(String response) {
+                                        if(response.equals("Success")){
+                                            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                                            startActivity(i);
+                                        }
+                                        else{
+                                            Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -281,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!validateName(charSequence.toString())){
+                if(!loginUtils.validateName(charSequence.toString())){
                     signUpName.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
                     invalidName.getLayoutParams().height = 30;
                 }
@@ -306,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!validateName(charSequence.toString())){
+                if(!loginUtils.validateName(charSequence.toString())){
                     signUpSurname.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
                     invalidSurname.getLayoutParams().height = 30;
                 }
@@ -331,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!validateEmail(charSequence.toString())){
+                if(!loginUtils.validateEmail(charSequence.toString())){
                     signUpEmail.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
                     invalidEmail.getLayoutParams().height = 30;
                 }
@@ -356,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!validatePass(charSequence.toString(), null)){
+                if(!loginUtils.validatePass(charSequence.toString(), null)){
                     signUpPass.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
                     invalidPass.getLayoutParams().height = 30;
                 }
@@ -381,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!validatePass(charSequence.toString(), signUpPass.getText().toString())){
+                if(!loginUtils.validatePass(charSequence.toString(), signUpPass.getText().toString())){
                     signUpPassConfirm.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
                     invalidConfirm.getLayoutParams().height = 30;
                 }
@@ -397,56 +407,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    static public boolean validateName(String name){
-        Pattern special = Pattern.compile("[!@#$%^&*()_+=|<>?{}\\[\\]~/`-]");
-        Matcher isSpecial = special.matcher(name);
-        if(name.isEmpty() || isSpecial.find()){
-            return false;
-        }
-        for (int i = 0; i < name.length(); i++){
-            char c = name.charAt(i);
-            if(Character.isDigit(c)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    static public boolean validateEmail(String email){
-        if(email.isEmpty() || !email.contains("@") || !email.contains(".")){
-            return false;
-        }
-        return true;
-    }
-
-    static public boolean validatePass(String pass, String confirm){
-        boolean capitalFlag = false, numFlag = false, lowerFlag = false;
-        if(confirm == null){
-            if(pass.length() < 8){
-                return false;
-            }
-            for (int i = 0; i < pass.length(); i++){
-                char c = pass.charAt(i);
-                if(Character.isUpperCase(c)){
-                    capitalFlag = true;
-                }
-                else if(Character.isDigit(c)){
-                    numFlag = true;
-                }
-                else if(Character.isLowerCase(c)){
-                    lowerFlag = true;
-                }
-            }
-            if(!capitalFlag || !lowerFlag || !numFlag){
-                return false;
-            }
-        }
-        else if(!confirm.equals(pass)){
-            return false;
-        }
-        return true;
     }
 
     public void doGoogleLogIn(){

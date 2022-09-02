@@ -8,16 +8,16 @@ import org.junit.Test;
 public class SignInTests {
     @Test
     public void incorrectEmail_noAt(){
-        assertFalse(MainActivity.validateEmail("WrongEmail.com"));
+        assertFalse(loginUtils.validateEmail("WrongEmail.com"));
     }
 
     @Test
     public void incorrectEmail_noDot(){
-        assertFalse(MainActivity.validateEmail("WrongEmail@gmailcom"));
+        assertFalse(loginUtils.validateEmail("WrongEmail@gmailcom"));
     }
 
     @Test
     public void correctEmail(){
-        assertTrue(MainActivity.validateEmail("RightEmail@gmail.com"));
+        assertTrue(loginUtils.validateEmail("RightEmail@gmail.com"));
     }
 }
