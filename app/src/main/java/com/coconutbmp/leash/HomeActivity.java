@@ -16,12 +16,21 @@ import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity {
 
-    CardView add_budget_button;
+    CardView add_budget_button, btnAdd;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setDate();
+
+        btnAdd = findViewById(R.id.btnAdd);
+
+        btnAdd.setOnClickListener(view -> {
+            AddBudgetDialogue dialogue = new AddBudgetDialogue(this);
+            dialogue.show();
+        });
+
         add_budget_button = findViewById(R.id.add_budget_card);
         add_budget_button.setOnClickListener(click -> {
             Intent i = new Intent(this, AddLiabilityActivity.class);
