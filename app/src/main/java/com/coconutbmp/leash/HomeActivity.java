@@ -26,12 +26,6 @@ public class HomeActivity extends AppCompatActivity {
             AddBudgetDialogue dialogue = new AddBudgetDialogue(this);
             dialogue.show();
         });
-
-        add_budget_button = findViewById(R.id.add_budget_card);
-        add_budget_button.setOnClickListener(click -> {
-            Intent i = new Intent(this, AddLiabilityActivity.class);
-            startActivity(i);
-        });
     }
 
     public void setDate(){

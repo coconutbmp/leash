@@ -34,7 +34,6 @@ public class AddToBudgetDialogue extends Dialog {
             Intent i = new Intent(this.getContext(), AddLiabilityActivity.class);
             i.putExtra("budget_name", budget_name);
             this.getContext().startActivity(i);
-            //todo: pass budget details to the liability page.
         });
 
         //todo: set up transitions to income and transaction pages.

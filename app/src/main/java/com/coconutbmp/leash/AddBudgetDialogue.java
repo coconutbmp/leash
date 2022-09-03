@@ -34,7 +34,7 @@ public class AddBudgetDialogue extends Dialog {
             if (budget_name_edit.getText().length() > 0){
                 //todo: add code to add the budget to the users account
                 Intent i = new Intent(this.getContext(), Budget.class);
-                i.putExtra("budget_name", budget_name_edit.getText());
+                i.putExtra("budget_name", budget_name_edit.getText().toString());
                 this.getContext().startActivity(i);
             }
 
