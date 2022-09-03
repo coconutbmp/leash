@@ -2,16 +2,12 @@ package com.coconutbmp.leash;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity {
@@ -24,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setDate();
 
-        btnAdd = findViewById(R.id.btnAdd);
+        btnAdd = findViewById(R.id.btnAddSomething);
 
         btnAdd.setOnClickListener(view -> {
             AddBudgetDialogue dialogue = new AddBudgetDialogue(this);

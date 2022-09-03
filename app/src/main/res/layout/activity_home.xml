@@ -87,7 +87,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btnAdd"
+                android:id="@+id/btnAddSomething"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -124,7 +124,7 @@
                 app:cardCornerRadius="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnAdd">
+                app:layout_constraintTop_toBottomOf="@+id/btnAddSomething">
 
                 <ImageView
                     android:id="@+id/imageView2"
