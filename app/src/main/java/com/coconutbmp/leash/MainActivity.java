@@ -55,7 +55,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String EMAIL = "email";
     SharedPreferences prefs;
     Button openSignIn, openSignUp, signIn, signUp;
     ImageView closeSignIn, closeSignUp, signInShowPass, signUpShowPass, signUpShowConfirm;
@@ -546,7 +545,6 @@ public class MainActivity extends AppCompatActivity {
             String email = account.getEmail();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", email);
-            final boolean[] exists = {false};
             Intent home = new Intent(MainActivity.this, HomeActivity.class);
 
             internetRequest.doRequest(url + "login.php", MainActivity.this, jsonObject, new RequestHandler() {
