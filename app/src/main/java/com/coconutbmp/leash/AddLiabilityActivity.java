@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -34,6 +36,46 @@ public class AddLiabilityActivity extends AppCompatActivity {
     FragmentTransaction frag_tran;
     JSONObject json_rep;
     LiabilityDetails ld_container;
+
+    /**
+     *
+     * @param sender
+     * @param target_dp
+     * @param target_tv
+     *
+     *  if the "set date" buttons' text is set to "set date" then
+     *      set the height of the date picker to 150dp;
+     *      change the button text to "save"
+     *  else if its "save" then
+     *      set the textview to then selected date and set the button text to "set date"
+     */
+    public static void select_date(Button sender, DatePicker target_dp, TextView target_tv){
+        String save = "Save";
+        String set = "Set Date";
+        try {
+            if (sender.getText().equals(save)) {
+                sender.setText(set);
+                target_dp.getLayoutParams().height = 0;
+
+                String resulting_date = Integer.toString(target_dp.getYear());
+                resulting_date = Integer.toString(target_dp.getMonth()) + "/" + resulting_date;
+                resulting_date = Integer.toString(target_dp.getDayOfMonth()) + "/" + resulting_date;
+
+                target_tv.setText(resulting_date);
+
+
+            } else if (sender.getText().equals(set)) {
+                System.out.println("<- olo ->");
+                sender.setText(save);
+                // convert 150 dp to pixels
+                final float scale = sender.getContext().getResources().getDisplayMetrics().density;
+                int pixels = (int) (150 * scale + 0.5f);
+                target_dp.getLayoutParams().height = pixels;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     private void createJSONRepresentation() throws Exception {
         json_rep = new JSONObject();

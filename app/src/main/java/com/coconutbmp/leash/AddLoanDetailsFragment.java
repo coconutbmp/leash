@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -28,6 +30,9 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
     Spinner interest_type_spinner;
     Spinner calculation_freq_spinner;
     Spinner payment_freq_spinner;
+
+    Button end_button, start_button;
+    DatePicker end_dp, start_dp;
 
     SwitchCompat custom_repayment_switch;
 
@@ -54,6 +59,16 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         begin_date_edit = view.findViewById(R.id.loan_start_label);
         end_date_edit = view.findViewById(R.id.loan_end_label);
         repayment_amount_edit = view.findViewById(R.id.loan_repayment_edit);
+
+        start_button = view.findViewById(R.id.start_button);
+        end_button = view.findViewById(R.id.end_button);
+
+        start_dp = view.findViewById(R.id.loan_start_dp);
+        end_dp = view.findViewById(R.id.loan_end_dp);
+
+        start_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_edit));
+        end_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_edit));
+
         //custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
 
         return view;

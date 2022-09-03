@@ -131,7 +131,7 @@
                             android:textSize="20sp" />
 
                         <Button
-                            android:id="@+id/button5"
+                            android:id="@+id/set_rp_start_date_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
@@ -145,6 +145,7 @@
                     </LinearLayout>
 
                     <DatePicker
+                        android:id="@+id/start_dp"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
@@ -195,7 +196,7 @@
                             android:textSize="20sp" />
 
                         <Button
-                            android:id="@+id/button6"
+                            android:id="@+id/set_rp_end_date_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
@@ -209,6 +210,7 @@
                     </LinearLayout>
 
                     <DatePicker
+                        android:id="@+id/end_dp"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
