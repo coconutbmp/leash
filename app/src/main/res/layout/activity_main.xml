@@ -145,8 +145,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -207,17 +206,18 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
+                android:tag="hidden"
                 android:textColor="@color/shadow"
                 android:textColorHint="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtSignInEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/lblInvalidLoginEmail" />
 
             <Button
                 android:id="@+id/btnSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/white"
                 android:text="Sign In"
                 android:textAllCaps="false"
@@ -228,25 +228,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cbxStaySignedIn" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="48dp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
-
             <TextView
                 android:id="@+id/lblOpenSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/sign_up"
@@ -255,57 +242,20 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/smokey_white"
-                app:cardCornerRadius="24dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView"
-                app:layout_constraintStart_toStartOf="@+id/divider"
-                app:layout_constraintTop_toBottomOf="@+id/divider">
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/ic_google_logo" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/smokey_white"
-                app:cardCornerRadius="24dp"
-                app:layout_constraintEnd_toEndOf="@+id/divider"
-                app:layout_constraintStart_toEndOf="@+id/cardView3"
-                app:layout_constraintTop_toBottomOf="@+id/divider">
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_facebook" />
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
 
             <CheckBox
                 android:id="@+id/cbxStaySignedIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:buttonTint="@color/shadow"
                 android:fontFamily="@font/convergence"
                 android:text="Remember Me"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtSignInPass" />
+                app:layout_constraintTop_toBottomOf="@+id/lblInvalidLoginPass" />
 
             <ImageView
                 android:id="@+id/imgLogInViewPass"
@@ -315,6 +265,27 @@
                 app:layout_constraintStart_toEndOf="@+id/edtSignInPass"
                 app:layout_constraintTop_toTopOf="@+id/edtSignInPass"
                 app:srcCompat="@drawable/ic_baseline_visibility_24" />
+
+            <TextView
+                android:id="@+id/lblInvalidLoginEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:text="Invalid Email"
+                android:textColor="#C62828"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/edtSignInEmail"
+                app:layout_constraintTop_toBottomOf="@+id/edtSignInEmail" />
+
+            <TextView
+                android:id="@+id/lblInvalidLoginPass"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:text="Password must be at least 8 characters and contain A-Z, a-z, 0-9"
+                android:textColor="#C62828"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/edtSignInPass"
+                app:layout_constraintTop_toBottomOf="@+id/edtSignInPass" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -366,9 +337,9 @@
                 android:id="@+id/edtSignUpName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/grey"
                 android:ems="10"
                 android:hint="Name"
@@ -384,9 +355,9 @@
                 android:id="@+id/edtSignUpSurname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/grey"
                 android:ems="10"
                 android:hint="Surname"
@@ -402,9 +373,9 @@
                 android:id="@+id/edtSignUpEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/grey"
                 android:ems="10"
                 android:hint="Email"
@@ -420,14 +391,15 @@
                 android:id="@+id/edtSignUpPass"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/grey"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
+                android:tag="hidden"
                 android:textColor="@color/shadow"
                 android:textColorHint="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -438,14 +410,15 @@
                 android:id="@+id/edtSignUpConfirmPass"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/grey"
                 android:ems="10"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
+                android:tag="hidden"
                 android:textColor="@color/shadow"
                 android:textColorHint="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -468,55 +441,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblInvalidConfirm" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/smokey_white"
-                app:cardCornerRadius="24dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView4"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/divider2">
-
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/ic_google_logo" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/smokey_white"
-                app:cardCornerRadius="24dp"
-                app:layout_constraintEnd_toEndOf="@+id/divider2"
-                app:layout_constraintStart_toEndOf="@+id/cardView6"
-                app:layout_constraintTop_toBottomOf="@+id/divider2">
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_facebook" />
-            </androidx.cardview.widget.CardView>
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="48dp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
-
             <TextView
                 android:id="@+id/lblOpenSignIn"
                 android:layout_width="wrap_content"
@@ -528,7 +452,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView6" />
+                app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
             <TextView
                 android:id="@+id/lblInvalidPass"
@@ -583,6 +507,24 @@
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@+id/edtSignUpConfirmPass"
                 app:layout_constraintTop_toBottomOf="@+id/edtSignUpConfirmPass" />
+
+            <ImageView
+                android:id="@+id/imgShowSignInPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/edtSignUpPass"
+                app:layout_constraintStart_toEndOf="@+id/edtSignUpPass"
+                app:layout_constraintTop_toBottomOf="@+id/edtSignUpEmail"
+                app:srcCompat="@drawable/ic_baseline_visibility_24" />
+
+            <ImageView
+                android:id="@+id/imgShowSignInConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/edtSignUpConfirmPass"
+                app:layout_constraintStart_toEndOf="@+id/edtSignUpConfirmPass"
+                app:layout_constraintTop_toBottomOf="@+id/lblInvalidPass"
+                app:srcCompat="@drawable/ic_baseline_visibility_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

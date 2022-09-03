@@ -55,11 +55,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String EMAIL = "email";
     SharedPreferences prefs;
     Button openSignIn, openSignUp, signIn, signUp;
     ImageView closeSignIn, closeSignUp, signInShowPass, signUpShowPass, signUpShowConfirm;
-    TextView moveSignIn, moveSignUp, invalidName, invalidSurname, invalidEmail,invalidPass, invalidConfirm;
+    TextView moveSignIn, moveSignUp, invalidName, invalidSurname, invalidEmail,invalidPass, invalidConfirm, invalidLoginEmail, invalidLoginPass;
     CardView SignInCard, SignUpCard, googleLogIn, facebookLogIn;
     CheckBox StaySignedIn;
     EditText logInEmail, logInPass, signUpName, signUpSurname, signUpEmail, signUpPass, signUpPassConfirm;
@@ -100,9 +99,21 @@ public class MainActivity extends AppCompatActivity {
         invalidEmail = findViewById(R.id.lblInvalidEmail);
         invalidPass = findViewById(R.id.lblInvalidPass);
         invalidConfirm = findViewById(R.id.lblInvalidConfirm);
+        invalidLoginEmail = findViewById(R.id.lblInvalidLoginEmail);
+        invalidLoginPass = findViewById(R.id.lblInvalidLoginPass);
         signInShowPass = findViewById(R.id.imgLogInViewPass);
+        signUpShowPass = findViewById(R.id.imgShowSignInPass);
+        signUpShowConfirm = findViewById(R.id.imgShowSignInConfirm);
 
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
+
+        if(StaySignedIn.isChecked()){
+            String userEmail = prefs.getString("email", null);
+            String userPass = prefs.getString("pass", null);
+            logInEmail.setText(userEmail);
+            logInPass.setText(userPass);
+        }
+
         internetRequest = new InternetRequest();
         Intent home = new Intent(MainActivity.this, HomeActivity.class);
 
@@ -128,13 +139,6 @@ public class MainActivity extends AppCompatActivity {
                 openSignUp.setVisibility(View.GONE);
                 googleLogIn.setVisibility(View.GONE);
                 facebookLogIn.setVisibility(View.GONE);
-
-                if(StaySignedIn.isChecked()){
-                    String userEmail = prefs.getString("email", "");
-                    String userPass = prefs.getString("pass", "");
-                    logInEmail.setText(userEmail);
-                    logInPass.setText(userPass);
-                }
             }
         });
 
@@ -204,9 +208,21 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 if(StaySignedIn.isChecked() == true) {
                     editor.putBoolean("StaySignedIn", true);
+                    boolean emailCheck = logInEmail.getText().toString().equals(null) || logInEmail.getText().toString().equals("");
+                    boolean passCheck = logInPass.getText().toString().equals(null) || logInPass.getText().toString().equals("");
+
+                    if (!emailCheck && !passCheck){
+                        editor.putString("email", logInEmail.getText().toString());
+                        editor.putString("pass", logInPass.getText().toString());
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Cannot Save. Empty Inputs", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     editor.putBoolean("StaySignedIn", false);
+                    editor.putString("email", null);
+                    editor.putString("pass", null);
                 }
                 editor.commit();
             }
@@ -216,6 +232,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 changePassVisibility(logInPass, signInShowPass);
+            }
+        });
+
+        signUpShowPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePassVisibility(signUpPass, signUpShowPass);
+            }
+        });
+
+        signUpShowConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePassVisibility(signUpPassConfirm, signUpShowConfirm);
             }
         });
 
@@ -233,21 +263,24 @@ public class MainActivity extends AppCompatActivity {
                             public void processResponse(String response) {
                                 try {
                                     boolean valid = false;
+                                    String name = "";
                                     JSONArray jsonArray = new JSONArray(response);
                                     for (int i = 0; i < jsonArray.length(); i ++){
                                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                                         if (jsonObject.getString("user_Password").equals(pass)){
+                                            name = jsonObject.getString("user_FirstName") + " " + jsonObject.getString("user_LastName");
                                             valid = true;
                                             break;
                                         }
                                     }
 
                                     if(valid){
+                                        Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(MainActivity.this, HomeActivity.class);
                                         startActivity(i);
                                     }
                                     else{
-                                        Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -312,8 +345,57 @@ public class MainActivity extends AppCompatActivity {
         facebookLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(i);
+
+            }
+        });
+
+        logInEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!loginUtils.validateEmail(charSequence.toString())){
+                    logInEmail.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
+                    invalidLoginEmail.getLayoutParams().height = 30;
+                }
+                else{
+                    logInEmail.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+                    invalidLoginEmail.getLayoutParams().height = 1;
+                }
+                invalidLoginEmail.requestLayout();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        logInPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!loginUtils.validatePass(charSequence.toString(), null)){
+                    logInPass.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
+                    invalidLoginPass.getLayoutParams().height = 30;
+                }
+                else{
+                    logInPass.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+                    invalidLoginPass.getLayoutParams().height = 1;
+                }
+                invalidLoginPass.requestLayout();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
@@ -358,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
                     signUpSurname.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     invalidSurname.getLayoutParams().height = 1;
                 }
-                invalidName.requestLayout();
+                invalidSurname.requestLayout();
             }
 
             @Override
@@ -383,7 +465,7 @@ public class MainActivity extends AppCompatActivity {
                     signUpEmail.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     invalidEmail.getLayoutParams().height = 1;
                 }
-                invalidName.requestLayout();
+                invalidEmail.requestLayout();
             }
 
             @Override
@@ -408,7 +490,7 @@ public class MainActivity extends AppCompatActivity {
                     signUpPass.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     invalidPass.getLayoutParams().height = 1;
                 }
-                invalidName.requestLayout();
+                invalidPass.requestLayout();
             }
 
             @Override
@@ -433,7 +515,7 @@ public class MainActivity extends AppCompatActivity {
                     signUpPassConfirm.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     invalidConfirm.getLayoutParams().height = 1;
                 }
-                invalidName.requestLayout();
+                invalidConfirm.requestLayout();
             }
 
             @Override
@@ -463,10 +545,53 @@ public class MainActivity extends AppCompatActivity {
             String email = account.getEmail();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", email);
+            Intent home = new Intent(MainActivity.this, HomeActivity.class);
+
             internetRequest.doRequest(url + "login.php", MainActivity.this, jsonObject, new RequestHandler() {
                 @Override
                 public void processResponse(String response) {
+                    try{
+                        JSONArray jsonArray = new JSONArray(response);
+                        boolean valid = false;
+                        if(jsonArray.length() == 0){
+                            jsonObject.put("FName", name);
+                            jsonObject.put("LName", surname);
+                            jsonObject.put("pass", password);
+                            internetRequest.doRequest(url + "register.php", MainActivity.this, jsonObject, new RequestHandler() {
+                                @Override
+                                public void processResponse(String response) {
+                                    if(response.equals("Success")){
+                                        Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
+                                        startActivity(home);
+                                    }
+                                    else{
+                                        Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            return;
+                        }
 
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jO = jsonArray.getJSONObject(i);
+                            if (jO.getString("user_Password").equals(password)){
+                                valid = true;
+                                break;
+                            }
+                        }
+
+                        if(valid){
+                            Toast.makeText(MainActivity.this, "Welcome "+name+" "+surname, Toast.LENGTH_SHORT).show();
+                            Intent home = new Intent(MainActivity.this, HomeActivity.class);
+                            startActivity(home);
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             });
 
@@ -500,11 +625,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changePassVisibility(EditText edtPass, ImageView sender){
-        if(edtPass.getTransformationMethod() == HideReturnsTransformationMethod.getInstance()){
+        if(edtPass.getTag().equals("hidden")){
             edtPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            sender.setImageResource(R.drawable.ic_baseline_visibility_off_24);
+            edtPass.setTag("visible");
         }
         else{
             edtPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            sender.setImageResource(R.drawable.ic_baseline_visibility_24);
+            edtPass.setTag("hidden");
         }
     }
 }
