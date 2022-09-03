@@ -546,10 +546,54 @@ public class MainActivity extends AppCompatActivity {
             String email = account.getEmail();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", email);
+            final boolean[] exists = {false};
+            Intent home = new Intent(MainActivity.this, HomeActivity.class);
+
             internetRequest.doRequest(url + "login.php", MainActivity.this, jsonObject, new RequestHandler() {
                 @Override
                 public void processResponse(String response) {
+                    try{
+                        JSONArray jsonArray = new JSONArray(response);
+                        boolean valid = false;
+                        if(jsonArray.length() == 0){
+                            jsonObject.put("FName", name);
+                            jsonObject.put("LName", surname);
+                            jsonObject.put("pass", password);
+                            internetRequest.doRequest(url + "register.php", MainActivity.this, jsonObject, new RequestHandler() {
+                                @Override
+                                public void processResponse(String response) {
+                                    if(response.equals("Success")){
+                                        Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
+                                        startActivity(home);
+                                    }
+                                    else{
+                                        Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            return;
+                        }
 
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jO = jsonArray.getJSONObject(i);
+                            if (jO.getString("user_Password").equals(password)){
+                                valid = true;
+                                break;
+                            }
+                        }
+
+                        if(valid){
+                            Toast.makeText(MainActivity.this, "Welcome "+name+" "+surname, Toast.LENGTH_SHORT).show();
+                            Intent home = new Intent(MainActivity.this, HomeActivity.class);
+                            startActivity(home);
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             });
 
