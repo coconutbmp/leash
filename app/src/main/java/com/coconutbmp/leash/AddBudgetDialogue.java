@@ -33,7 +33,8 @@ public class AddBudgetDialogue extends Dialog {
         proceed.setOnClickListener(view -> {
             if (budget_name_edit.getText().length() > 0){
                 //todo: add code to add the budget to the users account
-                Intent i = new Intent(this.getContext(), AddLiabilityActivity.class);
+                Intent i = new Intent(this.getContext(), Budget.class);
+                i.putExtra("budget_name", budget_name_edit.getText().toString());
                 this.getContext().startActivity(i);
             }
 
