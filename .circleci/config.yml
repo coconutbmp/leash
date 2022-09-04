@@ -59,12 +59,11 @@ jobs:
       # And finally run the release build
       - run:
           command: ./gradlew jacocoTestReport
-      - run:
-          name: Upload coverage to code climate
-          command: |
-                  export JACOCO_SOURCE_PATH=app/src/main/java
-                  ./cc-test-reporter format-coverage app/build/reports/coverage/androidTest/debug/report.xml -t jacoco
-                  ./cc-test-reporter upload-coverage
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/artifacts/
+          path: app/build/reports/coverage/androidTest/debug
+          destination: report
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/collect-test-data/
+          path: app/build/reports/jacoc/jacocoTestReport
       - run:
           name: Assemble release build
           command: |
