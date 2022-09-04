@@ -21,6 +21,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+       String userID= getIntent().getStringExtra("userID");
+
         btnAdd = findViewById(R.id.btnAddSomething);
         home_return_button = findViewById(R.id.homeReturnCard);
         day = findViewById(R.id.lblDay);
@@ -29,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         UXFunctions.setDate(day, month);
 
         btnAdd.setOnClickListener(view -> {
-            AddBudgetDialogue dialogue = new AddBudgetDialogue(this);
+            AddBudgetDialogue dialogue = new AddBudgetDialogue(this,userID);
             dialogue.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialogue.show();
         });
@@ -42,3 +44,4 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 }
+
