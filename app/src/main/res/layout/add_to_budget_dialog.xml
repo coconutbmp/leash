@@ -1,31 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/beige"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/budget_title_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:elevation="1dp"
+                android:fontFamily="@font/convergence"
+                android:text="What are You Adding?"
+                android:textColor="@color/grey"
+                android:textSize="28sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ReturnCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ReturnCard"
+                app:layout_constraintTop_toTopOf="@+id/ReturnCard" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/ReturnCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
-                app:contentPadding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -37,19 +57,17 @@
                     app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/budget_title_label2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/convergence"
-                android:text="What are You Adding?"
-                android:textColor="@color/grey"
-                android:textSize="34sp" />
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/hexagons" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,12 +76,15 @@
             android:minHeight="50dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="Income"
-                android:textSize="24sp" />
+                android:textAlignment="textStart"
+                android:textColor="@color/dark_grey"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/add_income_button"
@@ -86,12 +107,15 @@
             android:minHeight="50dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="Liability"
-                android:textSize="24sp" />
+                android:textAlignment="textStart"
+                android:textColor="@color/dark_grey"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/add_liability_button"
@@ -114,12 +138,15 @@
             android:minHeight="50dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="Transaction"
-                android:textSize="24sp" />
+                android:textAlignment="textStart"
+                android:textColor="@color/dark_grey"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/add_transaction_button"

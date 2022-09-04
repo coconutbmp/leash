@@ -12,16 +12,65 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/DateCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/smokey_white"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lblBudgetDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/convergence"
+                    android:text="Day"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/lblBudgetMonth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Month"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/ReturnCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/smokey_white"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/DateCard">
 
             <ImageView
                 android:id="@+id/imgBack"
@@ -51,7 +100,7 @@
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DateCard">
+            app:layout_constraintTop_toBottomOf="@+id/ReturnCard">
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -61,54 +110,6 @@
                 app:srcCompat="@drawable/ic_baseline_add_24" />
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/DateCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:cardBackgroundColor="@color/smokey_white"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ReturnCard">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/lblDay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="2dp"
-                    android:fontFamily="@font/convergence"
-                    android:text="Day"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/lblMonth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Month"
-                    android:textAlignment="center"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -175,11 +176,12 @@
                         android:id="@+id/summary_ll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
                         android:orientation="vertical">
 
                         <Button
                             android:id="@+id/more_summaries_button"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:layout_weight="0"

@@ -4,54 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/beige"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="360dp"
-        android:layout_height="200dp">
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
 
         <Button
             android:id="@+id/add_budget_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/smokey_white"
+            android:fontFamily="@font/convergence"
             android:text="Done"
+            android:textAllCaps="false"
+            android:textColor="@color/shadow"
+            app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cancel_add_budget_button"
             app:layout_constraintTop_toBottomOf="@+id/budget_name_edit" />
 
         <Button
             android:id="@+id/cancel_add_budget_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/smokey_white"
+            android:fontFamily="@font/convergence"
             android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/shadow"
+            app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_budget_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/add_budget_button" />
+            app:layout_constraintTop_toBottomOf="@+id/budget_name_edit" />
 
         <TextView
             android:id="@+id/loan_start_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="Budget Name:"
-            android:textSize="20sp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/convergence"
+            android:text="Create Budget"
+            android:textColor="@color/grey"
+            android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/budget_name_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/grey"
             android:ems="10"
-            android:hint="Budget name"
+            android:hint="Budget Name"
             android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColor="@color/shadow"
+            android:textColorHint="@color/dark_grey"
             app:layout_constraintEnd_toEndOf="@+id/loan_start_label"
             app:layout_constraintStart_toStartOf="@+id/loan_start_label"
             app:layout_constraintTop_toBottomOf="@+id/loan_start_label" />
