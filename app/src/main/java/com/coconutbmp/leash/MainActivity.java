@@ -264,9 +264,11 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                     boolean valid = false;
                                     String name = "";
-                                    JSONArray jsonArray = new JSONArray(response);
+                                    String userID ="";
+                                            JSONArray jsonArray = new JSONArray(response);
                                     for (int i = 0; i < jsonArray.length(); i ++){
                                         JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                           userID= jsonObject.getString("user_ID");
                                         if (jsonObject.getString("user_Password").equals(pass)){
                                             name = jsonObject.getString("user_FirstName") + " " + jsonObject.getString("user_LastName");
                                             valid = true;
@@ -276,7 +278,9 @@ public class MainActivity extends AppCompatActivity {
 
                                     if(valid){
                                         Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
+
                                         Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                                        i.putExtra("userID",userID);
                                         startActivity(i);
                                     }
                                     else{
