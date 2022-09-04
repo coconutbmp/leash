@@ -37,7 +37,7 @@ jobs:
           system-image: system-images;android-30;google_apis;x86
 
       - run:
-          command: ./gradlew connectedCheck
+          command: ./gradlew testDebugUnitTest
 
       # And finally run the release build
       - run:
