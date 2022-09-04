@@ -46,9 +46,7 @@ jobs:
             ./gradlew assembleRelease
 
       - codecov/upload:
-          file: '/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
-      - codecov/upload:
-          file: '/app/build/reports/coverage/androidTest/debug/report.xml'
+          file: '/app/build/reports/test-results/testDebugUnitTest/TEST-com.coconutbmp.leash.SignInTests.xml'
 
 
 # Invoke jobs via workflows
