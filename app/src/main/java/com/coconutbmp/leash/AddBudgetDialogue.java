@@ -36,6 +36,7 @@ public class AddBudgetDialogue extends Dialog {
                 Intent i = new Intent(this.getContext(), Budget.class);
                 i.putExtra("budget_name", budget_name_edit.getText().toString());
                 this.getContext().startActivity(i);
+                this.cancel();
             }
 
         });
