@@ -42,6 +42,6 @@ public class AddToBudgetDialogue extends Dialog {
             this.getContext().startActivity(i);
         });
 
-        //todo: set up transitions to income and transaction pages.
+        //todo: set up transitions to the transaction page.
     }
 }
