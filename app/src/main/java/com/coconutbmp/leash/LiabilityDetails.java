@@ -1,5 +1,4 @@
 package com.coconutbmp.leash;
-;
 
 import org.json.JSONObject;
 

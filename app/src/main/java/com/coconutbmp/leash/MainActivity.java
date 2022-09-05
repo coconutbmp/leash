@@ -72,38 +72,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        hook();
 
-        SignInCard = findViewById(R.id.SignInCard);
-        SignUpCard = findViewById(R.id.SignUpCard);
-        openSignIn = findViewById(R.id.btnShowSignIn);
-        openSignUp = findViewById(R.id.btnShowSignUp);
-        moveSignIn = findViewById(R.id.lblOpenSignIn);
-        moveSignUp = findViewById(R.id.lblOpenSignUp);
-        closeSignIn = findViewById(R.id.imgCloseSignIn);
-        closeSignUp = findViewById(R.id.imgCloseSignUp);
-        signIn = findViewById(R.id.btnSignIn);
-        signUp = findViewById(R.id.btnRegister);
-        googleLogIn = findViewById(R.id.googleCard);
-        facebookLogIn = findViewById(R.id.facebookCard);
-        StaySignedIn = findViewById(R.id.cbxStaySignedIn);
-        logInEmail = findViewById(R.id.edtSignInEmail);
-        logInPass = findViewById(R.id.edtSignInPass);
-        signUpName = findViewById(R.id.edtSignUpName);
-        signUpSurname = findViewById(R.id.edtSignUpSurname);
-        signUpEmail = findViewById(R.id.edtSignUpEmail);
-        signUpPass = findViewById(R.id.edtSignUpPass);
-        signUpPassConfirm = findViewById(R.id.edtSignUpConfirmPass);
-        invalidName = findViewById(R.id.lblInvalidName);
-        invalidSurname = findViewById(R.id.lblInvalidSurname);
-        invalidEmail = findViewById(R.id.lblInvalidEmail);
-        invalidPass = findViewById(R.id.lblInvalidPass);
-        invalidConfirm = findViewById(R.id.lblInvalidConfirm);
-        invalidLoginEmail = findViewById(R.id.lblInvalidLoginEmail);
-        invalidLoginPass = findViewById(R.id.lblInvalidLoginPass);
-        signInShowPass = findViewById(R.id.imgLogInViewPass);
-        signUpShowPass = findViewById(R.id.imgShowSignInPass);
-        signUpShowConfirm = findViewById(R.id.imgShowSignInConfirm);
+        prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
 
@@ -115,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         internetRequest = new InternetRequest();
-        Intent home = new Intent(MainActivity.this, HomeActivity.class);
 
         activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -261,32 +231,7 @@ public class MainActivity extends AppCompatActivity {
                         internetRequest.doRequest(url+"login.php", MainActivity.this, jsonObject, new RequestHandler() {
                             @Override
                             public void processResponse(String response) {
-                                try {
-                                    boolean valid = false;
-                                    String name = "";
-                                    String userID ="";
-                                            JSONArray jsonArray = new JSONArray(response);
-                                    for (int i = 0; i < jsonArray.length(); i ++){
-                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                        if (jsonObject.getString("user_Password").equals(pass)){
-                                            userID= jsonObject.getString("user_ID");
-                                            name = jsonObject.getString("user_FirstName") + " " + jsonObject.getString("user_LastName");
-                                            valid = true;
-                                            break;
-                                        }
-                                    }
-
-                                    if(valid){
-                                        Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
-                                        home.putExtra("userID",userID);
-                                        startActivity(home);
-                                    }
-                                    else{
-                                        Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                doRegularLogIn(response, pass);
                             }
                         });
                     } catch (JSONException e) {
@@ -321,14 +266,7 @@ public class MainActivity extends AppCompatActivity {
                         internetRequest.doRequest(url+"register.php", MainActivity.this, jsonObject, new RequestHandler() {
                             @Override
                             public void processResponse(String response) {
-                                if(!response.equals("Failed")){
-                                    Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
-                                    home.putExtra("userID", response);
-                                    startActivity(home);
-                                }
-                                else{
-                                    Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
-                                }
+                                doRegister(response, name, surname);
                             }
                         });
                     } catch (JSONException e) {
@@ -348,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
         facebookLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -502,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        signUpPassConfirm.addTextChangedListener(new TextWatcher() {
+        signUpPassConfirm.addTextChangedListener( new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -510,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!loginUtils.validatePass(charSequence.toString(), signUpPass.getText().toString())){
+                if(!loginUtils.validatePass(signUpPass.getText().toString(), charSequence.toString())){
                     signUpPassConfirm.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
                     invalidConfirm.getLayoutParams().height = 30;
                 }
@@ -526,6 +464,81 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void hook(){
+        SignInCard = findViewById(R.id.SignInCard);
+        SignUpCard = findViewById(R.id.SignUpCard);
+        openSignIn = findViewById(R.id.btnShowSignIn);
+        openSignUp = findViewById(R.id.btnShowSignUp);
+        moveSignIn = findViewById(R.id.lblOpenSignIn);
+        moveSignUp = findViewById(R.id.lblOpenSignUp);
+        closeSignIn = findViewById(R.id.imgCloseSignIn);
+        closeSignUp = findViewById(R.id.imgCloseSignUp);
+        signIn = findViewById(R.id.btnSignIn);
+        signUp = findViewById(R.id.btnRegister);
+        googleLogIn = findViewById(R.id.googleCard);
+        facebookLogIn = findViewById(R.id.facebookCard);
+        StaySignedIn = findViewById(R.id.cbxStaySignedIn);
+        logInEmail = findViewById(R.id.edtSignInEmail);
+        logInPass = findViewById(R.id.edtSignInPass);
+        signUpName = findViewById(R.id.edtSignUpName);
+        signUpSurname = findViewById(R.id.edtSignUpSurname);
+        signUpEmail = findViewById(R.id.edtSignUpEmail);
+        signUpPass = findViewById(R.id.edtSignUpPass);
+        signUpPassConfirm = findViewById(R.id.edtSignUpConfirmPass);
+        invalidName = findViewById(R.id.lblInvalidName);
+        invalidSurname = findViewById(R.id.lblInvalidSurname);
+        invalidEmail = findViewById(R.id.lblInvalidEmail);
+        invalidPass = findViewById(R.id.lblInvalidPass);
+        invalidConfirm = findViewById(R.id.lblInvalidConfirm);
+        invalidLoginEmail = findViewById(R.id.lblInvalidLoginEmail);
+        invalidLoginPass = findViewById(R.id.lblInvalidLoginPass);
+        signInShowPass = findViewById(R.id.imgLogInViewPass);
+        signUpShowPass = findViewById(R.id.imgShowSignInPass);
+        signUpShowConfirm = findViewById(R.id.imgShowSignInConfirm);
+    }
+
+    public void doRegister(String response, String name, String surname){
+        Intent home = new Intent(MainActivity.this, HomeActivity.class);
+        if(!response.equals("Failed")){
+            Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
+            home.putExtra("userID", response);
+            startActivity(home);
+        }
+        else{
+            Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void doRegularLogIn(String response, String pass){
+        Intent home = new Intent(MainActivity.this, HomeActivity.class);
+        try {
+            boolean valid = false;
+            String name = "";
+            String userID ="";
+            JSONArray jsonArray = new JSONArray(response);
+            for (int i = 0; i < jsonArray.length(); i ++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (jsonObject.getString("user_Password").equals(pass)){
+                    userID= jsonObject.getString("user_ID");
+                    name = jsonObject.getString("user_FirstName") + " " + jsonObject.getString("user_LastName");
+                    valid = true;
+                    break;
+                }
+            }
+
+            if(valid){
+                Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
+                home.putExtra("userID",userID);
+                startActivity(home);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void doGoogleLogIn(){
