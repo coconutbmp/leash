@@ -278,9 +278,8 @@ public class MainActivity extends AppCompatActivity {
 
                                     if(valid){
                                         Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                                        i.putExtra("userID",userID);
-                                        startActivity(i);
+                                        home.putExtra("userID",userID);
+                                        startActivity(home);
                                     }
                                     else{
                                         Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
@@ -565,8 +564,9 @@ public class MainActivity extends AppCompatActivity {
                             internetRequest.doRequest(url + "register.php", MainActivity.this, jsonObject, new RequestHandler() {
                                 @Override
                                 public void processResponse(String response) {
-                                    if(response.equals("Success")){
+                                    if(!response.equals("Failed")){
                                         Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
+                                        home.putExtra("userID", response);
                                         startActivity(home);
                                     }
                                     else{
