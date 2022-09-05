@@ -268,8 +268,8 @@ public class MainActivity extends AppCompatActivity {
                                             JSONArray jsonArray = new JSONArray(response);
                                     for (int i = 0; i < jsonArray.length(); i ++){
                                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                           userID= jsonObject.getString("user_ID");
                                         if (jsonObject.getString("user_Password").equals(pass)){
+                                            userID= jsonObject.getString("user_ID");
                                             name = jsonObject.getString("user_FirstName") + " " + jsonObject.getString("user_LastName");
                                             valid = true;
                                             break;
@@ -278,7 +278,6 @@ public class MainActivity extends AppCompatActivity {
 
                                     if(valid){
                                         Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
-
                                         Intent i = new Intent(MainActivity.this, HomeActivity.class);
                                         i.putExtra("userID",userID);
                                         startActivity(i);
@@ -550,6 +549,7 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", email);
             Intent home = new Intent(MainActivity.this, HomeActivity.class);
+            final String[] userID = {""};
 
             internetRequest.doRequest(url + "login.php", MainActivity.this, jsonObject, new RequestHandler() {
                 @Override
@@ -579,6 +579,7 @@ public class MainActivity extends AppCompatActivity {
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject jO = jsonArray.getJSONObject(i);
                             if (jO.getString("user_Password").equals(password)){
+                                userID[0] = jO.getString("user_ID");
                                 valid = true;
                                 break;
                             }
@@ -587,6 +588,7 @@ public class MainActivity extends AppCompatActivity {
                         if(valid){
                             Toast.makeText(MainActivity.this, "Welcome "+name+" "+surname, Toast.LENGTH_SHORT).show();
                             Intent home = new Intent(MainActivity.this, HomeActivity.class);
+                            home.putExtra("userID", userID[0]);
                             startActivity(home);
                         }
                         else{

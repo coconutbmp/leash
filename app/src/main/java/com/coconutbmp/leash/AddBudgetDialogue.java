@@ -28,7 +28,7 @@ public class AddBudgetDialogue extends Dialog {
 
     public AddBudgetDialogue(Activity act,String data) {
         super(act);
-        userID=data;
+        userID = data;
     }
 
     @Override
