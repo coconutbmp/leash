@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -24,7 +27,11 @@ public class AddBudgetDialogue extends Dialog {
     //declarations
     String name,startdate,enddate, userID;
     Button proceed, cancel;
-    EditText budget_name_edit, budget_startdate_edit, budget_enddate_edit;
+    EditText budget_name_edit;
+    TextView begin_date_edit, end_date_edit;
+    Button start_button, end_button;
+    DatePicker start_dp, end_dp;
+
 
     public AddBudgetDialogue(Activity act,String data) {
         super(act);
@@ -42,8 +49,18 @@ public class AddBudgetDialogue extends Dialog {
         proceed = findViewById(R.id.add_budget_button);
         cancel = findViewById(R.id.cancel_add_budget_button);
         budget_name_edit = findViewById(R.id.budget_name_edit);
-        budget_startdate_edit = findViewById(R.id.et_startdate);
-        budget_enddate_edit = findViewById(R.id.et_enddate);
+
+        begin_date_edit = findViewById(R.id.budget_start_label);
+        end_date_edit = findViewById(R.id.budget_end_label);
+
+        start_button = findViewById(R.id.budget_start_button);
+        end_button = findViewById(R.id.budget_end_button);
+
+        start_dp = findViewById(R.id.budget_start_dp);
+        end_dp= findViewById(R.id.budget_end_dp);
+
+        start_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_edit));
+        end_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_edit));
 
 
         cancel.setOnClickListener(view -> {   //when "cancel" button is clicked
@@ -56,8 +73,8 @@ public class AddBudgetDialogue extends Dialog {
 
                 //get EditText content in string format
                 name= budget_name_edit.getText().toString();
-                startdate= budget_startdate_edit.getText().toString();
-                enddate= budget_enddate_edit.getText().toString();
+                startdate= begin_date_edit.getText().toString();
+                enddate= end_date_edit.getText().toString();
 
                 addtoDatabase();
 
