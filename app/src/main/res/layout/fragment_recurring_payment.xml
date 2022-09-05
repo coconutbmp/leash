@@ -30,7 +30,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/convergence"
-            android:text="Bills and Debt Orders"
+            android:text="Bills"
             android:textColor="@color/grey"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView13"
@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/convergence"
-                        android:text="When do Payments End"
+                        android:text="When do Payments End?"
                         android:textColor="@color/dark_grey"
                         android:textSize="16sp" />
 
