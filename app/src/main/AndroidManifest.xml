@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Leash"
         tools:targetApi="31">
         <activity
+            android:name=".AddIncomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".Budget"
             android:exported="false" />
         <activity

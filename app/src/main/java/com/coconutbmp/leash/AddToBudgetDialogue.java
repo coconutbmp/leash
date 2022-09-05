@@ -36,6 +36,12 @@ public class AddToBudgetDialogue extends Dialog {
             this.getContext().startActivity(i);
         });
 
+        add_income_button.setOnClickListener(view -> {
+            Intent i = new Intent(this.getContext(), AddIncomeActivity.class);
+            i.putExtra("budget_name", budget_name);
+            this.getContext().startActivity(i);
+        });
+
         //todo: set up transitions to income and transaction pages.
     }
 }
