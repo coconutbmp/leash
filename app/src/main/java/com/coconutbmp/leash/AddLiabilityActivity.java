@@ -57,8 +57,8 @@ public class AddLiabilityActivity extends AppCompatActivity {
                 sender.setText(set);
                 target_dp.getLayoutParams().height = 0;
 
-                String resulting_date = Integer.toString(target_dp.getYear()) + "-";
-                resulting_date = resulting_date + Integer.toString(target_dp.getMonth()) + "-" ;
+                String resulting_date = Integer.toString(target_dp.getYear()) + "-" ;
+                resulting_date = resulting_date + Integer.toString(target_dp.getMonth() + 1) + "-" ;
                 resulting_date = resulting_date + Integer.toString(target_dp.getDayOfMonth())  ;
 
                 target_tv.setText(resulting_date);
