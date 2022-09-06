@@ -71,18 +71,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        hook();
-
         prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-
+        hook();
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
 
         if(StaySignedIn.isChecked()){
             String userEmail = prefs.getString("email", null);
-            String userPass = prefs.getString("pass", null);
             logInEmail.setText(userEmail);
-            logInPass.setText(userPass);
         }
 
         internetRequest = new InternetRequest();
@@ -179,11 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 if(StaySignedIn.isChecked() == true) {
                     editor.putBoolean("StaySignedIn", true);
                     boolean emailCheck = logInEmail.getText().toString().equals(null) || logInEmail.getText().toString().equals("");
-                    boolean passCheck = logInPass.getText().toString().equals(null) || logInPass.getText().toString().equals("");
-
-                    if (!emailCheck && !passCheck){
+                    if (!emailCheck){
                         editor.putString("email", logInEmail.getText().toString());
-                        editor.putString("pass", logInPass.getText().toString());
                     }
                     else{
                         Toast.makeText(MainActivity.this, "Cannot Save. Empty Inputs", Toast.LENGTH_SHORT).show();
@@ -192,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     editor.putBoolean("StaySignedIn", false);
                     editor.putString("email", null);
-                    editor.putString("pass", null);
                 }
                 editor.commit();
             }
@@ -464,6 +455,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        logInEmail.getText().clear();
+        logInPass.getText().clear();
+        signUpName.getText().clear();
+        signUpSurname.getText().clear();
+        signUpEmail.getText().clear();
+        signUpPass.getText().clear();
+        signUpPassConfirm.getText().clear();
+
+
+        if(StaySignedIn.isChecked()){
+            String userEmail = prefs.getString("email", null);
+            logInEmail.setText(userEmail);
+        }
     }
 
     public void hook(){

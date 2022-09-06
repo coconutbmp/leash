@@ -145,7 +145,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -249,11 +250,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:buttonTint="@color/shadow"
-                android:fontFamily="@font/convergence"
+                android:fontFamily="sans-serif"
                 android:text="Remember Me"
                 android:textColor="@color/dark_grey"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblInvalidLoginPass" />
 
@@ -281,11 +283,25 @@
                 android:id="@+id/lblInvalidLoginPass"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
+                android:layout_marginStart="8dp"
                 android:text="Password must be at least 8 characters and contain A-Z, a-z, 0-9"
                 android:textColor="#C62828"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@+id/edtSignInPass"
                 app:layout_constraintTop_toBottomOf="@+id/edtSignInPass" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="28dp"
+                android:text="Forgot Password?"
+                android:textColor="@color/shadow"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cbxStaySignedIn"
+                app:layout_constraintTop_toBottomOf="@+id/lblInvalidLoginPass" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

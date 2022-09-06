@@ -119,6 +119,7 @@
                         android:layout_margin="10dp"
                         android:ems="10"
                         android:inputType="numberDecimal"
+                        android:minHeight="48dp"
                         android:text="0.00" />
 
                 </LinearLayout>
