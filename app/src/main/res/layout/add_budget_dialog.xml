@@ -10,7 +10,7 @@
     app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="378dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/smokey_white"
             android:fontFamily="@font/convergence"
@@ -36,6 +37,7 @@
             android:id="@+id/cancel_add_budget_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/smokey_white"
@@ -53,9 +55,7 @@
             android:id="@+id/loan_start_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
             android:fontFamily="@font/convergence"
             android:text="Create Budget"
             android:textColor="@color/grey"
@@ -68,9 +68,12 @@
             android:id="@+id/linearLayout2"
             android:layout_width="376dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/loan_start_label"
-            tools:layout_editor_absoluteX="1dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loan_start_label">
 
             <EditText
                 android:id="@+id/budget_name_edit"
@@ -92,12 +95,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/lblRecurringStart"
+                    android:id="@+id/lblBudgetStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/convergence"
                     android:text="Start Date"
-                    android:textColor="@color/grey"
-                    android:textSize="20sp" />
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -112,8 +116,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="00/00/0000"
-                        android:textColor="@color/shadow"
-                        android:textSize="16sp" />
+                        android:textColor="@color/grey"
+                        android:textSize="20sp" />
 
                     <Button
                         android:id="@+id/budget_start_button"
@@ -147,12 +151,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/lblRecurringStart"
+                    android:id="@+id/BudgetEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start Date"
-                    android:textColor="@color/grey"
-                    android:textSize="20sp" />
+                    android:fontFamily="@font/convergence"
+                    android:text="End Date"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -167,8 +172,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="00/00/0000"
-                        android:textColor="@color/shadow"
-                        android:textSize="16sp" />
+                        android:textColor="@color/grey"
+                        android:textSize="20sp" />
 
                     <Button
                         android:id="@+id/budget_end_button"
