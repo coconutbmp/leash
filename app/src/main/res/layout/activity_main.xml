@@ -296,9 +296,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:text="Forgot Password?"
+                android:text="@string/forgot_pass"
                 android:textColor="@color/shadow"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cbxStaySignedIn"
                 app:layout_constraintTop_toBottomOf="@+id/lblInvalidLoginPass" />
