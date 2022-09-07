@@ -27,6 +27,7 @@ import okhttp3.Response;
  * Controller For the Home Page
  */
 public class HomeActivity extends AppCompatActivity {
+    //declaring variables
     CardView home_return_button, btnAdd;
     TextView day, month;
     String userID;
@@ -81,6 +82,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //initialising variables
+        String userID = getIntent().getStringExtra("userID");
+
         userID = getIntent().getStringExtra("userID");
 
         btnAdd = findViewById(R.id.btnAddSomething);
@@ -89,6 +93,7 @@ public class HomeActivity extends AppCompatActivity {
         month = findViewById(R.id.lblMonth);
 
         UXFunctions.setDate(day, month);
+        //implementing button to add budget dialogue
 
         getMyBudgets();
 
@@ -99,7 +104,7 @@ public class HomeActivity extends AppCompatActivity {
             dialogue.show();
         });
 
-        // this returns you to the landing page
+        //implementing return button
         home_return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
