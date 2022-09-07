@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView day, month;
     String userID;
 
-    JSONArray getMyBudgets(){
+    JSONArray getMyBudgets(){ // retrieve all my budgets
         System.out.println("->->->->->->->->->->->->->->->->->");
         OkHttpClient client = new OkHttpClient();
         FormBody.Builder builder = new FormBody.Builder();
@@ -93,13 +93,13 @@ public class HomeActivity extends AppCompatActivity {
         month = findViewById(R.id.lblMonth);
 
         UXFunctions.setDate(day, month);
+
+        getMyBudgets(); // retrieve budgets from the db
+
         //implementing button to add budget dialogue
-
-        getMyBudgets();
-
-        // the add button shows the AddBudget popup
+        String finalUserID = userID;
         btnAdd.setOnClickListener(view -> {
-            AddBudgetDialogue dialogue = new AddBudgetDialogue(this, userID);
+            AddBudgetDialogue dialogue = new AddBudgetDialogue(this, finalUserID);
             dialogue.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialogue.show();
         });
