@@ -5,8 +5,8 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UXFunctions {
-    static public void setDate(TextView day, TextView month){
+public class UXFunctions { // functions that will be reused throughout UI
+    static public void setDate(TextView day, TextView month){ // display date
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 
         String today = sdf.format(new Date());

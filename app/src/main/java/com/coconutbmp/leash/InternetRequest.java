@@ -19,26 +19,27 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class InternetRequest {
+public class InternetRequest { // send and receive http requests to server
     Request request;
     OkHttpClient client = new OkHttpClient();
 
+    // make request by passing a parameters fro  a json to server
     public void doRequest(String url, Activity activity, JSONObject parameters, com.coconutbmp.leash.RequestHandler requestHandler){
         HttpUrl.Builder test = HttpUrl.parse(url).newBuilder();
         List<String> keys = new ArrayList<>();
         Iterator<String> it = parameters.keys();
-        it.forEachRemaining(e->keys.add(e));
+        it.forEachRemaining(e->keys.add(e)); // get json keys
         for (String key: keys){
             try {
-                test.addQueryParameter(key, parameters.getString(key));
+                test.addQueryParameter(key, parameters.getString(key)); //pass keys and values as parameters
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
-        request = new Request.Builder().url(test.build()).build();
+        request = new Request.Builder().url(test.build()).build(); // create request with url and parameters
 
-        client.newCall(request).enqueue(new Callback() {
+        client.newCall(request).enqueue(new Callback() {// handle server responses
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 e.printStackTrace();

@@ -54,25 +54,30 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity {
-    SharedPreferences prefs;
+public class MainActivity extends AppCompatActivity{
+    SharedPreferences prefs; // variable to access locally stored user preferences
+    ActivityResultLauncher<Intent> activityResultLauncher; // Variable to execute google login after a result from the api is returned
+    GoogleSignInClient googleSignInClient; //api variable to access user's google accounts
+    InternetRequest internetRequest; //Object to execute http requests from the app
+    String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/"; // base link where http requests are sent
+
+    // Declare all components used on Login Page
     Button openSignIn, openSignUp, signIn, signUp;
     ImageView closeSignIn, closeSignUp, signInShowPass, signUpShowPass, signUpShowConfirm;
     TextView moveSignIn, moveSignUp, invalidName, invalidSurname, invalidEmail,invalidPass, invalidConfirm, invalidLoginEmail, invalidLoginPass;
     CardView SignInCard, SignUpCard, googleLogIn, facebookLogIn;
     CheckBox StaySignedIn;
     EditText logInEmail, logInPass, signUpName, signUpSurname, signUpEmail, signUpPass, signUpPassConfirm;
-    ActivityResultLauncher<Intent> activityResultLauncher;
-    GoogleSignInClient googleSignInClient;
-    InternetRequest internetRequest;
-    String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        hook();
+        prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE); // initialise and fetch user preferences
+        hook(); // hook all components to related xml components
+
+        // check if user wants to to be remembered when logging in
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
 
         if(StaySignedIn.isChecked()){
@@ -80,8 +85,9 @@ public class MainActivity extends AppCompatActivity {
             logInEmail.setText(userEmail);
         }
 
-        internetRequest = new InternetRequest();
+        internetRequest = new InternetRequest(); // instantiate Internet Request instance
 
+        // instantiate result handler for google login and set function to handle result
         activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -95,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
             }
         );
 
+        // Navigation and UI interaction
+        // Code has slight differences so repetition is necessary
         openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,31 +218,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //How to deal with user login
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // fetch input
                 String email = logInEmail.getText().toString();
                 String pass = logInPass.getText().toString();
-                if(loginUtils.validateEmail(email) && loginUtils.validatePass(pass, null)){
+                if(loginUtils.validateEmail(email) && loginUtils.validatePass(pass, null)){ // validate data
                     JSONObject jsonObject = new JSONObject();
                     try {
-                        jsonObject.put("email", email);
+                        jsonObject.put("email", email); // put email in json for http request
+                        //Make http request to login.php
                         internetRequest.doRequest(url+"login.php", MainActivity.this, jsonObject, new RequestHandler() {
                             @Override
                             public void processResponse(String response) {
-                                doRegularLogIn(response, pass);
+                                doRegularLogIn(response, pass); //how to handle server response
                             }
                         });
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        e.printStackTrace(); // catch failed request
                     }
                 }
             }
         });
 
+        // how to handle new user registration
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // fetch user input
                 String name = signUpName.getText().toString();
                 String surname = signUpSurname.getText().toString();
                 String email = signUpEmail.getText().toString();
@@ -245,19 +258,21 @@ public class MainActivity extends AppCompatActivity {
                         && loginUtils.validateName(surname)
                         && loginUtils.validateEmail(email)
                         && loginUtils.validatePass(pass, null)
-                        && loginUtils.validatePass(pass, confirmPass);
+                        && loginUtils.validatePass(pass, confirmPass); // validate input
 
                 if(valid){
                     JSONObject jsonObject = new JSONObject();
                     try {
+                        // add everything to json for request
                         jsonObject.put("FName", name);
                         jsonObject.put("LName", surname);
                         jsonObject.put("email", email);
                         jsonObject.put("pass", pass);
+                        //make http request to register.php
                         internetRequest.doRequest(url+"register.php", MainActivity.this, jsonObject, new RequestHandler() {
                             @Override
                             public void processResponse(String response) {
-                                doRegister(response, name, surname);
+                                doRegister(response, name, surname); // process server response
                             }
                         });
                     } catch (JSONException e) {
@@ -281,6 +296,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // UI Feature, track user input validity in real time
+        // display error message to related input
+
         logInEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -289,15 +307,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!loginUtils.validateEmail(charSequence.toString())){
+                if(!loginUtils.validateEmail(charSequence.toString())){ // validate input
+                    // change input color and show error
                     logInEmail.getBackground().mutate().setColorFilter(Color.rgb(225, 80, 40), PorterDuff.Mode.SRC_ATOP);
                     invalidLoginEmail.getLayoutParams().height = 30;
                 }
                 else{
+                    // return to normal
                     logInEmail.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     invalidLoginEmail.getLayoutParams().height = 1;
                 }
-                invalidLoginEmail.requestLayout();
+                invalidLoginEmail.requestLayout(); // request layout update
             }
 
             @Override
@@ -458,9 +478,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() { //when returning to login page, everything should be reset
         super.onResume();
 
+        // clear all edits
         logInEmail.getText().clear();
         logInPass.getText().clear();
         signUpName.getText().clear();
@@ -469,6 +490,8 @@ public class MainActivity extends AppCompatActivity {
         signUpPass.getText().clear();
         signUpPassConfirm.getText().clear();
 
+        // check user preferences and add inputs back if necessary
+        StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
 
         if(StaySignedIn.isChecked()){
             String userEmail = prefs.getString("email", null);
@@ -476,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void hook(){
+    public void hook(){ // function to hook java components to xml compenents
         SignInCard = findViewById(R.id.SignInCard);
         SignUpCard = findViewById(R.id.SignUpCard);
         openSignIn = findViewById(R.id.btnShowSignIn);
@@ -509,97 +532,107 @@ public class MainActivity extends AppCompatActivity {
         signUpShowConfirm = findViewById(R.id.imgShowSignInConfirm);
     }
 
-    public void doRegister(String response, String name, String surname){
-        Intent home = new Intent(MainActivity.this, HomeActivity.class);
-        if(!response.equals("Failed")){
-            Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
-            home.putExtra("userID", response);
-            startActivity(home);
+    public void doRegister(String response, String name, String surname){ // how to handle registration server response
+        Intent home = new Intent(MainActivity.this, HomeActivity.class); // set up intent to change page
+        if(!response.equals("Failed")){ // check response was successful (success returns userID)
+            Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show(); // Welcome Toast message
+            home.putExtra("userID", response); // carry userID to next activity
+            startActivity(home); // change activities
         }
-        else{
+        else{ // if failed, display error
             Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void doRegularLogIn(String response, String pass){
+    public void doRegularLogIn(String response, String pass){ // handle login server response
         Intent home = new Intent(MainActivity.this, HomeActivity.class);
         try {
             boolean valid = false;
             String name = "";
             String userID ="";
-            JSONArray jsonArray = new JSONArray(response);
-            for (int i = 0; i < jsonArray.length(); i ++){
+            JSONArray jsonArray = new JSONArray(response); // format response to JSON array
+            for (int i = 0; i < jsonArray.length(); i ++){ // loop through array
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.getString("user_Password").equals(pass)){
-                    userID= jsonObject.getString("user_ID");
+                if (jsonObject.getString("user_Password").equals(pass)){ // find matching password
+                    // store necessary info
+                    userID = jsonObject.getString("user_ID");
                     name = jsonObject.getString("user_FirstName") + " " + jsonObject.getString("user_LastName");
                     valid = true;
-                    break;
+                    break; // exit loop
                 }
             }
 
-            if(valid){
-                Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show();
-                home.putExtra("userID",userID);
-                startActivity(home);
+            if(valid){ // check if user exists
+                Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show(); // welcome toast
+                home.putExtra("userID",userID); // carry userID to next activity
+                startActivity(home); // change activity
             }
-            else{
+            else{ // error message
                 Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
             }
-        } catch (JSONException e) {
+        } catch (JSONException e) { //JSON Object exception
             e.printStackTrace();
         }
     }
 
-    public void doGoogleLogIn(){
+    public void doGoogleLogIn(){ // start google login process
+        // Instantiate Sign in options
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-        googleSignInClient.signOut();
+        googleSignInClient = GoogleSignIn.getClient(this, gso); // get google sign api client
+        googleSignInClient.signOut(); // sign out any existing accounts
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        Intent googleSignIn = googleSignInClient.getSignInIntent();
-        activityResultLauncher.launch(googleSignIn);
+        Intent googleSignIn = googleSignInClient.getSignInIntent(); // get intent
+        activityResultLauncher.launch(googleSignIn); // start processing results
     }
 
-    public void completeGoogleSignIn(Intent data){
+    public void completeGoogleSignIn(Intent data){ // handle google login results
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
         try {
-            GoogleSignInAccount account = task.getResult(ApiException.class);
-            String password = prefs.getString("googlePass", "googlePass");
+            GoogleSignInAccount account = task.getResult(ApiException.class); // get google account
+            String password = prefs.getString("googlePass", "googlePass"); // set default pass for google logins
+            // fetch necessary data
             String name = account.getGivenName();
             String surname = account.getFamilyName();
             String email = account.getEmail();
+
+            //create json and put email for http request
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", email);
-            Intent home = new Intent(MainActivity.this, HomeActivity.class);
-            final String[] userID = {""};
+            Intent home = new Intent(MainActivity.this, HomeActivity.class); // make new activity intent
+            final String[] userID = {""}; // initialise userID variable
 
+            //make login http request
             internetRequest.doRequest(url + "login.php", MainActivity.this, jsonObject, new RequestHandler() {
                 @Override
-                public void processResponse(String response) {
+                public void processResponse(String response) { // handle server response
                     try{
                         JSONArray jsonArray = new JSONArray(response);
                         boolean valid = false;
-                        if(jsonArray.length() == 0){
+                        if(jsonArray.length() == 0){ // no account exists, create one in the database
                             jsonObject.put("FName", name);
                             jsonObject.put("LName", surname);
                             jsonObject.put("pass", password);
+
+                            // make new request to register user
                             internetRequest.doRequest(url + "register.php", MainActivity.this, jsonObject, new RequestHandler() {
                                 @Override
                                 public void processResponse(String response) {
-                                    if(!response.equals("Failed")){
+                                    if(!response.equals("Failed")){ // handle response for registration request
+                                        // welcome toast
                                         Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
-                                        home.putExtra("userID", response);
-                                        startActivity(home);
+                                        home.putExtra("userID", response); // carry user id across activities
+                                        startActivity(home); // change activities
                                     }
-                                    else{
+                                    else{ // error toast for failed response
                                         Toast.makeText(MainActivity.this, "An error has occurred, try again", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-                            return;
+                            return; // exit
                         }
 
+                        // if there exists a user, find the right one
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject jO = jsonArray.getJSONObject(i);
                             if (jO.getString("user_Password").equals(password)){
@@ -634,7 +667,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void doFacebookLogIn(){
+    public void doFacebookLogIn(){ // handle facebook login
         CallbackManager callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -654,11 +687,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void changePassVisibility(EditText edtPass, ImageView sender){
-        if(edtPass.getTag().equals("hidden")){
-            edtPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            sender.setImageResource(R.drawable.ic_baseline_visibility_off_24);
-            edtPass.setTag("visible");
+    public void changePassVisibility(EditText edtPass, ImageView sender){ // make passwords visible/invisible
+        if(edtPass.getTag().equals("hidden")){ // use preset tag to determine visibility
+            edtPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());// make text visible
+            sender.setImageResource(R.drawable.ic_baseline_visibility_off_24); // change image
+            edtPass.setTag("visible"); // change tag
         }
         else{
             edtPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
