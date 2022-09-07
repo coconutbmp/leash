@@ -20,6 +20,11 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+/**
+ * Controller for the Add Liability Activity
+ *
+ * You can add a Loan or a Recurring payment within
+ */
 public class AddLiabilityActivity extends AppCompatActivity {
 
     Button continue_button;
@@ -103,11 +108,11 @@ public class AddLiabilityActivity extends AppCompatActivity {
         frag_man = getSupportFragmentManager();
         frag_tran = frag_man.beginTransaction(); // allows for switching elements with a fragment
 
-        if(Objects.equals(type, "Loan")){
+        if(Objects.equals(type, "Loan")){ // display Loan form
             AddLoanDetailsFragment loan_frag = new AddLoanDetailsFragment();
             ld_container = loan_frag;
             frag_tran.replace(frag_container.getId(), loan_frag).commit();
-        } else if (Objects.equals(type, "Recurring Payment")){
+        } else if (Objects.equals(type, "Recurring Payment")){ // display Recurring payment form
             AddRecurringPaymentFragment recurring_payment_frag = new AddRecurringPaymentFragment();
             ld_container = recurring_payment_frag;
             frag_tran.replace(frag_container.getId(), recurring_payment_frag).commit();
@@ -129,22 +134,29 @@ public class AddLiabilityActivity extends AppCompatActivity {
         frag_container = findViewById(R.id.frag_container_ll);
 
         cancel_button.setOnClickListener(view -> finish()); // close this activity when cancel clicked
+
         continue_button.setOnClickListener(view -> {
             try{
-                createJSONRepresentation();
+                createJSONRepresentation(); // create json storing relevant data about the liability to add.
+                //todo: upload the data with a call to the server
             } catch (Exception e){
                 System.out.println("json parsing failed");
+                //todo: warn user about error (maybe prompt to fill in missing values)
                 e.printStackTrace();
             }
 
         });
+
+        // initialize what form were on, based on what type if liability is first in the spinner
         displayByContext(liability_type_spinner.getSelectedItem().toString());
 
+        /**
+         * if "loan" selected -> display loan form
+         * if "recurring payment" selected -> display that form
+         */
         liability_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.print("selected -> ");
-                System.out.println(liability_type_spinner.getSelectedItem());
                 displayByContext(liability_type_spinner.getSelectedItem().toString());
             }
 
