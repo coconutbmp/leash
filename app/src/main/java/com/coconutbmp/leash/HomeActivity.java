@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //initialising variables
-        String userID = getIntent().getStringExtra("userID");
+        userID = getIntent().getStringExtra("userID");
 
         userID = getIntent().getStringExtra("userID");
 
