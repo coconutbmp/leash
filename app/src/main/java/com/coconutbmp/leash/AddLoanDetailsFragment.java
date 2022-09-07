@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -24,7 +23,7 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
 
     EditText principal_amt_edit;
     EditText interest_rate_edit;
-    TextView begin_date_edit, end_date_edit;
+    TextView begin_date_label, end_date_label;
     EditText repayment_amount_edit;
 
     Spinner interest_type_spinner;
@@ -36,6 +35,10 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
 
     SwitchCompat custom_repayment_switch;
 
+
+    /**
+     * Constructor
+     */
     public AddLoanDetailsFragment() {
         // Required empty public constructor
     }
@@ -56,8 +59,8 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         interest_rate_edit = view.findViewById(R.id.interest_rate_edit);
         interest_type_spinner = view.findViewById(R.id.liability_type_spinner);
         calculation_freq_spinner = view.findViewById(R.id.calculation_freq_spinner);
-        begin_date_edit = view.findViewById(R.id.loan_start_label);
-        end_date_edit = view.findViewById(R.id.loan_end_label);
+        begin_date_label = view.findViewById(R.id.loan_start_label);
+        end_date_label = view.findViewById(R.id.loan_end_label);
         repayment_amount_edit = view.findViewById(R.id.loan_repayment_edit);
 
         start_button = view.findViewById(R.id.start_button);
@@ -66,14 +69,19 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         start_dp = view.findViewById(R.id.loan_start_dp);
         end_dp = view.findViewById(R.id.loan_end_dp);
 
-        start_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_edit));
-        end_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_edit));
+        start_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_label)); // link the button to the date picker and label
+        end_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_label)); // link the button to the date picker and label
 
         //custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
 
         return view;
     }
 
+    /**
+     * parse class to json
+     * @return
+     * @throws Exception
+     */
     @Override
     public JSONObject getJSONRepresentation() throws Exception{
         JSONObject rep = new JSONObject();
@@ -81,8 +89,8 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         rep.put("interest_type", interest_type_spinner.getSelectedItem().toString());
         rep.put("interest_rate_percent", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
         rep.put("interest_calc_freq", calculation_freq_spinner.getSelectedItem());
-        rep.put("start_date", begin_date_edit.getText());
-        rep.put("end_date", begin_date_edit.getText());
+        rep.put("start_date", begin_date_label.getText());
+        rep.put("end_date", begin_date_label.getText());
         rep.put("payment_frequency", payment_freq_spinner.getSelectedItem());
         return rep;
     }

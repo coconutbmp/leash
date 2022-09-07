@@ -8,9 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -25,7 +23,7 @@ import okhttp3.Response;
 public class AddBudgetDialogue extends Dialog {
 
     //declarations
-    String name,startdate,enddate, userID;
+    String name, start_date, end_date, userID;
     Button proceed, cancel;
     EditText budget_name_edit;
     TextView begin_date_edit, end_date_edit;
@@ -33,6 +31,11 @@ public class AddBudgetDialogue extends Dialog {
     DatePicker start_dp, end_dp;
 
 
+    /**
+     * Constructor for the AddBudgetDialogue
+     * @param act parent activity
+     * @param data accept user id in order to link the budget-to-be to the correct user
+     */
     public AddBudgetDialogue(Activity act,String data) {
         super(act);
         userID = data;
@@ -69,14 +72,13 @@ public class AddBudgetDialogue extends Dialog {
 
         proceed.setOnClickListener(view -> {     // when "done" button is clicked
             if (budget_name_edit.getText().length() > 0){
-                //todo: add code to add the budget to the users account
 
                 //get EditText content in string format
                 name= budget_name_edit.getText().toString();
-                startdate= begin_date_edit.getText().toString();
-                enddate= end_date_edit.getText().toString();
+                start_date = begin_date_edit.getText().toString();
+                end_date = end_date_edit.getText().toString();
 
-                addtoDatabase();
+                addToDatabase();
 
                 //create intent, pass information and start Budget activity
                 Intent i = new Intent(this.getContext(), Budget.class);
@@ -92,7 +94,10 @@ public class AddBudgetDialogue extends Dialog {
         });
     }
 
-    public void addtoDatabase(){  //network request to insert budget information into database
+    /**
+     * upload the data for the created budget to the database
+     */
+    public void addToDatabase(){  //network request to insert budget information into database
 
         //set up client
         OkHttpClient client = new OkHttpClient();
@@ -101,8 +106,8 @@ public class AddBudgetDialogue extends Dialog {
         //add parameters to insert
         FormBodybuilding.add("userid",userID);
         FormBodybuilding.add("name",name);
-        FormBodybuilding.add("startdate",startdate);
-        FormBodybuilding.add("enddate",enddate);
+        FormBodybuilding.add("startdate", start_date);
+        FormBodybuilding.add("enddate", end_date);
 
 
 

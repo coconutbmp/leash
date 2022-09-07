@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * Controller for the Budget Page
+ */
 public class Budget extends AppCompatActivity {
     CardView add_button, return_button;
     String budget_name;
@@ -29,10 +32,8 @@ public class Budget extends AppCompatActivity {
 
         UXFunctions.setDate(day, month);
 
-        Bundle b = getIntent().getExtras();
+        Bundle b = getIntent().getExtras();// get data passed from previous activity
         budget_name = getIntent().getExtras().getString("budget_name");
-        System.out.println("    --->    " + budget_name);
-        System.out.println(b.toString());
 
         budget_title.setText(budget_name);
 

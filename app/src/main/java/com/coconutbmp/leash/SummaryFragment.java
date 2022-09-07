@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Fragment to Show Summaries for some data
+ */
 public class SummaryFragment extends Fragment {
 
     public SummaryFragment() {
