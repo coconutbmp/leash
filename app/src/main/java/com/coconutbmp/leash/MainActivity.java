@@ -48,6 +48,7 @@ import org.json.JSONObject;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -260,22 +261,27 @@ public class MainActivity extends AppCompatActivity{
                         && loginUtils.validatePass(pass, null)
                         && loginUtils.validatePass(pass, confirmPass); // validate input
 
-                if(valid){
+                if(valid) {
                     JSONObject jsonObject = new JSONObject();
                     try {
+                        String hashed = loginUtils.Hash(pass);
                         // add everything to json for request
                         jsonObject.put("FName", name);
                         jsonObject.put("LName", surname);
                         jsonObject.put("email", email);
-                        jsonObject.put("pass", pass);
+                        jsonObject.put("pass", hashed);
                         //make http request to register.php
-                        internetRequest.doRequest(url+"register.php", MainActivity.this, jsonObject, new RequestHandler() {
+                        internetRequest.doRequest(url + "register.php", MainActivity.this, jsonObject, new RequestHandler() {
                             @Override
                             public void processResponse(String response) {
                                 doRegister(response, name, surname); // process server response
                             }
                         });
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (InvalidKeySpecException e) {
                         e.printStackTrace();
                     }
                 }
@@ -550,10 +556,11 @@ public class MainActivity extends AppCompatActivity{
             boolean valid = false;
             String name = "";
             String userID ="";
+
             JSONArray jsonArray = new JSONArray(response); // format response to JSON array
             for (int i = 0; i < jsonArray.length(); i ++){ // loop through array
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.getString("user_Password").equals(pass)){ // find matching password
+                if (loginUtils.verifyPassword(pass ,jsonObject.getString("user_Password"))){ // find matching password
                     // store necessary info
                     userID = jsonObject.getString("user_ID");
                     name = jsonObject.getString("user_FirstName") + " " + jsonObject.getString("user_LastName");
@@ -571,6 +578,10 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(MainActivity.this, "No Such Account Exists", Toast.LENGTH_SHORT).show();
             }
         } catch (JSONException e) { //JSON Object exception
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
     }
