@@ -6,5 +6,7 @@ import android.widget.LinearLayout;
 public class BudgetListLayout extends LinearLayout {
     public BudgetListLayout(Context context) {
         super(context);
+        setOrientation(VERTICAL);
+        setBackgroundColor(getResources().getColor(R.color.beige));
     }
 }
