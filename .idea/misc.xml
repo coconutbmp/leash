@@ -7,8 +7,10 @@
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1315" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1315" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.133" />
+        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_edit_calendar_24.xml" value="0.1265" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.133" />
+        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.1265" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_visibility_24.xml" value="0.131" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_baseline_visibility_off_24.xml" value="0.131" />
@@ -16,10 +18,10 @@
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_google_logo.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_leash.xml" value="0.133" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/drawable/ic_logo_foreground.xml" value="0.133" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_add_income.xml" value="0.25" />
+        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_add_income.xml" value="0.18" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_add_liability.xml" value="0.22" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_budget.xml" value="0.33" />
-        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/add_budget_dialog.xml" value="0.22" />
         <entry key="..\:/Users/Liam Carstens/Documents/Coding Projects/Android Projects/leash/app/src/main/res/layout/add_to_budget_dialog.xml" value="0.33" />
