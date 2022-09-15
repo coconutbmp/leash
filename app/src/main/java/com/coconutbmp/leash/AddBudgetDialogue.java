@@ -62,8 +62,8 @@ public class AddBudgetDialogue extends Dialog {
         start_dp = findViewById(R.id.budget_start_dp);
         end_dp= findViewById(R.id.budget_end_dp);
 
-        start_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_edit));
-        end_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_edit));
+        start_button.setOnClickListener(view1 -> UXFunctions.select_date(start_button, start_dp, begin_date_edit));
+        end_button.setOnClickListener(view1 -> UXFunctions.select_date(end_button, end_dp, end_date_edit));
 
 
         cancel.setOnClickListener(view -> {   //when "cancel" button is clicked

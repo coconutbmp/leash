@@ -69,8 +69,8 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         start_dp = view.findViewById(R.id.loan_start_dp);
         end_dp = view.findViewById(R.id.loan_end_dp);
 
-        start_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_label)); // link the button to the date picker and label
-        end_button.setOnClickListener(view1 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_label)); // link the button to the date picker and label
+        start_button.setOnClickListener(view1 -> UXFunctions.select_date(start_button, start_dp, begin_date_label)); // link the button to the date picker and label
+        end_button.setOnClickListener(view1 -> UXFunctions.select_date(end_button, end_dp, end_date_label)); // link the button to the date picker and label
 
         //custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
 

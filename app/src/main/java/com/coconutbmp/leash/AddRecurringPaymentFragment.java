@@ -55,8 +55,8 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
         start_dp = view.findViewById(R.id.loan_start_dp);
         end_dp = view.findViewById(R.id.loan_end_dp);
 
-        start_button.setOnClickListener(v1 -> AddLiabilityActivity.select_date(start_button, start_dp, begin_date_edit));// link the button to the date picker and label
-        end_button.setOnClickListener(v2 -> AddLiabilityActivity.select_date(end_button, end_dp, end_date_edit));// link the button to the date picker and label
+        start_button.setOnClickListener(v1 -> UXFunctions.select_date(start_button, start_dp, begin_date_edit));// link the button to the date picker and label
+        end_button.setOnClickListener(v2 -> UXFunctions.select_date(end_button, end_dp, end_date_edit));// link the button to the date picker and label
 
         return view;
     }
