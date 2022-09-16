@@ -1,2 +1,2 @@
 ignore:
-  app/src/main/java/com/coconutbmp/leash/MainActivity.java
+  - "app/src/main/java/com/coconutbmp/leash/MainActivity.java"
