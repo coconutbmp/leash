@@ -2,6 +2,7 @@ package com.coconutbmp.leash;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,9 +15,11 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.ArrayList;
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class BudgetListLayout extends LinearLayout {
     TextView budgetName, budgetSummary;
-    ImageView budgetDetails;
+    CircleImageView budgetDetails;
     LinearLayout textLayout;
     View divider;
 
@@ -25,6 +28,7 @@ public class BudgetListLayout extends LinearLayout {
     public BudgetListLayout(Context context) {
         super(context);
         setOrientation(HORIZONTAL);
+        setGravity(Gravity.CENTER_VERTICAL);
         setBackgroundColor(ContextCompat.getColor(context, R.color.beige));
 
         colors.add("#FF00E676");
@@ -32,15 +36,26 @@ public class BudgetListLayout extends LinearLayout {
         colors.add("#E53935");
         colors.add("#3D5AFE");
 
-        int index = new Random().nextInt(5);
+        int index = new Random().nextInt(4);
 
-        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
         params.setMargins(4, 8, 4, 8);
+
+        LayoutParams imageParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
+        params.setMargins(8, 8, 8, 8);
 
         LayoutParams dividerParams = new LayoutParams(4, ViewGroup.LayoutParams.MATCH_PARENT);
         dividerParams.setMargins(4, 4, 4, 4);
 
+        budgetName = new TextView(context);
+        budgetSummary = new TextView(context);
+        budgetDetails = new CircleImageView(context);
+        textLayout = new LinearLayout(context);
+        divider = new View(context);
+
         divider.setBackgroundColor(Color.parseColor(colors.get(index)));
+
+        textLayout.setOrientation(VERTICAL);
 
         budgetName.setTextSize(22);
         budgetName.setTextColor(ContextCompat.getColor(context, R.color.grey));
@@ -49,9 +64,15 @@ public class BudgetListLayout extends LinearLayout {
         budgetSummary.setTextSize(12);
         budgetSummary.setTextColor(ContextCompat.getColor(context, R.color.dark_grey));
 
+        budgetDetails.setImageResource(R.drawable.ic_baseline_arrow_forward_24);
+        budgetDetails.setElevation(8);
+        budgetDetails.setCircleBackgroundColor(ContextCompat.getColor(context, R.color.smokey_white));
+
         textLayout.addView(budgetName);
+        textLayout.addView(budgetSummary, params);
+
         addView(divider, dividerParams);
         addView(textLayout, params);
-        addView(budgetDetails);
+        addView(budgetDetails, imageParams);
     }
 }

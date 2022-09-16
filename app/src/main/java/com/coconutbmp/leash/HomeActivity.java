@@ -3,13 +3,17 @@ package com.coconutbmp.leash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,51 +35,9 @@ public class HomeActivity extends AppCompatActivity {
     CardView home_return_button, btnAdd;
     TextView day, month;
     String userID;
-
-    JSONArray getMyBudgets(){ // retrieve all my budgets
-        System.out.println("->->->->->->->->->->->->->->->->->");
-        OkHttpClient client = new OkHttpClient();
-        FormBody.Builder builder = new FormBody.Builder();
-
-        builder.add("userid", userID);
-
-        RequestBody reqBody = builder.build();
-        System.out.println(userID);
-
-        String URL = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/get_budget.php";
-
-        //link parameters in RequestBody with URL to build request
-        Request req = new Request.Builder()
-                .post(reqBody)
-                .url(URL)
-                .build();
-
-        client.newCall(req).enqueue(new Callback() {   //make the call with request to get a response
-            @Override
-            public void onFailure(Call call, IOException e) {  //if call fails
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException { //if we get a response
-                String strResponse =response.body().string();
-
-                if("Success".equals(strResponse)){  //if response returns "Success"
-                    System.out.println("---------------------------------");
-                    System.out.println(strResponse);
-                    System.out.println("---------------------------------");
-                }
-                else if(strResponse.equals("Failed")){ //if response returns "Failed"
-                    System.out.println("---------------------------------");
-                    System.out.println(strResponse);
-                    System.out.println("---------------------------------");
-                }
-
-            }
-        });
-
-        return null;
-    }
+    String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
+    LinearLayout budgets;
+    InternetRequest internetRequest;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,16 +47,42 @@ public class HomeActivity extends AppCompatActivity {
         //initialising variables
         userID = getIntent().getStringExtra("userID");
 
-        userID = getIntent().getStringExtra("userID");
+        internetRequest = new InternetRequest();
 
         btnAdd = findViewById(R.id.btnAddSomething);
         home_return_button = findViewById(R.id.homeReturnCard);
         day = findViewById(R.id.lblDay);
         month = findViewById(R.id.lblMonth);
+        budgets = findViewById(R.id.budgetLayout);
 
         UXFunctions.setDate(day, month);
 
-        getMyBudgets(); // retrieve budgets from the db
+        JSONObject userParams = new JSONObject();
+        try {
+            userParams.put("userid", userID);
+            internetRequest.doRequest(url + "get_budget.php", this, userParams, new RequestHandler() {
+                @Override
+                public void processResponse(String response) {
+                    try {
+                        budgets.removeAllViews();
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        layoutParams.setMargins(24, 4, 24, 4);
+                        JSONArray jsonArray = new JSONArray(response);
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            BudgetListLayout budget = new BudgetListLayout(HomeActivity.this);
+                            budget.budgetName.setText(jsonObject.getString("budget_Name"));
+                            budget.budgetSummary.setText(jsonObject.getString("budget_StartDate") + " - "+jsonObject.getString("budget_EndDate"));
+                            budgets.addView(budget, layoutParams);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         //implementing button to add budget dialogue
         String finalUserID = userID;
@@ -111,6 +99,37 @@ public class HomeActivity extends AppCompatActivity {
                 HomeActivity.this.finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JSONObject userParams = new JSONObject();
+        try {
+            userParams.put("userid", userID);
+            internetRequest.doRequest(url + "get_budget.php", this, userParams, new RequestHandler() {
+                @Override
+                public void processResponse(String response) {
+                    try {
+                        budgets.removeAllViews();
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        layoutParams.setMargins(24, 4, 24, 4);
+                        JSONArray jsonArray = new JSONArray(response);
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            BudgetListLayout budget = new BudgetListLayout(HomeActivity.this);
+                            budget.budgetName.setText(jsonObject.getString("budget_Name"));
+                            budget.budgetSummary.setText(jsonObject.getString("budget_StartDate") + " - "+jsonObject.getString("budget_EndDate"));
+                            budgets.addView(budget, layoutParams);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
 
