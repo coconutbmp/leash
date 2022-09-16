@@ -13,6 +13,11 @@ public class SignInTests {
     }
 
     @Test
+    public void incorrectName_empty(){
+        assertFalse(loginUtils.validateName(""));
+    }
+
+    @Test
     public void incorrectName_contains_number(){
         assertFalse(loginUtils.validateName("Name123"));
     }
@@ -30,6 +35,11 @@ public class SignInTests {
     @Test
     public void incorrectEmail_noDot(){
         assertFalse(loginUtils.validateEmail("WrongEmail@gmailcom"));
+    }
+
+    @Test
+    public void incorrectEmail_empty(){
+        assertFalse(loginUtils.validateEmail(""));
     }
 
     @Test
