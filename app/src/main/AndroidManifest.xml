@@ -20,6 +20,9 @@
             android:name=".AddIncomeActivity"
             android:exported="false" />
         <activity
+            android:name=".AddTransactionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Budget"
             android:exported="false" />
         <activity
