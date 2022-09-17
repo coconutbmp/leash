@@ -58,24 +58,6 @@
         app:layout_constraintTop_toBottomOf="@+id/lblWelcome" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/facebookCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="32dp"
-        app:layout_constraintStart_toEndOf="@+id/googleCard"
-        app:layout_constraintTop_toBottomOf="@+id/lblSlogan">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_facebook" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
         android:id="@+id/googleCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -250,12 +232,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
                 android:buttonTint="@color/shadow"
                 android:fontFamily="sans-serif"
                 android:text="Remember Me"
                 android:textColor="@color/dark_grey"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblInvalidLoginPass" />
 
@@ -289,18 +270,6 @@
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@+id/edtSignInPass"
                 app:layout_constraintTop_toBottomOf="@+id/edtSignInPass" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="28dp"
-                android:text="@string/forgot_pass"
-                android:textColor="@color/shadow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cbxStaySignedIn"
-                app:layout_constraintTop_toBottomOf="@+id/lblInvalidLoginPass" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -4,9 +4,6 @@
     <string name="sign_in">Already Registered? <u>Sign In</u></string>
     <string name="forgot_pass"><u> Forgot Password? </u></string>
 
-    <string name="facebook_app_id">1440156773128030</string>
-    <string name="fb_login_protocol_scheme">fb1440156773128030</string>
-    <string name="add">+</string>
     <string name="select_cat">Select Category</string>
     <string name="create_cat">Create New Custom Category</string>
     <string name="add_liability_name">Add Liability Name</string>

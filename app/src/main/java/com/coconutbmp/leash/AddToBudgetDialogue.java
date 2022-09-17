@@ -8,9 +8,11 @@ import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 
 public class AddToBudgetDialogue extends Dialog {
 
+    CardView returnCard;
     Button add_transact_button, add_liability_button, add_income_button;
     String budget_name;
 
@@ -34,6 +36,7 @@ public class AddToBudgetDialogue extends Dialog {
         add_transact_button = findViewById(R.id.add_transaction_button);
         add_income_button = findViewById(R.id.add_income_button);
         add_liability_button = findViewById(R.id.add_liability_button);
+        returnCard = findViewById(R.id.ReturnCard);
 
         add_liability_button.setOnClickListener(view -> {
             Intent i = new Intent(this.getContext(), AddLiabilityActivity.class);
@@ -45,6 +48,10 @@ public class AddToBudgetDialogue extends Dialog {
             Intent i = new Intent(this.getContext(), AddIncomeActivity.class);
             i.putExtra("budget_name", budget_name); // pass data useful for the AddIncomeActivity
             this.getContext().startActivity(i);
+        });
+
+        returnCard.setOnClickListener(view -> {
+            AddToBudgetDialogue.this.dismiss();
         });
 
         //todo: set up transitions to the transaction page.

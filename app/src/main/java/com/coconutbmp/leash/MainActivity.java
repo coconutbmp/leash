@@ -30,11 +30,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -66,7 +61,7 @@ public class MainActivity extends AppCompatActivity{
     Button openSignIn, openSignUp, signIn, signUp;
     ImageView closeSignIn, closeSignUp, signInShowPass, signUpShowPass, signUpShowConfirm;
     TextView moveSignIn, moveSignUp, invalidName, invalidSurname, invalidEmail,invalidPass, invalidConfirm, invalidLoginEmail, invalidLoginPass;
-    CardView SignInCard, SignUpCard, googleLogIn, facebookLogIn;
+    CardView SignInCard, SignUpCard, googleLogIn;
     CheckBox StaySignedIn;
     EditText logInEmail, logInPass, signUpName, signUpSurname, signUpEmail, signUpPass, signUpPassConfirm;
 
@@ -112,7 +107,6 @@ public class MainActivity extends AppCompatActivity{
                 openSignIn.setVisibility(View.GONE);
                 openSignUp.setVisibility(View.GONE);
                 googleLogIn.setVisibility(View.GONE);
-                facebookLogIn.setVisibility(View.GONE);
             }
         });
 
@@ -124,7 +118,6 @@ public class MainActivity extends AppCompatActivity{
                 openSignIn.setVisibility(View.GONE);
                 openSignUp.setVisibility(View.GONE);
                 googleLogIn.setVisibility(View.GONE);
-                facebookLogIn.setVisibility(View.GONE);
             }
         });
 
@@ -136,7 +129,6 @@ public class MainActivity extends AppCompatActivity{
                 openSignIn.setVisibility(View.VISIBLE);
                 openSignUp.setVisibility(View.VISIBLE);
                 googleLogIn.setVisibility(View.VISIBLE);
-                facebookLogIn.setVisibility(View.VISIBLE);
             }
         });
 
@@ -148,7 +140,6 @@ public class MainActivity extends AppCompatActivity{
                 openSignIn.setVisibility(View.VISIBLE);
                 openSignUp.setVisibility(View.VISIBLE);
                 googleLogIn.setVisibility(View.VISIBLE);
-                facebookLogIn.setVisibility(View.VISIBLE);
             }
         });
 
@@ -160,7 +151,6 @@ public class MainActivity extends AppCompatActivity{
                 openSignIn.setVisibility(View.GONE);
                 openSignUp.setVisibility(View.GONE);
                 googleLogIn.setVisibility(View.GONE);
-                facebookLogIn.setVisibility(View.GONE);
             }
         });
 
@@ -172,7 +162,6 @@ public class MainActivity extends AppCompatActivity{
                 openSignIn.setVisibility(View.GONE);
                 openSignUp.setVisibility(View.GONE);
                 googleLogIn.setVisibility(View.GONE);
-                facebookLogIn.setVisibility(View.GONE);
             }
         });
 
@@ -292,13 +281,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 doGoogleLogIn();
-            }
-        });
-
-        facebookLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -517,7 +499,6 @@ public class MainActivity extends AppCompatActivity{
         signIn = findViewById(R.id.btnSignIn);
         signUp = findViewById(R.id.btnRegister);
         googleLogIn = findViewById(R.id.googleCard);
-        facebookLogIn = findViewById(R.id.facebookCard);
         StaySignedIn = findViewById(R.id.cbxStaySignedIn);
         logInEmail = findViewById(R.id.edtSignInEmail);
         logInPass = findViewById(R.id.edtSignInPass);
@@ -676,26 +657,6 @@ public class MainActivity extends AppCompatActivity{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public void doFacebookLogIn(){ // handle facebook login
-        CallbackManager callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(@NonNull FacebookException e) {
-
-            }
-        });
     }
 
     public void changePassVisibility(EditText edtPass, ImageView sender){ // make passwords visible/invisible
