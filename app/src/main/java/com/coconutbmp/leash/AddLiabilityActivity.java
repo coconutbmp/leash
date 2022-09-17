@@ -1,8 +1,10 @@
 package com.coconutbmp.leash;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -126,6 +128,17 @@ public class AddLiabilityActivity extends AppCompatActivity {
             }
 
         });
+
+        String[] cats = getResources().getStringArray(R.array.predefined_categories);
+        String[] types = getResources().getStringArray(R.array.liability_type);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_text, cats);
+        ArrayAdapter<String> adapter_type = new ArrayAdapter<String>(this, R.layout.spinner_text, types);
+        liability_type_spinner.setPopupBackgroundDrawable(getResources().getDrawable(R.color.smokey_white));
+        liability_type_spinner.getBackground().setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
+        category_spinner.setPopupBackgroundDrawable(getResources().getDrawable(R.color.smokey_white));
+        category_spinner.getBackground().setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
+        category_spinner.setAdapter(adapter);
+        liability_type_spinner.setAdapter(adapter_type);
 
         // initialize what form were on, based on what type if liability is first in the spinner
         displayByContext(liability_type_spinner.getSelectedItem().toString());

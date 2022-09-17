@@ -18,10 +18,14 @@
         tools:targetApi="31">
         <activity
             android:name=".AddIncomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Leash.NoActionBar"/>
         <activity
             android:name=".Budget"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Leash.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

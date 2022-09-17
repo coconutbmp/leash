@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:text="Most Recent Summary"
                         android:textColor="@color/dark_grey"
-                        android:textSize="24sp" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:id="@+id/summary_ll"
@@ -184,6 +184,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="8dp"
+                            app:cardBackgroundColor="@color/smokey_white"
                             app:cardCornerRadius="8dp">
 
                             <LinearLayout
@@ -200,8 +201,8 @@
                                     android:layout_margin="10dp"
                                     android:gravity="center"
                                     android:text="Nothing To Show. Please add elements to your Budget."
-                                    android:textColor="@color/dark_grey"
-                                    android:textSize="16sp" />
+                                    android:textColor="@color/grey"
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 

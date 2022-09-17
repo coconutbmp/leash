@@ -2,10 +2,15 @@ package com.coconutbmp.leash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Controller for the Add Income Page
@@ -19,6 +24,7 @@ public class AddIncomeActivity extends AppCompatActivity {
     Button start, end;
     DatePicker startDate, endDate;
     TextView lblStartDate, lblEndDate;
+    Spinner incomeFrequency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,15 @@ public class AddIncomeActivity extends AppCompatActivity {
         lblStartDate = findViewById(R.id.loan_start_label);
         lblEndDate = findViewById(R.id.loan_end_label);
 
+        incomeFrequency = findViewById(R.id.sprRecurringFrequency2);
+
         start.setOnClickListener(view1 -> UXFunctions.select_date(start, startDate, lblStartDate)); // link the button to the date picker and label
         end.setOnClickListener(view1 -> UXFunctions.select_date(end, endDate, lblEndDate)); // link the button to the date picker and label
+
+        String[] freq = getResources().getStringArray(R.array.calculation_frequencies);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_text, freq);
+        incomeFrequency.setPopupBackgroundDrawable(getResources().getDrawable(R.color.smokey_white));
+        incomeFrequency.getBackground().setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
+        incomeFrequency.setAdapter(adapter);
     }
 }

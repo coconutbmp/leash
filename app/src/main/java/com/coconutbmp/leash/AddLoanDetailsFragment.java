@@ -1,5 +1,6 @@
 package com.coconutbmp.leash;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SwitchCompat;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
