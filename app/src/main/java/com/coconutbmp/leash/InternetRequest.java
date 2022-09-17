@@ -22,6 +22,7 @@ import okhttp3.Response;
 public class InternetRequest { // send and receive http requests to server
     Request request;
     OkHttpClient client = new OkHttpClient();
+    public static final String std_url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
 
     // make request by passing a parameters fro  a json to server
     public void doRequest(String url, Activity activity, JSONObject parameters, com.coconutbmp.leash.RequestHandler requestHandler){
