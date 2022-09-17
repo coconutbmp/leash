@@ -1,5 +1,9 @@
 package com.coconutbmp.leash;
 
+import static java.security.AccessController.getContext;
+
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -36,13 +40,10 @@ public class UXFunctions { // functions that will be reused throughout UI
             if (sender.getText().equals(save)) {
                 sender.setText(set);
                 target_dp.getLayoutParams().height = 0;
-
                 String resulting_date = Integer.toString(target_dp.getYear()) + "-" ;
                 resulting_date = resulting_date + Integer.toString(target_dp.getMonth() + 1) + "-" ;
                 resulting_date = resulting_date + Integer.toString(target_dp.getDayOfMonth())  ;
-
                 target_tv.setText(resulting_date);
-
 
             } else if (sender.getText().equals(set)) {
                 System.out.println("<- olo ->");
@@ -52,7 +53,7 @@ public class UXFunctions { // functions that will be reused throughout UI
                 int pixels = (int) (150 * scale + 0.5f);
                 target_dp.getLayoutParams().height = pixels;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

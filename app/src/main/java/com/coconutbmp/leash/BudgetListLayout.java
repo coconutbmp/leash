@@ -33,7 +33,7 @@ public class BudgetListLayout extends LinearLayout {
         super(context);
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
-        setBackgroundColor(ContextCompat.getColor(context, R.color.beige));
+        setBackgroundColor(ContextCompat.getColor(context, R.color.smokey_white));
 
         colors.add("#FF00E676");
         colors.add("#FFFFC400");
@@ -46,10 +46,10 @@ public class BudgetListLayout extends LinearLayout {
         params.setMargins(4, 8, 4, 8);
 
         LayoutParams imageParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        params.setMargins(8, 8, 8, 8);
+        params.setMargins(0, 8, 16, 8);
 
         LayoutParams dividerParams = new LayoutParams(4, ViewGroup.LayoutParams.MATCH_PARENT);
-        dividerParams.setMargins(4, 4, 4, 4);
+        dividerParams.setMargins(16, 4, 4, 4);
 
         budgetName = new TextView(context);
         budgetSummary = new TextView(context);
@@ -70,7 +70,7 @@ public class BudgetListLayout extends LinearLayout {
 
         budgetDetails.setImageResource(R.drawable.ic_baseline_arrow_forward_24);
         budgetDetails.setElevation(8);
-        budgetDetails.setCircleBackgroundColor(ContextCompat.getColor(context, R.color.smokey_white));
+        budgetDetails.setCircleBackgroundColor(ContextCompat.getColor(context, R.color.beige));
 
         textLayout.addView(budgetName);
         textLayout.addView(budgetSummary, params);

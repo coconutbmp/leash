@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
@@ -45,7 +45,7 @@
 
                     <com.github.mikephil.charting.charts.RadarChart
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
