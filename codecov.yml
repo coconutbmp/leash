@@ -1,2 +1,8 @@
 ignore:
   - "app/src/main/java/com/coconutbmp/leash/MainActivity.java"
+  - "app/src/main/java/com/coconutbmp/leash/AddBudgetDialogue.java"
+  - "app/src/main/java/com/coconutbmp/leash/AddIncomeActivity.java"
+  - "app/src/main/java/com/coconutbmp/leash/AddLiabilityActivity.java"
+  - "app/src/main/java/com/coconutbmp/leash/AddLoanDetailsFragment.java"
+  - "app/src/main/java/com/coconutbmp/leash/AddToBudgetDialogue.java"
+  - "app/src/main/java/com/coconutbmp/leash/AddTransactionsActivity.java"

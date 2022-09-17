@@ -22,6 +22,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Leash.NoActionBar"/>
         <activity
+            android:name=".AddTransactionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Budget"
             android:exported="false"
             android:screenOrientation="portrait"
