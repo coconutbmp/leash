@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
     LinearLayout budgets;
     InternetRequest internetRequest;
+    LinearLayout summary_holder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,14 @@ public class HomeActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        summary_holder = findViewById(R.id.summaryLayout);
+        FragmentManager frag_man = getSupportFragmentManager();
+        FragmentTransaction frag_tran = frag_man.beginTransaction();
+
+        SummaryFragment summary_frag = new SummaryFragment();
+        frag_tran.add(summary_holder.getId(), summary_frag).commit();
+
+
 
         //implementing button to add budget dialogue
         String finalUserID = userID;
