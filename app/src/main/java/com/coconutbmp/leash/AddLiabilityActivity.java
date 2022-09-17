@@ -42,6 +42,25 @@ public class AddLiabilityActivity extends AppCompatActivity {
     JSONObject json_rep;
     LiabilityDetails ld_container;
 
+
+    void handleSubmissionResponse(String response){
+        System.out.println(response);
+    }
+
+    private boolean submitLiability(JSONObject final_rep){
+
+        InternetRequest ir = new InternetRequest();
+
+        ir.doRequest(
+                InternetRequest.std_url + "submit_liability.php",
+                this,
+                final_rep,
+                this::handleSubmissionResponse
+        );
+
+        return true;
+    }
+
     private void createJSONRepresentation() throws Exception {
         json_rep = new JSONObject();
         json_rep.put("liability_name", name_edit.getText());
@@ -98,6 +117,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
         continue_button.setOnClickListener(view -> {
             try{
                 createJSONRepresentation(); // create json storing relevant data about the liability to add.
+                submitLiability(json_rep);
                 //todo: upload the data with a call to the server
             } catch (Exception e){
                 System.out.println("json parsing failed");

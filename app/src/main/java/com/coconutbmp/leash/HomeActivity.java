@@ -42,6 +42,26 @@ public class HomeActivity extends AppCompatActivity {
     InternetRequest internetRequest;
     LinearLayout summary_holder;
 
+    public void processBudgetResponse(String response){
+        try {
+            budgets.removeAllViews();
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(24, 4, 24, 4);
+            JSONArray jsonArray = new JSONArray(response);
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                BudgetListLayout budget = new BudgetListLayout(HomeActivity.this);
+
+                budget.json_rep = jsonObject;
+                budget.budgetName.setText(jsonObject.getString("budget_Name"));
+                budget.budgetSummary.setText(jsonObject.getString("budget_StartDate") + " - "+jsonObject.getString("budget_EndDate"));
+                budgets.addView(budget, layoutParams);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,26 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         JSONObject userParams = new JSONObject();
         try {
             userParams.put("userid", userID);
-            internetRequest.doRequest(url + "get_budget.php", this, userParams, new RequestHandler() {
-                @Override
-                public void processResponse(String response) {
-                    try {
-                        budgets.removeAllViews();
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        layoutParams.setMargins(24, 4, 24, 4);
-                        JSONArray jsonArray = new JSONArray(response);
-                        for(int i = 0; i < jsonArray.length(); i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            BudgetListLayout budget = new BudgetListLayout(HomeActivity.this);
-                            budget.budgetName.setText(jsonObject.getString("budget_Name"));
-                            budget.budgetSummary.setText(jsonObject.getString("budget_StartDate") + " - "+jsonObject.getString("budget_EndDate"));
-                            budgets.addView(budget, layoutParams);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            internetRequest.doRequest(url + "get_budget.php", this, userParams, this::processBudgetResponse);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -118,26 +119,7 @@ public class HomeActivity extends AppCompatActivity {
         JSONObject userParams = new JSONObject();
         try {
             userParams.put("userid", userID);
-            internetRequest.doRequest(url + "get_budget.php", this, userParams, new RequestHandler() {
-                @Override
-                public void processResponse(String response) {
-                    try {
-                        budgets.removeAllViews();
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        layoutParams.setMargins(24, 4, 24, 4);
-                        JSONArray jsonArray = new JSONArray(response);
-                        for(int i = 0; i < jsonArray.length(); i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            BudgetListLayout budget = new BudgetListLayout(HomeActivity.this);
-                            budget.budgetName.setText(jsonObject.getString("budget_Name"));
-                            budget.budgetSummary.setText(jsonObject.getString("budget_StartDate") + " - "+jsonObject.getString("budget_EndDate"));
-                            budgets.addView(budget, layoutParams);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            internetRequest.doRequest(url + "get_budget.php", this, userParams, this::processBudgetResponse);
         } catch (JSONException e) {
             e.printStackTrace();
         }
