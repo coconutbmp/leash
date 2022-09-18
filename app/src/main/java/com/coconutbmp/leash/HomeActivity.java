@@ -1,12 +1,14 @@
 package com.coconutbmp.leash;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -34,11 +36,12 @@ import okhttp3.Response;
  */
 public class HomeActivity extends AppCompatActivity {
     //declaring variables
-    CardView home_return_button, btnAdd, liabilityReport;
+    CardView home_return_button, btnAdd, liabilityReport, logout;
     TextView day, month;
     String userID;
     String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
     LinearLayout budgets;
+    SharedPreferences prefs;
     InternetRequest internetRequest;
     LinearLayout summary_holder;
 
@@ -69,12 +72,14 @@ public class HomeActivity extends AppCompatActivity {
 
         //initialising variables
         userID = getIntent().getStringExtra("userID");
+        prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         internetRequest = new InternetRequest();
 
         btnAdd = findViewById(R.id.btnAddSomething);
         liabilityReport = findViewById(R.id.liabilityReportCardView);
         home_return_button = findViewById(R.id.homeReturnCard);
+        logout = findViewById(R.id.logoutCard);
         day = findViewById(R.id.lblDay);
         month = findViewById(R.id.lblMonth);
         budgets = findViewById(R.id.budgetLayout);
@@ -117,6 +122,16 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 HomeActivity.this.finish();
             }
+        });
+
+        logout.setOnClickListener(view -> {
+            SharedPreferences.Editor editor = prefs.edit();
+            boolean staySignedIn = prefs.getBoolean("StaySignedIn", false);
+            if(staySignedIn) {
+                editor.putBoolean("StaySignedIn", false);
+            }
+            editor.commit();
+            this.finish();
         });
     }
 

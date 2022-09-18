@@ -234,7 +234,7 @@
                 android:layout_marginTop="16dp"
                 android:buttonTint="@color/shadow"
                 android:fontFamily="sans-serif"
-                android:text="Remember Me"
+                android:text="Stay Signed In"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

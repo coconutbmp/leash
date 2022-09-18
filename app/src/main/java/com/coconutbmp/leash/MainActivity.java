@@ -76,11 +76,6 @@ public class MainActivity extends AppCompatActivity{
         // check if user wants to to be remembered when logging in
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
 
-        if(StaySignedIn.isChecked()){
-            String userEmail = prefs.getString("email", null);
-            logInEmail.setText(userEmail);
-        }
-
         internetRequest = new InternetRequest(); // instantiate Internet Request instance
 
         // instantiate result handler for google login and set function to handle result
@@ -102,11 +97,33 @@ public class MainActivity extends AppCompatActivity{
         openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignInCard.setVisibility(View.VISIBLE);
-                SignUpCard.setVisibility(View.GONE);
-                openSignIn.setVisibility(View.GONE);
-                openSignUp.setVisibility(View.GONE);
-                googleLogIn.setVisibility(View.GONE);
+                String email;
+                String pass;
+                if(StaySignedIn.isChecked()){
+                    email = prefs.getString("email", null);
+                    pass = prefs.getString("pass", null);
+                    if(email != null&& pass != null && loginUtils.validateEmail(email) && loginUtils.validatePass(pass, null)){ // validate data
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("email", email); // put email in json for http request
+                            //Make http request to login.php
+                            internetRequest.doRequest(url+"login.php", MainActivity.this, jsonObject, new RequestHandler() {
+                                @Override
+                                public void processResponse(String response) {
+                                    doRegularLogIn(response, pass); //how to handle server response
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace(); // catch failed request
+                        }
+                    }
+                }else{
+                    SignInCard.setVisibility(View.VISIBLE);
+                    SignUpCard.setVisibility(View.GONE);
+                    openSignIn.setVisibility(View.GONE);
+                    openSignUp.setVisibility(View.GONE);
+                    googleLogIn.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -172,8 +189,10 @@ public class MainActivity extends AppCompatActivity{
                 if(StaySignedIn.isChecked() == true) {
                     editor.putBoolean("StaySignedIn", true);
                     boolean emailCheck = logInEmail.getText().toString().equals(null) || logInEmail.getText().toString().equals("");
+                    boolean passCheck = logInPass.getText().toString().equals(null) || logInPass.getText().toString().equals("");
                     if (!emailCheck){
                         editor.putString("email", logInEmail.getText().toString());
+                        editor.putString("pass", logInPass.getText().toString());
                     }
                     else{
                         Toast.makeText(MainActivity.this, "Cannot Save. Empty Inputs", Toast.LENGTH_SHORT).show();
@@ -182,6 +201,7 @@ public class MainActivity extends AppCompatActivity{
                 else{
                     editor.putBoolean("StaySignedIn", false);
                     editor.putString("email", null);
+                    editor.putString("pass", null);
                 }
                 editor.commit();
             }
@@ -212,9 +232,13 @@ public class MainActivity extends AppCompatActivity{
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String email;
+                String pass;
                 // fetch input
-                String email = logInEmail.getText().toString();
-                String pass = logInPass.getText().toString();
+
+                email = logInEmail.getText().toString();
+                pass = logInPass.getText().toString();
+
                 if(loginUtils.validateEmail(email) && loginUtils.validatePass(pass, null)){ // validate data
                     JSONObject jsonObject = new JSONObject();
                     try {
