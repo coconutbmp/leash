@@ -81,7 +81,7 @@ public class AddBudgetDialogue extends Dialog {
                 addToDatabase();
 
                 //create intent, pass information and start Budget activity
-                Intent i = new Intent(this.getContext(), Budget.class);
+                Intent i = new Intent(this.getContext(), BudgetActivity.class);
                 i.putExtra("budget_name", budget_name_edit.getText().toString());
                 i.putExtra("budget_startdate", budget_name_edit.getText().toString());
                 i.putExtra("budget_enddate", budget_name_edit.getText().toString());

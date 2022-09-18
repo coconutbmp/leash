@@ -49,12 +49,25 @@ public class InternetRequest { // send and receive http requests to server
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 final String responseData = response.body().string();
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        requestHandler.processResponse(responseData);
-                    }
-                });
+                if (activity != null){
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            requestHandler.processResponse(responseData);
+                        }
+                    });
+                } else {
+                    Thread response_thread = new Thread("Response"){
+                        @Override
+                        public void run(){
+                            requestHandler.processResponse(responseData);
+                        }
+                    };
+                    response_thread.start();
+                }
+
+
+
             }
         });
     }

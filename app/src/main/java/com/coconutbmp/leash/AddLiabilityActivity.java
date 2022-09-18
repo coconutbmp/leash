@@ -66,7 +66,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
     private void createJSONRepresentation() throws Exception {
         json_rep = new JSONObject();
         json_rep.put("liability_name", name_edit.getText());
-        json_rep.put("liability_category", category_spinner.getSelectedItem());
+        json_rep.put("category", category_spinner.getSelectedItem());
         json_rep.put("liability_type", liability_type_spinner.getSelectedItem());
 
         LiabilityDetails details_container = ld_container;

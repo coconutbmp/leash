@@ -10,7 +10,7 @@ import android.widget.TextView;
 /**
  * Controller for the Budget Page
  */
-public class Budget extends AppCompatActivity {
+public class BudgetActivity extends AppCompatActivity {
     CardView add_button, return_button;
     String budget_name;
     TextView budget_title, day, month;
@@ -46,7 +46,7 @@ public class Budget extends AppCompatActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Budget.this.finish();
+                BudgetActivity.this.finish();
             }
         });
     }

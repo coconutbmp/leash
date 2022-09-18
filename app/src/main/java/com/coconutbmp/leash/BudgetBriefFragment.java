@@ -62,7 +62,7 @@ public class BudgetBriefFragment extends Fragment {
         name_label = view.findViewById(R.id.name_label);
         card = view.findViewById(R.id.card_view);
         card.setOnClickListener(view1 -> {
-            Intent i = new Intent(this.getContext(), Budget.class);
+            Intent i = new Intent(this.getContext(), BudgetActivity.class);
         });
 
         try{

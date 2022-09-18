@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -80,7 +79,7 @@ public class BudgetListLayout extends LinearLayout {
         addView(budgetDetails, imageParams);
 
         this.setOnClickListener(view -> {
-            Intent intent = new Intent(this.getContext(), Budget.class);
+            Intent intent = new Intent(this.getContext(), BudgetActivity.class);
             try{
                 intent.putExtra("json_representation", json_rep.toString());
                 intent.putExtra("budget_name", (String) json_rep.get("budget_Name"));

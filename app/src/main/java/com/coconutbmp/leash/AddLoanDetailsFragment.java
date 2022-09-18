@@ -87,13 +87,13 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
     @Override
     public JSONObject getJSONRepresentation() throws Exception{
         JSONObject rep = new JSONObject();
-        rep.put("principal_amt", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
+        rep.put("principle", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
         rep.put("interest_type", interest_type_spinner.getSelectedItem().toString());
-        rep.put("interest_rate_percent", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
-        rep.put("interest_calc_freq", calculation_freq_spinner.getSelectedItem());
-        rep.put("start_date", begin_date_label.getText());
-        rep.put("end_date", begin_date_label.getText());
-        rep.put("payment_frequency", payment_freq_spinner.getSelectedItem());
+        rep.put("rate", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
+        rep.put("calc_freq", calculation_freq_spinner.getSelectedItem());
+        rep.put("start", begin_date_label.getText());
+        rep.put("end", begin_date_label.getText());
+        rep.put("pay_freq", payment_freq_spinner.getSelectedItem());
         return rep;
     }
 }
