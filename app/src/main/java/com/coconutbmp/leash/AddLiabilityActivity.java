@@ -50,7 +50,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
     }
 
     private boolean submitLiability(JSONObject final_rep){
-
+        System.out.println(final_rep.toString());
         InternetRequest ir = new InternetRequest();
 
         ir.doRequest(

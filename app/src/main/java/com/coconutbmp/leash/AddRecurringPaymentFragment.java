@@ -54,8 +54,8 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
         start_button = view.findViewById(R.id.set_rp_start_date_button);
         end_button = view.findViewById(R.id.set_rp_end_date_button);
 
-        start_dp = view.findViewById(R.id.loan_start_dp);
-        end_dp = view.findViewById(R.id.loan_end_dp);
+        start_dp = view.findViewById(R.id.start_dp);
+        end_dp = view.findViewById(R.id.end_dp);
 
         start_button.setOnClickListener(v1 -> UXFunctions.select_date(start_button, start_dp, begin_date_edit));// link the button to the date picker and label
         end_button.setOnClickListener(v2 -> UXFunctions.select_date(end_button, end_dp, end_date_edit));// link the button to the date picker and label
@@ -72,10 +72,10 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
     public JSONObject getJSONRepresentation() throws Exception{
         JSONObject rep = new JSONObject();
 
-        rep.put("recurring_payment_amt", Double.parseDouble(String.valueOf(rp_edit.getText())));
-        rep.put("payment_frequency", payment_freq_spinner.getSelectedItem());
-        rep.put("start_date", begin_date_edit.getText());
-        rep.put("end_date", end_date_edit.getText());
+        rep.put("payment_amt", Double.parseDouble(String.valueOf(rp_edit.getText())));
+        rep.put("pay_freq", payment_freq_spinner.getSelectedItem());
+        rep.put("start", begin_date_edit.getText());
+        rep.put("end", end_date_edit.getText());
 
         return rep;
     }

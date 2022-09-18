@@ -59,11 +59,12 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
 
         principal_amt_edit = view.findViewById(R.id.principal_amt_edit);
         interest_rate_edit = view.findViewById(R.id.interest_rate_edit);
-        interest_type_spinner = view.findViewById(R.id.liability_type_spinner);
+        interest_type_spinner = view.findViewById(R.id.interest_type_spinner);
         calculation_freq_spinner = view.findViewById(R.id.calculation_freq_spinner);
         begin_date_label = view.findViewById(R.id.loan_start_label);
         end_date_label = view.findViewById(R.id.loan_end_label);
         repayment_amount_edit = view.findViewById(R.id.loan_repayment_edit);
+        payment_freq_spinner = view.findViewById(R.id.loan_payment_freq_spinner);
 
         start_button = view.findViewById(R.id.start_button);
         end_button = view.findViewById(R.id.end_button);
@@ -88,12 +89,12 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
     public JSONObject getJSONRepresentation() throws Exception{
         JSONObject rep = new JSONObject();
         rep.put("principle", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
-        rep.put("interest_type", interest_type_spinner.getSelectedItem().toString());
+        rep.put("interest_type", interest_type_spinner.getSelectedItem());
         rep.put("rate", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
         rep.put("calc_freq", calculation_freq_spinner.getSelectedItem());
         rep.put("start", begin_date_label.getText());
         rep.put("end", begin_date_label.getText());
-        rep.put("pay_freq", payment_freq_spinner.getSelectedItem());
+        rep.put("pay_freq", payment_freq_spinner.getSelectedItem().toString());
         return rep;
     }
 }
