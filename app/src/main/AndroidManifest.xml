@@ -23,6 +23,8 @@
             android:theme="@style/Theme.Leash.NoActionBar"/>
         <activity
             android:name=".AddTransactionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Leash.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".Budget"
@@ -45,7 +47,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Leash.NoActionBar" />
 
-        <activity android:name=".AddLiabilityActivity" />
+        <activity
+            android:name=".AddLiabilityActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Leash.NoActionBar"/>
+
+        <activity
+            android:name=".LiabilityDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Leash.NoActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"

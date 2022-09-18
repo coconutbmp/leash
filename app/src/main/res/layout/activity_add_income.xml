@@ -118,10 +118,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/grey"
                         android:ems="10"
-                        android:inputType="numberDecimal"
+                        android:inputType="numberSigned|numberDecimal"
                         android:minHeight="48dp"
-                        android:text="0.00" />
+                        android:text="0.00"
+                        android:textColor="@color/shadow"
+                        android:textColorHint="@color/dark_grey" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -186,8 +189,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Start Date"
-                            android:textColor="@color/grey"
-                            android:textSize="20sp" />
+                            android:textColor="@color/dark_grey"
+                            android:textSize="16sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -201,9 +204,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/convergence"
                                 android:text="00/00/0000"
-                                android:textColor="@color/shadow"
-                                android:textSize="16sp" />
+                                android:textColor="@color/grey"
+                                android:textSize="20sp" />
 
                             <Button
                                 android:id="@+id/start_button"
@@ -226,8 +230,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
+                        android:calendarTextColor="@color/shadow"
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner" />
+                        android:datePickerMode="spinner"
+                        android:theme="@style/DatePickers" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -239,9 +245,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="End Date:"
-                            android:textColor="@color/grey"
-                            android:textSize="20sp" />
+                            android:text="End Date: (Optional)"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="16sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -255,9 +261,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Indefinite"
-                                android:textColor="@color/shadow"
-                                android:textSize="16sp" />
+                                android:fontFamily="@font/convergence"
+                                android:text="0000/00/00"
+                                android:textColor="@color/grey"
+                                android:textSize="20sp" />
 
                             <Button
                                 android:id="@+id/end_button"
@@ -279,10 +286,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
+                        android:calendarTextColor="@color/shadow"
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner" />
+                        android:datePickerMode="spinner"
+                        android:theme="@style/DatePickers" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnSaveIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/beige"
+                android:drawableEnd="@drawable/ic_baseline_save_24"
+                android:fontFamily="@font/convergence"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textColor="@color/shadow"
+                app:cornerRadius="16dp" />
 
         </LinearLayout>
     </ScrollView>

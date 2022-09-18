@@ -34,7 +34,7 @@ import okhttp3.Response;
  */
 public class HomeActivity extends AppCompatActivity {
     //declaring variables
-    CardView home_return_button, btnAdd;
+    CardView home_return_button, btnAdd, liabilityReport;
     TextView day, month;
     String userID;
     String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
@@ -73,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
         internetRequest = new InternetRequest();
 
         btnAdd = findViewById(R.id.btnAddSomething);
+        liabilityReport = findViewById(R.id.liabilityReportCardView);
         home_return_button = findViewById(R.id.homeReturnCard);
         day = findViewById(R.id.lblDay);
         month = findViewById(R.id.lblMonth);
@@ -102,6 +103,12 @@ public class HomeActivity extends AppCompatActivity {
             AddBudgetDialogue dialogue = new AddBudgetDialogue(this, finalUserID);
             dialogue.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialogue.show();
+        });
+
+        liabilityReport.setOnClickListener(view -> {
+            Intent i = new Intent(HomeActivity.this, LiabilityDetailsActivity.class);
+            i.putExtra("userID", userID);
+            startActivity(i);
         });
 
         //implementing return button

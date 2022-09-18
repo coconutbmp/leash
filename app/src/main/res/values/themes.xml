@@ -19,4 +19,9 @@
         <item name="windowNoTitle">true</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
+
+    <style name="DatePickers">
+        <item name="android:textColorPrimary">@color/shadow</item>
+        <item name="android:colorControlNormal">@color/grey</item>
+    </style>
 </resources>

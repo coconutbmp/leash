@@ -31,6 +31,9 @@
         <item>Gaming</item>
         <item>Utility Bills</item>
         <item>Water Bills</item>
+        <item>Mortgage</item>
+        <item>School Fees</item>
+        <item>Business Loan</item>
     </string-array>
 
     <string-array name="liability_type">
