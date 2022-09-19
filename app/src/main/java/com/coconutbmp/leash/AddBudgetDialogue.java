@@ -83,13 +83,12 @@ public class AddBudgetDialogue extends Dialog {
 
                 addToDatabase();
             }
-
-
         });
     }
 
     void handle_response(String response){
-        if (response.toLowerCase().equals("success")){
+        System.out.println(response + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        if (response.toLowerCase().charAt(0) == 's'){ // s for success
 
             //create intent, pass information and start Budget activity
             Intent i = new Intent(this.getContext(), BudgetActivity.class);
@@ -98,9 +97,12 @@ public class AddBudgetDialogue extends Dialog {
                 json_rep.put("budget_Name", budget_name_edit.getText().toString());
                 json_rep.put("budget_StartDate", begin_date_edit.getText().toString());
                 json_rep.put("budget_EndDate", end_date_edit.getText().toString());
+                Data.addBudget(json_rep);
+                Data.setCurrent(json_rep);
             } catch (Exception e){
                 e.printStackTrace();
             }
+
 
             this.getContext().startActivity(i);
         } else {

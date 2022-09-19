@@ -68,6 +68,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
         json_rep = new JSONObject();
         json_rep.put("liability_name", name_edit.getText());
         json_rep.put("category", category_spinner.getSelectedItem());
+        json_rep.put("budget_ID", Data.current.getJsonRep().get("budget_ID"));
         String lt = liability_type_spinner.getSelectedItem().toString().split(" ")[0].toLowerCase();
         json_rep.put("liability_type", lt);
 
