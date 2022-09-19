@@ -16,7 +16,14 @@ public class LiabilityHistoryLayout extends LinearLayout {
         super(context);
         setOrientation(VERTICAL);
 
-        setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+        setBackgroundColor(ContextCompat.getColor(context, R.color.beige));
+
+        name = new TextView(context);
+        amount = new TextView(context);
+        date = new TextView(context);
+        interest = new TextView(context);
+        divider = new View(context);
+
 
         name.setTextSize(24);
         amount.setTextSize(18);
@@ -25,10 +32,16 @@ public class LiabilityHistoryLayout extends LinearLayout {
 
         name.setTextColor(ContextCompat.getColor(context, R.color.grey));
         amount.setTextColor(ContextCompat.getColor(context, R.color.light_brown));
-        name.setTextColor(ContextCompat.getColor(context, R.color.dark_grey));
-        name.setTextColor(ContextCompat.getColor(context, R.color.dark_grey));
+        date.setTextColor(ContextCompat.getColor(context, R.color.dark_grey));
+        interest.setTextColor(ContextCompat.getColor(context, R.color.dark_grey));
 
         LayoutParams dividerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 4);
         divider.setBackgroundColor(ContextCompat.getColor(context, R.color.beige));
+
+        addView(name);
+        addView(amount);
+        addView(date);
+        addView(interest);
+        addView(divider, dividerParams);
     }
 }
