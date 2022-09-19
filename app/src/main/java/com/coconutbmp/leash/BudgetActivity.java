@@ -32,8 +32,11 @@ public class BudgetActivity extends AppCompatActivity {
 
         UXFunctions.setDate(day, month);
 
-        Bundle b = getIntent().getExtras();// get data passed from previous activity
-        budget_name = getIntent().getExtras().getString("budget_name");
+        try {
+            budget_name = Data.current.getJsonRep().getString("budget_Name");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         budget_title.setText(budget_name);
 

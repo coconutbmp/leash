@@ -10,6 +10,7 @@ public class BudgetComponent {
     private InternetRequest ir;
 
     BudgetComponent(JSONObject json_rep){
+        setJsonRep(json_rep);
         initialize();
     }
 

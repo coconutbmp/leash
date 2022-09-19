@@ -43,6 +43,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
     FragmentTransaction frag_tran;
     JSONObject json_rep;
     LiabilityDetails ld_container;
+    int budget_id;
 
 
     void handleSubmissionResponse(String response){
@@ -67,7 +68,8 @@ public class AddLiabilityActivity extends AppCompatActivity {
         json_rep = new JSONObject();
         json_rep.put("liability_name", name_edit.getText());
         json_rep.put("category", category_spinner.getSelectedItem());
-        json_rep.put("liability_type", liability_type_spinner.getSelectedItem());
+        String lt = liability_type_spinner.getSelectedItem().toString().split(" ")[0].toLowerCase();
+        json_rep.put("liability_type", lt);
 
         LiabilityDetails details_container = ld_container;
         JSONObject details = details_container.getJSONRepresentation();

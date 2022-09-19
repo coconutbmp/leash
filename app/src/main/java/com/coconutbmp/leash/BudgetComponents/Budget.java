@@ -1,8 +1,5 @@
 package com.coconutbmp.leash.BudgetComponents;
 
-import com.coconutbmp.leash.InternetRequest;
-import com.coconutbmp.leash.Transaction;
-
 import org.json.JSONObject;
 import java.util.Vector;
 
@@ -23,7 +20,7 @@ public class Budget extends BudgetComponent{
 
     public Budget(JSONObject json_rep){
         super(json_rep);
-        setJsonRep(json_rep);
+
 
     }
 

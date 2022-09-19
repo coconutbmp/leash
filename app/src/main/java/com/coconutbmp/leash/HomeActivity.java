@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
             JSONArray jsonArray = new JSONArray(response);
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Data.addBudget(jsonObject);
                 BudgetListLayout budget = new BudgetListLayout(HomeActivity.this);
 
                 budget.json_rep = jsonObject;

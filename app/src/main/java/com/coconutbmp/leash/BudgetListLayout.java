@@ -80,16 +80,7 @@ public class BudgetListLayout extends LinearLayout {
 
         this.setOnClickListener(view -> {
             Intent intent = new Intent(this.getContext(), BudgetActivity.class);
-            try{
-                intent.putExtra("json_representation", json_rep.toString());
-                intent.putExtra("budget_name", (String) json_rep.get("budget_Name"));
-                intent.putExtra("budget_startdate", (String) json_rep.get("budget_StartDate"));
-                intent.putExtra("budget_enddate", (String) json_rep.get("budget_EndDate"));
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-
-
+            Data.setCurrent(json_rep);
             this.getContext().startActivity(intent);
         });
     }

@@ -10,7 +10,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -79,19 +82,32 @@ public class AddBudgetDialogue extends Dialog {
                 end_date = end_date_edit.getText().toString();
 
                 addToDatabase();
-
-                //create intent, pass information and start Budget activity
-                Intent i = new Intent(this.getContext(), BudgetActivity.class);
-                i.putExtra("budget_name", budget_name_edit.getText().toString());
-                i.putExtra("budget_startdate", budget_name_edit.getText().toString());
-                i.putExtra("budget_enddate", budget_name_edit.getText().toString());
-                this.getContext().startActivity(i);
-                this.cancel();
-
             }
 
 
         });
+    }
+
+    void handle_response(String response){
+        if (response.toLowerCase().equals("success")){
+
+            //create intent, pass information and start Budget activity
+            Intent i = new Intent(this.getContext(), BudgetActivity.class);
+            JSONObject json_rep = new JSONObject();
+            try {
+                json_rep.put("budget_Name", budget_name_edit.getText().toString());
+                json_rep.put("budget_StartDate", begin_date_edit.getText().toString());
+                json_rep.put("budget_EndDate", end_date_edit.getText().toString());
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            this.getContext().startActivity(i);
+        } else {
+            // todo: show error message
+        }
+
+        this.cancel();
     }
 
     /**
@@ -99,46 +115,24 @@ public class AddBudgetDialogue extends Dialog {
      */
     public void addToDatabase(){  //network request to insert budget information into database
 
-        //set up client
-        OkHttpClient client = new OkHttpClient();
-        FormBody.Builder FormBodybuilding = new FormBody.Builder();
+        InternetRequest ir = new InternetRequest();
+        try{
+            //add parameters to insert
+            JSONObject params = new JSONObject();
+            params.put("userid",userID);
+            params.put("name",name);
+            params.put("startdate", start_date);
+            params.put("enddate", end_date);
+            ir.doRequest(
+                    InternetRequest.std_url+ "add_budget.php",
+                    this.getOwnerActivity(),
+                    params,
+                    this::handle_response
+            );
 
-        //add parameters to insert
-        FormBodybuilding.add("userid",userID);
-        FormBodybuilding.add("name",name);
-        FormBodybuilding.add("startdate", start_date);
-        FormBodybuilding.add("enddate", end_date);
-
-
-
-        RequestBody reqBody = FormBodybuilding.build();
-        String URL = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/add_budget.php";
-
-        //link parameters in RequestBody with URL to build request
-        Request req = new Request.Builder()
-                .post(reqBody)
-                .url(URL)
-                .build();
-        client.newCall(req).enqueue(new Callback() {   //make the call with request to get a response
-            @Override
-            public void onFailure(Call call, IOException e) {  //if call fails
-                e.printStackTrace();
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException { //if we get a response
-                String strResponse =response.body().string();
-
-                if("Success".equals(strResponse)){  //if response returns "Success"
-                    System.out.println(strResponse);
-                }
-                else if(strResponse.equals("Failed")){ //if response returns "Failed"
-                    System.out.println(strResponse);
-                }
-
-            }
-        });
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
