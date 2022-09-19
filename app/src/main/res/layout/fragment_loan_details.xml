@@ -270,12 +270,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Incremented:"
+                            android:text="@string/payment_frequency_prompt"
                             android:textColor="@color/shadow"
                             android:textSize="16sp" />
 
                         <Spinner
-                            android:id="@+id/sprRecurringFrequency"
+                            android:id="@+id/loan_payment_freq_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:entries="@array/calculation_frequencies"

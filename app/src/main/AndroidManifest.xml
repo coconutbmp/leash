@@ -27,7 +27,7 @@
             android:theme="@style/Theme.Leash.NoActionBar"
             android:exported="false" />
         <activity
-            android:name=".Budget"
+            android:name=".BudgetActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Leash.NoActionBar"/>

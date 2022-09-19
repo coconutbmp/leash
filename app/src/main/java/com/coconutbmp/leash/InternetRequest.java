@@ -19,6 +19,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/submit_liability.php?user_id=2&liability_name=Lib&liability_type=Loan&start=2023/08/2&end=2023/08/2&category=Leisure&pay_freq=Monthly&rate=4&calc_freq=Monthly&principle=12000.00&payment_amt=323.33&interest_type=Simple
+
 public class InternetRequest { // send and receive http requests to server
     Request request;
     OkHttpClient client = new OkHttpClient();
@@ -49,12 +51,25 @@ public class InternetRequest { // send and receive http requests to server
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 final String responseData = response.body().string();
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        requestHandler.processResponse(responseData);
-                    }
-                });
+                if (activity != null){
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            requestHandler.processResponse(responseData);
+                        }
+                    });
+                } else {
+                    Thread response_thread = new Thread("Response"){
+                        @Override
+                        public void run(){
+                            requestHandler.processResponse(responseData);
+                        }
+                    };
+                    response_thread.start();
+                }
+
+
+
             }
         });
     }

@@ -548,6 +548,7 @@ public class MainActivity extends AppCompatActivity{
         if(!response.equals("Failed")){ // check response was successful (success returns userID)
             Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show(); // Welcome Toast message
             home.putExtra("userID", response); // carry userID to next activity
+            Data.setUserID(Integer.parseInt(response)); // store user id in a central location
             startActivity(home); // change activities
         }
         else{ // if failed, display error
@@ -577,6 +578,7 @@ public class MainActivity extends AppCompatActivity{
             if(valid){ // check if user exists
                 Toast.makeText(MainActivity.this, "Welcome " + name, Toast.LENGTH_SHORT).show(); // welcome toast
                 home.putExtra("userID",userID); // carry userID to next activity
+                Data.setUserID(Integer.parseInt(userID)); // store user id in a central location
                 startActivity(home); // change activity
             }
             else{ // error message
@@ -638,6 +640,7 @@ public class MainActivity extends AppCompatActivity{
                                         // welcome toast
                                         Toast.makeText(MainActivity.this, "Welcome " +name+" "+surname, Toast.LENGTH_SHORT).show();
                                         home.putExtra("userID", response); // carry user id across activities
+                                        Data.setUserID(Integer.parseInt(response)); // store user id in a central location
                                         startActivity(home); // change activities
                                     }
                                     else{ // error toast for failed response

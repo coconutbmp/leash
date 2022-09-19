@@ -22,7 +22,7 @@ public class AddToBudgetDialogue extends Dialog {
      */
     public AddToBudgetDialogue(@NonNull Context context) {
         super(context);
-        Budget b = (Budget) context;
+        BudgetActivity b = (BudgetActivity) context;
         budget_name = b.getBudgetName();
     }
 
