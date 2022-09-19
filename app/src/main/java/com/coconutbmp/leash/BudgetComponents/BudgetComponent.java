@@ -7,11 +7,15 @@ import org.json.JSONObject;
 public class BudgetComponent {
     private String type;
     private JSONObject json_rep;
-    private InternetRequest ir;
+    protected InternetRequest ir;
 
     BudgetComponent(JSONObject json_rep){
-        setJsonRep(json_rep);
-        initialize();
+        try{
+            setJsonRep(json_rep);
+            initialize();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void setJsonRep(JSONObject json_rep) {
@@ -22,7 +26,7 @@ public class BudgetComponent {
         return json_rep;
     }
 
-    public void initialize(){
-
+    public void initialize() throws Exception{
+        ir = new InternetRequest();
     }
 }

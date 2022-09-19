@@ -56,11 +56,11 @@ public class LiabilityDetailsActivity extends AppCompatActivity {
                                             JSONArray jsonArray = new JSONArray(response);
                                             for(int j = 0; j < jsonArray.length(); j++){
                                                 JSONObject jo = jsonArray.getJSONObject(j);
-                                                String interest = jo.getString("liability_loan_InterestType") + " interest at a rate of " + jo.getString("liability_loan_InterestRate") +"%";
+                                                String interest = jo.getString("loan_interest_type") + " interest at a rate of " + jo.getString("loan_interest_ate") +"%";
                                                 LiabilityHistoryLayout liabilityHistoryLayout = new LiabilityHistoryLayout(LiabilityDetailsActivity.this);
-                                                liabilityHistoryLayout.name.setText(jo.getString("liability_Name"));
-                                                liabilityHistoryLayout.amount.setText("R "+jo.getString("liability_loan_PrincipleAmount"));
-                                                liabilityHistoryLayout.date.setText(jo.getString("liability_StartDate") +" - "+jo.getString("liability_EndDate"));
+                                                liabilityHistoryLayout.name.setText(jo.getString("liability_name"));
+                                                liabilityHistoryLayout.amount.setText("R "+jo.getString("loan_principle"));
+                                                liabilityHistoryLayout.date.setText(jo.getString("start_date") +" - "+jo.getString("end_date"));
                                                 liabilityHistoryLayout.interest.setText(interest);
                                                 history.addView(liabilityHistoryLayout);
                                             }
