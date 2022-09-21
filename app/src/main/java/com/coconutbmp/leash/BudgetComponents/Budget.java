@@ -19,24 +19,33 @@ public class Budget extends BudgetComponent{
 
     }
 
+    public Vector<Income> getIncomes() { return income_list; };
+
+
     void setLiabilities(String response){
         JSONArray ja;
         System.out.println(response);
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
-                liability_list.add(new Liability((JSONObject) ja.get(i)));
+                liability_list.add(new Liability(this, (JSONObject) ja.get(i)));
             }
             System.out.println("got the array -> " + ja.toString());
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
+    public Vector<Liability> getLiabilities() { return liability_list; };
+
     void setTransactions(String response){
+        if(response.equals("")){
+            System.out.println("no response");
+            return;
+        }
         JSONArray ja;
-        System.out.println(response);
+        System.out.println(response + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
@@ -47,6 +56,9 @@ public class Budget extends BudgetComponent{
             e.printStackTrace();
         }
     }
+
+    public Vector<Transaction> getTransactions() { return transaction_list; };
+
 
     @Override
     public void initialize() throws Exception{

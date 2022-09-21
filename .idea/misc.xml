@@ -36,9 +36,15 @@
         <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_add_income.xml" value="0.22" />
         <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_add_liability.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_add_transaction.xml" value="0.1" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_budget.xml" value="0.33" />
         <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/activity_liability_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/add_to_budget_dialog.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/fragment_budget_brief.xml" value="0.25" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/fragment_budget_component.xml" value="0.1268882175226586" />
         <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/fragment_loan_details.xml" value="0.33" />
         <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/fragment_recurring_payment.xml" value="0.25" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/fragment_summary.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/hewit/Documents/school/SD/leash/app/src/main/res/layout/view_budget_component.xml" value="0.5" />
       </map>
     </option>
   </component>

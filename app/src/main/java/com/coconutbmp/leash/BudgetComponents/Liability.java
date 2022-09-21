@@ -32,18 +32,18 @@ public class Liability extends BudgetComponent{
         try {
             JSONObject jo = new JSONObject();
             jo.put("", ""); //todo: put needed values
-            ir.doRequest(
+            /*ir.doRequest(
                     InternetRequest.std_url + "get_liability_transactions.php",
                     null,
                     jo,
                     this::add_transactions
-            );
+            );*/
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public Liability(JSONObject json_rep) {
-        super(json_rep);
+    public Liability(Budget parent, JSONObject json_rep) {
+        super(parent, json_rep);
     }
 }
