@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/material_dynamic_neutral_variant60"
+        app:cardBackgroundColor="@color/light_brown"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:orientation="vertical"
             android:padding="8dp">
 
@@ -26,10 +26,12 @@
                 android:id="@+id/name_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/convergence"
                 android:gravity="center"
                 android:text="Component X"
-                android:textColor="@color/dark_grey"
-                android:textSize="20sp" />
+                android:textAlignment="textStart"
+                android:textColor="@color/shadow"
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:id="@+id/details_ll"
@@ -41,7 +43,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="details here" />
+                    android:text="details here"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>

@@ -197,8 +197,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:backgroundTint="@color/smokey_white"
+                android:drawableEnd="@drawable/ic_baseline_save_24"
                 android:fontFamily="@font/convergence"
-                android:text="Continue"
+                android:text="Save"
                 android:textAllCaps="false"
                 app:cornerRadius="16dp"
                 app:iconTint="@color/shadow" />

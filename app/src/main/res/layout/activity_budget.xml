@@ -136,19 +136,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="@font/convergence"
                 android:text="Budget Name"
                 android:textColor="@color/grey"
                 android:textSize="34sp" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -213,6 +206,7 @@
                             android:layout_margin="8dp"
                             android:layout_weight="0"
                             android:backgroundTint="@color/smokey_white"
+                            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
                             android:enabled="false"
                             android:fontFamily="@font/convergence"
                             android:text="More"
@@ -275,6 +269,7 @@
                             android:layout_margin="8dp"
                             android:layout_weight="0"
                             android:backgroundTint="@color/smokey_white"
+                            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
                             android:enabled="false"
                             android:fontFamily="@font/convergence"
                             android:text="More"
@@ -336,6 +331,7 @@
                             android:layout_margin="8dp"
                             android:layout_weight="0"
                             android:backgroundTint="@color/smokey_white"
+                            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
                             android:enabled="false"
                             android:fontFamily="@font/convergence"
                             android:text="More"

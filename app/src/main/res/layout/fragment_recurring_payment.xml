@@ -30,7 +30,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/convergence"
-            android:text="Bills"
+            android:text="Recurring Expenses"
             android:textColor="@color/grey"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView13"
@@ -150,7 +150,8 @@
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner" />
+                        android:datePickerMode="spinner"
+                        android:theme="@style/DatePickers" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -215,7 +216,8 @@
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner" />
+                        android:datePickerMode="spinner"
+                        android:theme="@style/DatePickers" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

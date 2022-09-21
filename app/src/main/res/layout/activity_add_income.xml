@@ -69,7 +69,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="28dp"
                 android:fontFamily="@font/convergence"
-                android:text="New Income"
+                android:text="Recurring Income"
                 android:textColor="@color/grey"
                 android:textSize="34sp" />
 

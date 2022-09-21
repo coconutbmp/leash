@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -35,7 +36,7 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
     Button end_button, start_button;
     DatePicker end_dp, start_dp;
 
-    SwitchCompat custom_repayment_switch;
+    Switch custom_repayment_switch;
 
 
     /**
@@ -75,7 +76,16 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         start_button.setOnClickListener(view1 -> UXFunctions.select_date(start_button, start_dp, begin_date_label)); // link the button to the date picker and label
         end_button.setOnClickListener(view1 -> UXFunctions.select_date(end_button, end_dp, end_date_label)); // link the button to the date picker and label
 
-        //custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
+        custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
+
+        custom_repayment_switch.setOnClickListener(view1 -> {
+            if(custom_repayment_switch.isChecked()){
+                repayment_amount_edit.setEnabled(true);
+            }
+            else{
+                repayment_amount_edit.setEnabled(false);
+            }
+        });
 
         return view;
     }

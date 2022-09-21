@@ -127,8 +127,9 @@
 
                         <TextView
                             android:id="@+id/textView8"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="3"
                             android:text="@string/rate_prompt"
                             android:textAlignment="viewStart"
                             android:textColor="@color/shadow"
@@ -136,12 +137,13 @@
 
                         <EditText
                             android:id="@+id/interest_rate_edit"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:backgroundTint="@color/grey"
                             android:ems="10"
                             android:hint="0.00"
-                            android:inputType="number"
+                            android:inputType="number|numberDecimal"
                             android:minHeight="48dp"
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp"
@@ -150,8 +152,9 @@
 
                         <TextView
                             android:id="@+id/textView10"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="3"
                             android:text="%"
                             android:textColor="@color/shadow"
                             android:textSize="18sp"
@@ -259,7 +262,8 @@
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner" />
+                        android:datePickerMode="spinner"
+                        android:theme="@style/DatePickers" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -316,8 +320,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/grey"
-                                android:editable="false"
                                 android:ems="10"
+                                android:enabled="false"
                                 android:hint="0.00"
                                 android:inputType="numberDecimal"
                                 android:minHeight="48dp"
@@ -379,7 +383,8 @@
                         android:layout_height="1dp"
                         android:layout_margin="8dp"
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner" />
+                        android:datePickerMode="spinner"
+                        android:theme="@style/DatePickers" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

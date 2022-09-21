@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -48,6 +49,13 @@ public class AddLiabilityActivity extends AppCompatActivity {
 
     void handleSubmissionResponse(String response){
         System.out.println(response);
+        if (response.equals("success")){
+            Toast.makeText(this, "Liability Added", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
+        else{
+            Toast.makeText(this, "Failed, Please fill in all fields", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean submitLiability(JSONObject final_rep){
