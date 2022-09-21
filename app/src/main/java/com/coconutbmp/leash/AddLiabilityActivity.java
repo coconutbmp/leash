@@ -49,7 +49,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
 
     void handleSubmissionResponse(String response){
         System.out.println(response);
-        if (response.equals("success")){
+        if (!response.equals("failed")){
             Toast.makeText(this, "Liability Added", Toast.LENGTH_SHORT).show();
             this.finish();
         }

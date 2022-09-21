@@ -51,9 +51,7 @@
         <item> --Frequency-- </item>
         <item>Yearly</item>
         <item>Monthly</item>
-        <item>Bi-Monthly</item>
         <item>Quaterly</item>
         <item>Weekly</item>
-        <item>Daily</item>
     </string-array>
 </resources>

@@ -64,18 +64,21 @@ public class LiabilityDetailsActivity extends AppCompatActivity {
                                     public void processResponse(String response) {
                                         try {
                                             JSONArray jsonArray = new JSONArray(response);
+                                            String interest = "No Interest on Recurring Expenses";
                                             for(int j = 0; j < jsonArray.length(); j++){
                                                 JSONObject jo = jsonArray.getJSONObject(j);
-                                                String interest = jo.getString("loan_interest_type") + " interest at a rate of " + jo.getString("loan_interest_rate") +"%";
                                                 LiabilityHistoryLayout liabilityHistoryLayout = new LiabilityHistoryLayout(LiabilityDetailsActivity.this);
                                                 liabilityHistoryLayout.name.setText(jo.getString("name"));
-                                                try{
+                                                if(!jo.getString("loan_principle").equals("null")){
+                                                    liabilityHistoryLayout.amount.setText("R "+jo.getString("loan_principle"));
                                                     amounts.add(Double.parseDouble(jo.getString("loan_principle")));
-                                                }catch (Exception e) {
-                                                    System.out.println("not a loan");
+                                                    interest = jo.getString("loan_interest_type") + " interest at a rate of " + jo.getString("loan_interest_rate") +"%";
+                                                }else{
+                                                    liabilityHistoryLayout.amount.setText("R "+jo.getString("payment_amount"));
+                                                    amounts.add(Double.parseDouble(jo.getString("payment_amount")));
+                                                    interest = "No Interest on Recurring Expenses";
                                                 }
 
-                                                liabilityHistoryLayout.amount.setText("R "+jo.getString("loan_principle"));
                                                 liabilityHistoryLayout.date.setText(jo.getString("start_date") +" - "+jo.getString("end_date"));
                                                 liabilityHistoryLayout.interest.setText(interest);
                                                 history.addView(liabilityHistoryLayout);

@@ -31,7 +31,6 @@ public class BudgetActivity extends AppCompatActivity {
         for (Liability l: current.getLiabilities()) {
             FragmentManager frag_man = getSupportFragmentManager();
             FragmentTransaction frag_tran = frag_man.beginTransaction();
-
             frag_tran.add(liability_ll.getId(), new LiabilityBrief(this, l)).commit();
         }
     }
@@ -74,4 +73,5 @@ public class BudgetActivity extends AppCompatActivity {
 
         display_liabilities();
     }
+
 }
