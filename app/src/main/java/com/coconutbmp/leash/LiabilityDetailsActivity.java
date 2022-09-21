@@ -74,6 +74,7 @@ public class LiabilityDetailsActivity extends AppCompatActivity {
                                                 liabilityHistoryLayout.interest.setText(interest);
                                                 history.addView(liabilityHistoryLayout);
 
+                                                Total = 0;
                                                 for(double d: amounts){
                                                     Total+=d;
                                                 }
