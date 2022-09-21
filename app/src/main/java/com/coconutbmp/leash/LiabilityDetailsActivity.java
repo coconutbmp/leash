@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class LiabilityDetailsActivity extends AppCompatActivity {
 
@@ -68,7 +69,12 @@ public class LiabilityDetailsActivity extends AppCompatActivity {
                                                 String interest = jo.getString("loan_interest_type") + " interest at a rate of " + jo.getString("loan_interest_rate") +"%";
                                                 LiabilityHistoryLayout liabilityHistoryLayout = new LiabilityHistoryLayout(LiabilityDetailsActivity.this);
                                                 liabilityHistoryLayout.name.setText(jo.getString("name"));
-                                                amounts.add(Double.parseDouble(jo.getString("loan_principle")));
+                                                try{
+                                                    amounts.add(Double.parseDouble(jo.getString("loan_principle")));
+                                                }catch (Exception e) {
+                                                    System.out.println("not a loan");
+                                                }
+
                                                 liabilityHistoryLayout.amount.setText("R "+jo.getString("loan_principle"));
                                                 liabilityHistoryLayout.date.setText(jo.getString("start_date") +" - "+jo.getString("end_date"));
                                                 liabilityHistoryLayout.interest.setText(interest);
