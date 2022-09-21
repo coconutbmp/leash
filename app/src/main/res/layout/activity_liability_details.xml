@@ -118,15 +118,34 @@
                     android:layout_marginRight="8dp"
                     android:background="@color/shadow" />
 
-                <TextView
-                    android:id="@+id/textView6"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/convergence"
-                    android:text="Total:"
-                    android:textColor="@color/grey"
-                    android:textSize="12sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/convergence"
+                        android:text="Total:"
+                        android:textColor="@color/grey"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/lblTotalLiabilities"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/convergence"
+                        android:text="Amount"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey"
+                        android:textSize="24sp" />
+                </LinearLayout>
 
                 <View
                     android:id="@+id/divider2"
