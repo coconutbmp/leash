@@ -140,7 +140,8 @@
                     android:layout_height="1dp"
                     android:layout_margin="8dp"
                     android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                    android:datePickerMode="spinner"
+                    android:theme="@style/DatePickers" />
 
             </LinearLayout>
 
@@ -196,7 +197,8 @@
                     android:layout_height="1dp"
                     android:layout_margin="8dp"
                     android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                    android:datePickerMode="spinner"
+                    android:theme="@style/DatePickers" />
             </LinearLayout>
 
         </LinearLayout>
