@@ -14,7 +14,8 @@ public class Budget extends BudgetComponent{
     InternetRequest ir = new InternetRequest();
 
     void setIncomes(String response){
-
+        JSONArray ja;
+        System.out.println(response);
 
     }
 
@@ -23,6 +24,9 @@ public class Budget extends BudgetComponent{
         System.out.println(response);
         try {
             ja = new JSONArray(response);
+            for (int i = 0; i < ja.length(); i++){
+                liability_list.add(new Liability((JSONObject) ja.get(i)));
+            }
             System.out.println("got the array -> " + ja.toString());
         }catch (Exception e){
             e.printStackTrace();
@@ -31,8 +35,17 @@ public class Budget extends BudgetComponent{
     }
 
     void setTransactions(String response){
-
-
+        JSONArray ja;
+        System.out.println(response);
+        try {
+            ja = new JSONArray(response);
+            for (int i = 0; i < ja.length(); i++){
+                transaction_list.add(new Transaction((JSONObject) ja.get(i)));
+            }
+            System.out.println("got the array -> " + ja.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -41,21 +54,28 @@ public class Budget extends BudgetComponent{
         System.out.println(this.getJsonRep().get("budget_ID") + " " + this.getJsonRep().get("budget_Name"));
         params.put("budgetid", this.getJsonRep().get("budget_ID"));
         ir = new InternetRequest();
-        //todo: get income
+
+        //get income
+        params = new JSONObject();
+        //todo: add parameters for income request
         ir.doRequest(
                 InternetRequest.std_url+"get_income.php",
                 null,
                 params,
                 this::setIncomes
         );
-        //todo: get liabilities
+        //get liabilities
+        params = new JSONObject();
+        params.put("budgetid", this.getJsonRep().get("budget_ID"));
         ir.doRequest(
                 InternetRequest.std_url+"get_liabilities.php",
                 null,
                 params,
                 this::setLiabilities
         );
-        //todo: get transactions
+        //get transactions
+        params = new JSONObject();
+        //todo: add parameters for transaction request
         ir.doRequest(
                 InternetRequest.std_url+"get_liabilities.php",
                 null,
