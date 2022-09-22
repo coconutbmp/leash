@@ -38,7 +38,7 @@
 
     <string-array name="liability_type">
         <item>Loan</item>
-        <item>Recurring Payment</item>
+        <item>Recurring Expense</item>
     </string-array>
 
     <string-array name="interest_types">
@@ -51,7 +51,7 @@
         <item> --Frequency-- </item>
         <item>Yearly</item>
         <item>Monthly</item>
-        <item>Quaterly</item>
+        <item>Quarterly</item>
         <item>Weekly</item>
     </string-array>
 </resources>
