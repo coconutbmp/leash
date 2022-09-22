@@ -502,6 +502,27 @@ public class MainActivity extends AppCompatActivity{
         signUpPass.getText().clear();
         signUpPassConfirm.getText().clear();
 
+        logInEmail.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        invalidLoginEmail.getLayoutParams().height = 1;
+
+        logInPass.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        invalidLoginPass.getLayoutParams().height = 1;
+
+        signUpPass.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        invalidPass.getLayoutParams().height = 1;
+
+        signUpEmail.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        invalidEmail.getLayoutParams().height = 1;
+
+        signUpName.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        invalidName.getLayoutParams().height = 1;
+
+        signUpSurname.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        invalidSurname.getLayoutParams().height = 1;
+
+        signUpPassConfirm.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        invalidConfirm.getLayoutParams().height = 1;
+
         // check user preferences and add inputs back if necessary
         StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
 
