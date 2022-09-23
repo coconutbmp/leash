@@ -33,8 +33,12 @@ public class Data {
         user_id = userID;
     }
 
-    public static void getUserID(){
+    public static int getUserID(){
+        return user_id;
+    }
 
+    public static ArrayList<Budget> getAll(){
+        return all_budgets;
     }
 
 }
