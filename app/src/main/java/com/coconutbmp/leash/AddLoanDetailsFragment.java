@@ -178,9 +178,12 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
 
             int n = (int) Math.round(years * freq);
 
-            double r = i/freq;
+            double r = (i/100d)/freq;
 
             double A = P * ((r*Math.pow(1+r, n))) / (Math.pow(1+r, n) - 1);
+            A*=100f;
+            A= Math.round(A);
+            A/=100f;
             rep.put("payment_amt", A);
         }
 

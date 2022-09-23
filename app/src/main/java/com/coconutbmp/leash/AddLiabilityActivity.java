@@ -72,9 +72,9 @@ public class AddLiabilityActivity extends AppCompatActivity {
         try {
             if(((String)final_rep.get("liability_type")).equals("loan"));
                 JSONObject transaction = new JSONObject();
-                transaction.put("budgetid", (String)Data.current.getJsonRep().get("budget_id"));
+                transaction.put("budgetid", (String)Data.current.getJsonRep().get("budget_ID"));
                 transaction.put("transactiontype", "once-off income");
-                transaction.put("transactionamount", (String) Data.current.getJsonRep().get("payment_amt"));
+                transaction.put("transactionamount", (String) json_rep.get("payment_amt"));
                 ir.doRequest(
                         InternetRequest.std_url + "submit_transaction.php",
                         this,
@@ -153,10 +153,8 @@ public class AddLiabilityActivity extends AppCompatActivity {
             try{
                 createJSONRepresentation(); // create json storing relevant data about the liability to add.
                 submitLiability(json_rep);
-                //todo: upload the data with a call to the server
             } catch (Exception e){
                 System.out.println("json parsing failed");
-                //todo: warn user about error (maybe prompt to fill in missing values)
                 e.printStackTrace();
             }
 
