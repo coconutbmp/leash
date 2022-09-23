@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.coconutbmp.leash.BudgetComponents.Budget;
 import com.coconutbmp.leash.BudgetComponents.Liability;
+import com.coconutbmp.leash.BudgetComponents.Transaction;
 
 /**
  * Controller for the Budget Page
@@ -36,6 +37,15 @@ public class BudgetActivity extends AppCompatActivity {
         }
     }
 
+    void display_transactions(){
+        Budget current = Data.current;
+        for(Transaction t: current.getTransactions()){
+            FragmentManager frag_man = getSupportFragmentManager();
+            FragmentTransaction frag_tran = frag_man.beginTransaction();
+            frag_tran.add(transaction_ll.getId(),new TransactionBrief(this, t)).commit();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +58,7 @@ public class BudgetActivity extends AppCompatActivity {
         month = findViewById(R.id.lblBudgetMonth);
 
         liability_ll = findViewById(R.id.liability_holder_ll);
+        transaction_ll = findViewById(R.id.transaction_holder_ll);
 
         UXFunctions.setDate(day, month);
 
@@ -73,6 +84,7 @@ public class BudgetActivity extends AppCompatActivity {
         });
 
         display_liabilities();
+        display_transactions();
     }
 
     @Override

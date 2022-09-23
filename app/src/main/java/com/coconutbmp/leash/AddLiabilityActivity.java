@@ -84,12 +84,13 @@ public class AddLiabilityActivity extends AppCompatActivity {
                 JSONObject transaction = new JSONObject();
                 transaction.put("budgetid", (String) Data.current.getJsonRep().get("budget_ID"));
                 transaction.put("transactiontype", "once-off income");
-                transaction.put("transactionamount", (String) json_rep.get("payment_amt"));
+                transaction.put("transactionamount", Double.toString((Double) final_rep.get("payment_amt")));
                 ir.doRequest(
                         InternetRequest.std_url + "submit_transaction.php",
                         this,
                         transaction,
                         response -> {
+                            System.out.println(response + "----------------------------------------------------------->");
                             if (response.toUpperCase().charAt(0) == 'S') {
                                 System.out.println("successfully added loan");
                             } else System.out.println("failed to add loan");

@@ -32,13 +32,13 @@ public class Budget extends BudgetComponent{
 
     void setLiabilities(String response){
         JSONArray ja;
-        System.out.println(response);
+        //System.out.println(response);
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
                 liability_list.add(new Liability(this, (JSONObject) ja.get(i)));
             }
-            System.out.println("got the array -> " + ja.toString());
+            //System.out.println("got the array -> " + ja.toString());
             if(listener!=null){
                 caller.runOnUiThread(new Runnable() {
                     @Override
@@ -102,7 +102,7 @@ public class Budget extends BudgetComponent{
     @Override
     public void initialize() throws Exception{
         JSONObject params = new JSONObject();
-        System.out.println(this.getJsonRep().get("budget_ID") + " " + this.getJsonRep().get("budget_Name"));
+        //System.out.println(this.getJsonRep().get("budget_ID") + " " + this.getJsonRep().get("budget_Name"));
         params.put("budgetid", this.getJsonRep().get("budget_ID"));
         ir = new InternetRequest();
 
@@ -126,9 +126,10 @@ public class Budget extends BudgetComponent{
         );
         //get transactions
         params = new JSONObject();
+        params.put("budgetid", getJsonRep().get("budget_ID"));
         //todo: add parameters for transaction request
         ir.doRequest(
-                InternetRequest.std_url+"get_liabilities.php",
+                InternetRequest.std_url+"get_all_transactions.php",
                 null,
                 params,
                 this::setTransactions

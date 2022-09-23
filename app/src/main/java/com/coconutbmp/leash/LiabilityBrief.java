@@ -37,7 +37,6 @@ public class LiabilityBrief extends BudgetComponentFragment {
 
         super.initiate_view();
         JSONObject json_rep = liability.getJsonRep();
-        System.out.println(liability.getJsonRep());
         this.name_label.setText((String) liability.getJsonRep().get("name"));
         this.details_ll.removeAllViews();
 
@@ -95,7 +94,6 @@ public class LiabilityBrief extends BudgetComponentFragment {
         try {
             if (liability.getJsonRep().getString("type").equals("loan")) {
                 for (LineDataSet lds: liability.generateOverTimeAnalysis()) {
-                    System.out.println("------>" + lds.getLabel());
                     ld.addDataSet(lds);
                 }
             } else {
