@@ -174,7 +174,7 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
                 freq = 1d;
             }
 
-            int years = 10; // todo: get actual years
+            double years = end_dp.getYear() - start_dp.getYear() + (1/12d) * (end_dp.getMonth() - start_dp.getMonth());
 
             int n = (int) Math.round(years * freq);
 

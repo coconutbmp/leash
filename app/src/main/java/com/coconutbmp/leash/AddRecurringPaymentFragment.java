@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -76,11 +77,32 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
     @Override
     public JSONObject getJSONRepresentation() throws Exception{
         JSONObject rep = new JSONObject();
+        try {
+            rep.put("payment_amt", Double.parseDouble(String.valueOf(rp_edit.getText())));
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select a Payment Amount.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
 
-        rep.put("payment_amt", Double.parseDouble(String.valueOf(rp_edit.getText())));
-        rep.put("pay_freq", payment_freq_spinner.getSelectedItem());
-        rep.put("start", begin_date_edit.getText());
-        rep.put("end", end_date_edit.getText());
+        try{
+            rep.put("pay_freq", payment_freq_spinner.getSelectedItem());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select a Payment Frequency.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+        try {
+            rep.put("start", begin_date_edit.getText());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select a Start Date.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        try {
+            rep.put("end", end_date_edit.getText());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select an End Date.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
 
         return rep;
     }
