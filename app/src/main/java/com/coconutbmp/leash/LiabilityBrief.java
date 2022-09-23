@@ -12,7 +12,6 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import org.json.JSONObject;
@@ -24,10 +23,7 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Formatter;
-import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 public class LiabilityBrief extends BudgetComponentFragment {
 
@@ -67,8 +63,8 @@ public class LiabilityBrief extends BudgetComponentFragment {
                     assert start != null;
                     start = start.minusDays(start.getDayOfMonth()-1);
                     start = start.plusMonths((int) value);
-                    System.out.println("val -> "+ value);
-                    System.out.println(start);
+                    //System.out.println("val -> "+ value);
+                    //System.out.println(start);
 
                     //System.out.println("millis -> " + start.toString());
                     LocalDateTime ldt = LocalDateTime.of(start, LocalTime.MIN.plusNanos(1));
@@ -92,7 +88,18 @@ public class LiabilityBrief extends BudgetComponentFragment {
             entries.add(new Entry(i, (float)Math.sin((double) i/100)));
         }
 
-        ld.addDataSet(liability.generateLineData());
+        //ld.addDataSet(liability.generatePaymentSet());
+
+        try {
+            if (liability.getJsonRep().getString("type").equals("loan")) {
+                for (LineDataSet lds: liability.generateOverTimeAnalysis()) {
+                    System.out.println("------>" + lds.getLabel());
+                    ld.addDataSet(lds);
+                }
+            } else {
+                ld.addDataSet(liability.generatePaymentSet());
+            }
+        } catch (Exception e) { e.printStackTrace(); }
         ld.setDrawValues(false);
 
         lc.setData(ld);

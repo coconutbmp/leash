@@ -1,6 +1,5 @@
 package com.coconutbmp.leash.BudgetComponents;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 
 import com.coconutbmp.leash.InternetRequest;
@@ -11,11 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.EventListener;
 import java.util.Vector;
 
 public class Liability extends BudgetComponent{
@@ -63,7 +59,7 @@ public class Liability extends BudgetComponent{
                 Integer.parseInt(dates[2]));
     }
 
-    public LineDataSet generateLineData(){
+    public LineDataSet generatePaymentSet(){
         try {
             LineDataSet liability_data_set = new LineDataSet(new ArrayList<Entry>(), getJsonRep().getString("name"));
             liability_data_set.setLineWidth(2f);
@@ -78,12 +74,13 @@ public class Liability extends BudgetComponent{
                 LocalDate start_date = stringToLocalDate(getJsonRep().getString("start_date"));
                 LocalDate end_date = stringToLocalDate(getJsonRep().getString("end_date"));
                 LocalDate date = LocalDate.from(start_date);
-                LocalDate prev_date = LocalDate.from(date);
 
-                Integer month_counter = 0;
-                while (date.isBefore(end_date) || date.isEqual(end_date)){ // create 30 transactions
+                int month_counter = 0;
+
+                // get all payments until the end of the loan period
+                while (date.isBefore(end_date) || date.isEqual(end_date)){
                     liability_data_set.addEntry(new Entry( month_counter + (float) date.getDayOfMonth()/date.getMonth().length(date.isLeapYear()), (float) getJsonRep().getDouble("payment_amount")));
-                    System.out.println("-> " + (month_counter + (float) date.getDayOfMonth()/date.getMonth().length(date.isLeapYear())));
+                    //System.out.println("-> " + (month_counter + (float) date.getDayOfMonth()/date.getMonth().length(date.isLeapYear())));
                     if(f == Frequency.MONTHLY){
                         date = date.plusMonths(1);
                         month_counter+=1;
@@ -92,8 +89,45 @@ public class Liability extends BudgetComponent{
             }
             return liability_data_set;
         } catch ( Exception e ) {
+            e.printStackTrace();
             return null;
         }
+    }
+
+    private LineDataSet generateRemainderSet(LineDataSet payment_entries){
+
+        LineDataSet remainder_set = new LineDataSet(new ArrayList<Entry>(), "Remaining Debt");
+
+        try {
+            Frequency f = Frequency.valueOf(getJsonRep().getString("loan_calc_frequency").toUpperCase());
+
+            double i = getJsonRep().getDouble("loan_interest_rate")/100;
+            double r = i/12;
+            double principle = this.getJsonRep().getDouble("loan_principle");
+
+            for (int index = 0; index < payment_entries.getEntryCount(); index++) {
+                Entry e = payment_entries.getEntryForIndex(index);
+
+                principle = principle - e.getY();
+                principle = principle * (1+r);
+                remainder_set.addEntry(new Entry(e.getX(), (float) principle));
+
+            }
+            return  remainder_set;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<LineDataSet> generateOverTimeAnalysis(){
+        ArrayList<LineDataSet> data_sets = new ArrayList<>();
+
+        LineDataSet payment_set = generatePaymentSet();
+        data_sets.add(payment_set);
+        data_sets.add(generateRemainderSet(payment_set));
+
+        return data_sets;
     }
 
     public Liability(Budget parent, JSONObject json_rep) {
