@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -78,15 +79,6 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
 
         custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
 
-        custom_repayment_switch.setOnClickListener(view1 -> {
-            if(custom_repayment_switch.isChecked()){
-                repayment_amount_edit.setEnabled(true);
-            }
-            else{
-                repayment_amount_edit.setEnabled(false);
-            }
-        });
-
         return view;
     }
 
@@ -98,13 +90,85 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
     @Override
     public JSONObject getJSONRepresentation() throws Exception{
         JSONObject rep = new JSONObject();
-        rep.put("principle", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
-        rep.put("interest_type", interest_type_spinner.getSelectedItem());
-        rep.put("rate", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
-        rep.put("calc_freq", calculation_freq_spinner.getSelectedItem());
-        rep.put("start", begin_date_label.getText());
-        rep.put("end", begin_date_label.getText());
+        try {
+            rep.put("principle", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Principle Amount Missing.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        try {
+            rep.put("interest_type", interest_type_spinner.getSelectedItem());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select Interest Type.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        try{
+            rep.put("rate", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Interest Rate Missing.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        try{
+            rep.put("calc_freq", calculation_freq_spinner.getSelectedItem());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select Calculation Frequency.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        try{
+            rep.put("start", begin_date_label.getText());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select a Start Date.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        try {
+            rep.put("end", begin_date_label.getText());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select an End Date.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        try{
         rep.put("pay_freq", payment_freq_spinner.getSelectedItem().toString());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Select a Payment Frequency.", Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        if(custom_repayment_switch.isChecked()){
+            try{
+                rep.put("payment_amt", repayment_amount_edit.getText());
+            } catch (Exception e){
+                Toast.makeText(getActivity(), "Add Payment Amount.", Toast.LENGTH_SHORT).show();
+                throw e;
+            }
+        } else {
+            double P = Double.parseDouble(String.valueOf(repayment_amount_edit.getText()));
+            double i = Double.parseDouble(String.valueOf(interest_rate_edit.getText()));
+            String freq_string = (String) payment_freq_spinner.getSelectedItem();
+            double freq = 1;
+            if(freq_string.equals("Monthly")){
+                freq = 12d;
+            } else if(freq_string.equals("Yearly")){
+                freq = 1d;
+            }
+
+            int years = 10; // todo: get actual years
+
+            int n = (int) Math.round(years * freq);
+
+            rep.put("payment_amt", repayment_amount_edit.getText());
+
+            double r = i/freq;
+
+            double A = P * ((r*Math.pow(1+r, n))) / (Math.pow(1+r, n) - 1);
+        }
+
+
         return rep;
     }
 }
