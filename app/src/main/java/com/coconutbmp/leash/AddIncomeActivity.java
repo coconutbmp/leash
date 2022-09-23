@@ -54,7 +54,7 @@ public class AddIncomeActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_text, freq);
         incomeFrequency.setPopupBackgroundDrawable(getResources().getDrawable(R.color.smokey_white));
         incomeFrequency.getBackground().setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
-
+        incomeFrequency.setAdapter(adapter);
 
         returnCard.setOnClickListener(view1->{
             AddIncomeActivity.this.finish();

@@ -532,7 +532,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void hook(){ // function to hook java components to xml compenents
+    public void hook(){ // function to hook java components to xml components
         SignInCard = findViewById(R.id.SignInCard);
         SignUpCard = findViewById(R.id.SignUpCard);
         openSignIn = findViewById(R.id.btnShowSignIn);

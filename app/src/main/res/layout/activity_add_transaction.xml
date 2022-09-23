@@ -80,9 +80,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:fontFamily="@font/convergence"
                     android:text="Are you receiving or paying?"
                     android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -91,7 +92,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/rbtnReceiving"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -102,7 +103,7 @@
                         android:textSize="12sp" />
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/rbtnPaying"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -133,12 +134,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:fontFamily="@font/convergence"
                     android:text="What was the amount of the transaction?"
                     android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/editTextNumberDecimal2"
+                    android:id="@+id/edtTransactionAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -152,8 +154,70 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:fontFamily="@font/convergence"
+                    android:text="What date di this occur?"
+                    android:textColor="@color/dark_grey" />
+
+                <DatePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    android:theme="@style/DatePickers" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:fontFamily="@font/convergence"
+                    android:text="What liability does this affect?"
+                    android:textColor="@color/dark_grey" />
+
+                <Spinner
+                    android:id="@+id/sprLiabilities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSaveTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

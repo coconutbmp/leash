@@ -126,7 +126,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
             AddLoanDetailsFragment loan_frag = new AddLoanDetailsFragment();
             ld_container = loan_frag;
             frag_tran.replace(frag_container.getId(), loan_frag).commit();
-        } else if (Objects.equals(type, "Recurring Payment")){ // display Recurring payment form
+        } else if (Objects.equals(type, "Recurring Expense")){ // display Recurring payment form
             AddRecurringPaymentFragment recurring_payment_frag = new AddRecurringPaymentFragment();
             ld_container = recurring_payment_frag;
             frag_tran.replace(frag_container.getId(), recurring_payment_frag).commit();
