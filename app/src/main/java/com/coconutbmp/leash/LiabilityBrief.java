@@ -18,7 +18,10 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Formatter;
@@ -47,19 +50,39 @@ public class LiabilityBrief extends BudgetComponentFragment {
         LineData ld = new LineData();
 
         XAxis axis = lc.getXAxis();
+        axis.setGranularity(1f);
+        axis.setGranularityEnabled(true);
+        axis.setAxisLineWidth(1);
         axis.setValueFormatter(new ValueFormatter() {
-            SimpleDateFormat date_format = new SimpleDateFormat("MMM dd yy", Locale.ENGLISH);
+            SimpleDateFormat date_format = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
             SimpleDateFormat year_format = new SimpleDateFormat("yyyy", Locale.ENGLISH);
 
             @Override
             public String getAxisLabel(float value, AxisBase axis) {
 
                 long millis = 0;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    millis = TimeUnit.DAYS.toMillis((long) value);
-                }
-                return date_format.format(new Date(millis));
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) { try {
+                    LocalDate start = Liability.stringToLocalDate(liability.getJsonRep().getString("start_date"));
 
+                    assert start != null;
+                    start = start.minusDays(start.getDayOfMonth()-1);
+                    start = start.plusMonths((int) value);
+                    System.out.println("val -> "+ value);
+                    System.out.println(start);
+
+                    //System.out.println("millis -> " + start.toString());
+                    LocalDateTime ldt = LocalDateTime.of(start, LocalTime.MIN.plusNanos(1));
+                    millis = ldt.toEpochSecond(ZoneOffset.ofHours(2)) * 1000L;
+                    //System.out.println("millis -> " + start.toString());
+                    if(start.getMonthValue() == 0){
+                        return year_format.format(new Date(millis));
+                    } else {
+                        return date_format.format(new Date(millis));
+                    }
+
+                }catch (Exception e){e.printStackTrace(); return null;}}
+
+            return null;
             }
         });
 
@@ -70,11 +93,16 @@ public class LiabilityBrief extends BudgetComponentFragment {
         }
 
         ld.addDataSet(liability.generateLineData());
+        ld.setDrawValues(false);
+
         lc.setData(ld);
 
         lc.setMinimumHeight(500);
+        lc.setVisibleXRangeMaximum(5f);
+
 
         details_ll.addView(lc);
+
         this.details_ll.addView(tv);
 
     }
