@@ -120,9 +120,9 @@
                         android:layout_margin="10dp"
                         android:backgroundTint="@color/grey"
                         android:ems="10"
+                        android:hint="0.00"
                         android:inputType="numberSigned|numberDecimal"
                         android:minHeight="48dp"
-                        android:text="0.00"
                         android:textColor="@color/shadow"
                         android:textColorHint="@color/dark_grey" />
 

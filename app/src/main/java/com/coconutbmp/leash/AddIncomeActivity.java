@@ -124,6 +124,7 @@ public class AddIncomeActivity extends AppCompatActivity {
             income.put("startDate", startDate);
             income.put("endDate", endDate);
             income.put("freq", frequency);
+            income.put("budgetid", Data.current.getJsonRep().get("budget_ID"));
             internetRequest.doRequest(url + "submit_income.php", this, income, this::processIncome);
         } catch (JSONException e) {
             e.printStackTrace();
