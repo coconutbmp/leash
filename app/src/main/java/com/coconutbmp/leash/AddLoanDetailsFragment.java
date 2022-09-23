@@ -143,7 +143,7 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         }
 
         try {
-            rep.put("end", begin_date_label.getText());
+            rep.put("end", end_date_label.getText());
         } catch (Exception e){
             Toast.makeText(getActivity(), "Select an End Date.", Toast.LENGTH_SHORT).show();
             throw e;
@@ -164,7 +164,7 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
                 throw e;
             }
         } else {
-            double P = Double.parseDouble(String.valueOf(repayment_amount_edit.getText()));
+            double P = Double.parseDouble(String.valueOf(principal_amt_edit.getText()));
             double i = Double.parseDouble(String.valueOf(interest_rate_edit.getText()));
             String freq_string = (String) payment_freq_spinner.getSelectedItem();
             double freq = 1;
@@ -178,11 +178,10 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
 
             int n = (int) Math.round(years * freq);
 
-            rep.put("payment_amt", repayment_amount_edit.getText());
-
             double r = i/freq;
 
             double A = P * ((r*Math.pow(1+r, n))) / (Math.pow(1+r, n) - 1);
+            rep.put("payment_amt", A);
         }
 
 
