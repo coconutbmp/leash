@@ -222,7 +222,7 @@
                             android:layout_height="wrap_content"
                             android:text="Start Date"
                             android:textColor="@color/grey"
-                            android:textSize="20sp" />
+                            android:textSize="14sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -236,9 +236,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/convergence"
                                 android:text="00/00/0000"
-                                android:textColor="@color/shadow"
-                                android:textSize="16sp" />
+                                android:textColor="@color/grey"
+                                android:textSize="20sp" />
 
                             <Button
                                 android:id="@+id/start_button"
@@ -269,11 +270,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
                             android:text="@string/payment_frequency_prompt"
                             android:textColor="@color/shadow"
                             android:textSize="16sp" />
@@ -282,6 +285,8 @@
                             android:id="@+id/loan_payment_freq_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
                             android:entries="@array/calculation_frequencies"
                             android:minHeight="48dp" />
                     </LinearLayout>
@@ -344,7 +349,7 @@
                             android:layout_margin="8dp"
                             android:text="End Date:"
                             android:textColor="@color/grey"
-                            android:textSize="20sp" />
+                            android:textSize="14sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -358,9 +363,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/convergence"
                                 android:text="00/00/0000"
-                                android:textColor="@color/shadow"
-                                android:textSize="16sp" />
+                                android:textColor="@color/grey"
+                                android:textSize="20sp" />
 
                             <Button
                                 android:id="@+id/end_button"
