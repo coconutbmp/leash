@@ -97,6 +97,12 @@ public class Liability extends BudgetComponent{
     private LineDataSet generateRemainderSet(LineDataSet payment_entries){
 
         LineDataSet remainder_set = new LineDataSet(new ArrayList<Entry>(), "Remaining Debt");
+        remainder_set.setLineWidth(2f);
+        remainder_set.setFillAlpha(50);
+        remainder_set.setFillColor(Color.rgb(255,255,100));
+        remainder_set.setDrawFilled(true);
+        remainder_set.setCircleColor(Color.rgb(255,255,100));
+        remainder_set.setColor(Color.rgb(255,255,100));
 
         try {
             Frequency f = Frequency.valueOf(getJsonRep().getString("loan_calc_frequency").toUpperCase());

@@ -50,7 +50,7 @@ public class LiabilityBrief extends BudgetComponentFragment {
         axis.setGranularityEnabled(true);
         axis.setAxisLineWidth(1);
         axis.setValueFormatter(new ValueFormatter() {
-            SimpleDateFormat date_format = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
+            SimpleDateFormat date_format = new SimpleDateFormat("MMM", Locale.ENGLISH);
             SimpleDateFormat year_format = new SimpleDateFormat("yyyy", Locale.ENGLISH);
 
             @Override
@@ -70,7 +70,7 @@ public class LiabilityBrief extends BudgetComponentFragment {
                     LocalDateTime ldt = LocalDateTime.of(start, LocalTime.MIN.plusNanos(1));
                     millis = ldt.toEpochSecond(ZoneOffset.ofHours(2)) * 1000L;
                     //System.out.println("millis -> " + start.toString());
-                    if(start.getMonthValue() == 0){
+                    if(start.getMonthValue() == 1){
                         return year_format.format(new Date(millis));
                     } else {
                         return date_format.format(new Date(millis));
