@@ -1,6 +1,7 @@
 package com.coconutbmp.leash.BudgetComponents;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 
 import com.coconutbmp.leash.InternetRequest;
 import com.github.mikephil.charting.data.Entry;
@@ -53,30 +54,41 @@ public class Liability extends BudgetComponent{
         }
     }
 
+    public static LocalDate stringToLocalDate(String s){
+        if(!(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)) return null;
+        String[] dates = s.split("-");
+        return LocalDate.of(
+                Integer.parseInt(dates[0]),
+                Integer.parseInt(dates[1]),
+                Integer.parseInt(dates[2]));
+    }
+
     public LineDataSet generateLineData(){
         try {
             LineDataSet liability_data_set = new LineDataSet(new ArrayList<Entry>(), getJsonRep().getString("name"));
-            String date_string = getJsonRep().getString("start_date");
-            String[] dates = date_string.split("-");
+            liability_data_set.setLineWidth(2f);
+            liability_data_set.setFillAlpha(50);
+            liability_data_set.setFillColor(Color.rgb(255,34,100));
+            liability_data_set.setDrawFilled(true);
+            liability_data_set.setCircleColor(Color.rgb(255,34,100));
+            liability_data_set.setColor(Color.rgb(255,34,100));
             Frequency f = Frequency.valueOf(getJsonRep().getString("payment_frequency").toUpperCase());
-            LocalDate date;
+
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                 date = LocalDate.of(
-                            Integer.parseInt(dates[0]),
-                            Integer.parseInt(dates[1]),
-                            Integer.parseInt(dates[2]));
+                LocalDate start_date = stringToLocalDate(getJsonRep().getString("start_date"));
+                LocalDate end_date = stringToLocalDate(getJsonRep().getString("end_date"));
+                LocalDate date = LocalDate.from(start_date);
+                LocalDate prev_date = LocalDate.from(date);
 
-                 LocalDate start = LocalDate.from(date);
-
-                 for (int t = 0; t < 30; t++){ // create 30 transactions
-                    liability_data_set.addEntry(new Entry(date.toEpochDay() - start.toEpochDay(), (float) getJsonRep().getDouble("payment_amount")));
-                    System.out.println("-> " + Long.toString(date.toEpochDay() - start.toEpochDay()));
+                Integer month_counter = 0;
+                while (date.isBefore(end_date) || date.isEqual(end_date)){ // create 30 transactions
+                    liability_data_set.addEntry(new Entry( month_counter + (float) date.getDayOfMonth()/date.getMonth().length(date.isLeapYear()), (float) getJsonRep().getDouble("payment_amount")));
+                    System.out.println("-> " + (month_counter + (float) date.getDayOfMonth()/date.getMonth().length(date.isLeapYear())));
                     if(f == Frequency.MONTHLY){
                         date = date.plusMonths(1);
+                        month_counter+=1;
                     }
-                 }
-            } else {
-                System.out.println("Your phone is wack>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>....");
+                }
             }
             return liability_data_set;
         } catch ( Exception e ) {
