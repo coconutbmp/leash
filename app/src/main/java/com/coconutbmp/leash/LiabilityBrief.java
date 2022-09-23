@@ -29,9 +29,12 @@ public class LiabilityBrief extends BudgetComponentFragment {
 
     Liability liability;
     LineChart lc;
+    LocalDate now;
 
     @Override
     void initiate_view() throws Exception{
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) now = LocalDate.now();
+
         super.initiate_view();
         JSONObject json_rep = liability.getJsonRep();
         System.out.println(liability.getJsonRep());
@@ -63,14 +66,13 @@ public class LiabilityBrief extends BudgetComponentFragment {
                     assert start != null;
                     start = start.minusDays(start.getDayOfMonth()-1);
                     start = start.plusMonths((int) value);
-                    //System.out.println("val -> "+ value);
-                    //System.out.println(start);
 
-                    //System.out.println("millis -> " + start.toString());
                     LocalDateTime ldt = LocalDateTime.of(start, LocalTime.MIN.plusNanos(1));
                     millis = ldt.toEpochSecond(ZoneOffset.ofHours(2)) * 1000L;
-                    //System.out.println("millis -> " + start.toString());
-                    if(start.getMonthValue() == 1){
+
+                    if(start.getMonthValue() == now.getMonthValue() && start.getYear() == now.getYear()){
+                        return "NOW";
+                    } else if(start.getMonthValue() == 1){
                         return year_format.format(new Date(millis));
                     } else {
                         return date_format.format(new Date(millis));

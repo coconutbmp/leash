@@ -42,18 +42,21 @@ public class AddToBudgetDialogue extends Dialog {
             Intent i = new Intent(this.getContext(), AddLiabilityActivity.class);
             i.putExtra("budget_name", budget_name); // pass data useful for the AddLiabilityActivity
             this.getContext().startActivity(i);
+            this.dismiss();
         });
 
         add_income_button.setOnClickListener(view -> {
             Intent i = new Intent(this.getContext(), AddIncomeActivity.class);
             i.putExtra("budget_name", budget_name); // pass data useful for the AddIncomeActivity
             this.getContext().startActivity(i);
+            this.dismiss();
         });
 
         add_transact_button.setOnClickListener(view -> {
             Intent i = new Intent(this.getContext(), AddTransactionActivity.class);
             i.putExtra("budget_name", budget_name); // pass data useful for the AddIncomeActivity
             this.getContext().startActivity(i);
+            this.dismiss();
         });
 
         returnCard.setOnClickListener(view -> {
