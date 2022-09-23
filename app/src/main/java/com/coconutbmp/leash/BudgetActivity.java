@@ -28,6 +28,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     void display_liabilities(){
         Budget current = Data.current;
+        liability_ll.removeAllViews();
         for (Liability l: current.getLiabilities()) {
             FragmentManager frag_man = getSupportFragmentManager();
             FragmentTransaction frag_tran = frag_man.beginTransaction();
@@ -74,4 +75,9 @@ public class BudgetActivity extends AppCompatActivity {
         display_liabilities();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        display_liabilities();
+    }
 }

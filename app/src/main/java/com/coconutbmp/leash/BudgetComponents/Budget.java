@@ -1,10 +1,16 @@
 package com.coconutbmp.leash.BudgetComponents;
 
+import android.app.Activity;
+import android.telecom.Call;
+
+import com.coconutbmp.leash.CompletionListener;
 import com.coconutbmp.leash.InternetRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.Vector;
+
+import javax.security.auth.callback.Callback;
 
 public class Budget extends BudgetComponent{
 
@@ -12,6 +18,8 @@ public class Budget extends BudgetComponent{
     Vector<Liability> liability_list = new Vector<Liability>();
     Vector<Transaction> transaction_list = new Vector<Transaction>();
     InternetRequest ir = new InternetRequest();
+    private CompletionListener listener = null;
+    private Activity caller = null;
 
     void setIncomes(String response){
         JSONArray ja;
@@ -31,8 +39,26 @@ public class Budget extends BudgetComponent{
                 liability_list.add(new Liability(this, (JSONObject) ja.get(i)));
             }
             System.out.println("got the array -> " + ja.toString());
+            if(listener!=null){
+                caller.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.processCompletion(true);
+                        listener = null;
+                    }
+                });
+            }
         }catch (Exception e){
             e.printStackTrace();
+            if(listener!=null){
+                caller.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.processCompletion(false);
+                        listener = null;
+                    }
+                });
+            }
         }
     }
 
@@ -58,6 +84,19 @@ public class Budget extends BudgetComponent{
     }
 
     public Vector<Transaction> getTransactions() { return transaction_list; };
+
+    public void refreshLiabilities(Activity caller, CompletionListener listener) throws Exception{
+        this.listener = listener;
+        this.caller = caller;
+        JSONObject params = new JSONObject();
+        params.put("budgetid", this.getJsonRep().get("budget_ID"));
+        ir.doRequest(
+                InternetRequest.std_url+"get_liabilities.php",
+                null,
+                params,
+                this::setLiabilities
+        );
+    }
 
 
     @Override
