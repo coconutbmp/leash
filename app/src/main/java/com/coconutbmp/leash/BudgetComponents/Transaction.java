@@ -12,5 +12,7 @@ public class Transaction extends BudgetComponent{
 
     public Transaction(JSONObject json_rep) {
         super(json_rep);
+        System.out.println("got transaction rep" + json_rep);
+
     }
 }

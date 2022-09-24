@@ -22,13 +22,23 @@ public class Budget extends BudgetComponent{
     private Activity caller = null;
 
     void setIncomes(String response){
+        if(response == null || response.equals("")) return;
+
         JSONArray ja;
-        System.out.println(response);
+        System.out.println("response = " + response);
+        try {
+            ja = new JSONArray(response);
+            for (int i = 0; i < ja.length(); i++){
+                income_list.add(new Income((JSONObject) ja.get(i)));
+            }
+            System.out.println("got the array -> " + ja.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
     public Vector<Income> getIncomes() { return income_list; };
-
 
     void setLiabilities(String response){
         JSONArray ja;
@@ -98,7 +108,6 @@ public class Budget extends BudgetComponent{
         );
     }
 
-
     @Override
     public void initialize() throws Exception{
         JSONObject params = new JSONObject();
@@ -108,7 +117,7 @@ public class Budget extends BudgetComponent{
 
         //get income
         params = new JSONObject();
-        //todo: add parameters for income request
+        params.put("budgetid", this.getJsonRep().get("budget_ID"));
         ir.doRequest(
                 InternetRequest.std_url+"get_income.php",
                 null,
