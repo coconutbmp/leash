@@ -59,6 +59,39 @@ public class Liability extends BudgetComponent{
                 Integer.parseInt(dates[2]));
     }
 
+    ArrayList<Entry> getPeriodSummary(LocalDate start_date, LocalDate end_date) {
+
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) try {
+            Frequency f = Frequency.valueOf(getJsonRep().getString("payment_frequency").toUpperCase());
+            LocalDate liability_start = Liability.stringToLocalDate(getJsonRep().getString("start_date"));
+            LocalDate liability_end = Liability.stringToLocalDate(getJsonRep().getString("end_date"));
+            LocalDate date = null;
+
+            date = LocalDate.from(liability_start);
+
+            while (date.isBefore(start_date)) {
+                if (f == Frequency.MONTHLY) {
+                    date = date.plusMonths(1);
+                }
+            }
+
+            while (date.isEqual(start_date) || (date.isAfter(start_date) && date.isBefore(end_date)))
+                if (f == Frequency.MONTHLY) {
+                    date = date.plusMonths(1);
+                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + date.getDayOfMonth());
+                    entries.add(new Entry((float) date.getDayOfMonth() / date.getMonth().length(date.isLeapYear()), (float) getJsonRep().getDouble("payment_amount")));
+                } else if (f == Frequency.WEEKLY) {
+                    date = date.plusDays(7);
+                }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return entries;
+    }
+
     public LineDataSet generatePaymentSet(){
         try {
             LineDataSet liability_data_set = new LineDataSet(new ArrayList<Entry>(), getJsonRep().getString("name"));
@@ -113,9 +146,8 @@ public class Liability extends BudgetComponent{
 
             for (int index = 0; index < payment_entries.getEntryCount(); index++) {
                 Entry e = payment_entries.getEntryForIndex(index);
-
-                principle = principle - e.getY();
                 principle = principle * (1+r);
+                principle = principle - e.getY();
                 remainder_set.addEntry(new Entry(e.getX(), (float) principle));
 
             }

@@ -1,13 +1,20 @@
 package com.coconutbmp.leash.BudgetComponents;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.telecom.Call;
 
 import com.coconutbmp.leash.CompletionListener;
 import com.coconutbmp.leash.InternetRequest;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.security.auth.callback.Callback;
@@ -147,10 +154,82 @@ public class Budget extends BudgetComponent{
 
     public Budget(JSONObject json_rep){
         super(json_rep);
-
-
     }
 
+    private void accumulate(LineDataSet subject, ArrayList<ArrayList<Entry>> lists){
+        float total=0f, x=0f;
+
+        Entry hold = new Entry(0f,0f);
+        float min = Float.MAX_VALUE;
+
+        ArrayList<Entry> used = new ArrayList<>();
+
+        while (hold != null){
+            x = hold.getX();
+            total += hold.getY();
+            used.add(hold);
+
+            subject.addEntry(new Entry(x, total));
+
+            hold = null;
+            min = Float.MAX_VALUE;
+            for(ArrayList<Entry> list: lists){
+                for(Entry e: list){
+                    System.out.println("--{" + e.getX() + "," + e.getY() + "}--");
+                    if(e.getX() >= x && e.getX() < min && !used.contains(e)) {
+
+                        hold = e;
+                        min = e.getX();
+                    }
+                }
+            }
+        }
+        subject.addEntry(new Entry(1f, total));
+    }
+
+    public LineData getPeriodSummary(LocalDate start_date, LocalDate end_date){
+        LineData data = new LineData();
+
+        float total_income = 0f, total_expense = 0f;
+        float x = 0f;
+
+
+        LineDataSet income_set = new LineDataSet(new ArrayList<>(), "Income");
+        income_set.setLineWidth(2f);
+        income_set.setFillAlpha(50);
+        income_set.setFillColor(Color.rgb(55,234,100));
+        income_set.setDrawFilled(true);
+        income_set.setCircleColor(Color.rgb(55,234,100));
+        income_set.setColor(Color.rgb(55,234,100));
+
+        LineDataSet expense_set = new LineDataSet(new ArrayList<>(), "Liability");
+        expense_set.setLineWidth(2f);
+        expense_set.setFillAlpha(50);
+        expense_set.setFillColor(Color.rgb(255,34,100));
+        expense_set.setDrawFilled(true);
+        expense_set.setCircleColor(Color.rgb(255,34,100));
+        expense_set.setColor(Color.rgb(255,34,100));
+
+        ArrayList<ArrayList<Entry>> income_sets = new ArrayList<>();
+        ArrayList<ArrayList<Entry>> liability_sets = new ArrayList<>();
+
+        for (int i = 0; i < income_list.size(); i++){
+            income_sets.add(income_list.get(i).getPeriodSummary(start_date, end_date));
+        }
+
+        accumulate(income_set, income_sets);
+
+        for (int i = 0; i < liability_list.size(); i++){
+            liability_sets.add(liability_list.get(i).getPeriodSummary(start_date, end_date));
+        }
+
+        accumulate(expense_set, liability_sets);
+
+        data.addDataSet(income_set);
+        data.addDataSet(expense_set);
+
+        return data;
+    }
 
 
 }

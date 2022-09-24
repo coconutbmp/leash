@@ -22,7 +22,7 @@ public class BudgetActivity extends AppCompatActivity {
     CardView add_button, return_button;
     String budget_name;
     TextView budget_title, day, month;
-    LinearLayout liability_ll, income_ll, transaction_ll;
+    LinearLayout liability_ll, income_ll, transaction_ll, budget_summary_ll;
 
     String getBudgetName(){
         return  budget_name;
@@ -58,6 +58,14 @@ public class BudgetActivity extends AppCompatActivity {
         }
     }
 
+    void display_budget_summary(){
+        Budget current = Data.current;
+        budget_summary_ll.removeAllViews();
+        FragmentManager frag_man = getSupportFragmentManager();
+        FragmentTransaction frag_tran = frag_man.beginTransaction();
+        frag_tran.add(budget_summary_ll.getId(), new BudgetBrief(this, Data.current)).commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +80,7 @@ public class BudgetActivity extends AppCompatActivity {
         liability_ll = findViewById(R.id.liability_holder_ll);
         transaction_ll = findViewById(R.id.transaction_holder_ll);
         income_ll = findViewById(R.id.income_holder_ll);
+        budget_summary_ll = findViewById(R.id.budget_summary_ll);
 
         UXFunctions.setDate(day, month);
 
@@ -99,6 +108,7 @@ public class BudgetActivity extends AppCompatActivity {
         display_liabilities();
         display_transactions();
         display_income();
+        display_budget_summary();
     }
 
     @Override

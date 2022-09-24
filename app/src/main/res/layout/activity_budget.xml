@@ -181,6 +181,7 @@
                             app:cardCornerRadius="8dp">
 
                             <LinearLayout
+                                android:id="@+id/budget_summary_ll"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0"
