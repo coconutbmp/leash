@@ -33,20 +33,20 @@ public class UXFunctionsTest{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
         today = sdf.format(new Date());
         MockitoAnnotations.openMocks(this);
+        Mockito.doNothing().when(day).setText(today.substring(0, 2));
+        Mockito.when(day.getText()).thenReturn(today.substring(0, 2));
+        Mockito.doNothing().when(day).setText(today.substring(3, 6));
+        Mockito.when(month.getText()).thenReturn(today.substring(3, 6));
     }
 
     @Test
-    public void test(){
-        Mockito.doNothing().when(day).setText(today.substring(0, 2));
-        Mockito.when(day.getText()).thenReturn(today.substring(0, 2));
+    public void testDay(){
         UXFunctions.setDate(day, month);
         assertEquals(today.substring(0, 2), day.getText().toString());
     }
 
     @Test
     public void testMonth(){
-        Mockito.doNothing().when(month).setText(today.substring(3, 6));
-        Mockito.when(month.getText()).thenReturn(today.substring(3, 6));
         UXFunctions.setDate(day, month);
         assertEquals(today.substring(3, 6), month.getText().toString());
     }
