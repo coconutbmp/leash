@@ -5,7 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class SignInTests {
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
+public class loginUtilsTests {
 
     @Test
     public void incorrectName_contains_special_char(){
@@ -75,5 +78,44 @@ public class SignInTests {
     @Test
     public void correctPass_Matching(){
         assertTrue(loginUtils.validatePass("Test1234", "Test1234"));
+    }
+
+    @Test
+    public void invalidHashVerification_HashSide(){
+        try {
+            String pass = "password";
+            String hash = loginUtils.Hash("different");
+            assertFalse(loginUtils.verifyPassword(pass, hash));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void invalidHashVerification_PassSide(){
+        try {
+            String pass = "different";
+            String hash = loginUtils.Hash("password");
+            assertFalse(loginUtils.verifyPassword(pass, hash));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void validHashVerification(){
+        try {
+            String pass = "password";
+            String hash = loginUtils.Hash("password");
+            assertTrue(loginUtils.verifyPassword(pass, hash));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
     }
 }

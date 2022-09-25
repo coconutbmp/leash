@@ -110,8 +110,7 @@ public class loginUtils { // functions for login validation
         byte[] salt = fromHex(parts[1]);
         byte[] hash = fromHex(parts[2]);
 
-        PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(),
-                salt, iterations, hash.length * 8);
+        PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] testHash = skf.generateSecret(spec).getEncoded();
 
