@@ -152,7 +152,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
-                    android:id="@+id/liability_type_ll"
+                    android:id="@+id/liability_type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
