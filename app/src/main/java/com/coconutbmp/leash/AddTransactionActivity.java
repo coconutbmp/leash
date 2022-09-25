@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -27,6 +28,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     RadioButton paying, receiving;
     EditText amount;
     Spinner liabilities;
+    DatePicker date_dp;
     Button save;
     String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
     InternetRequest internetRequest;
@@ -56,6 +58,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         liabilities.getBackground().setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
 
         liabilities.setAdapter(adapter);
+        date_dp = findViewById(R.id.transaction_date_dp);
 
         returnCard.setOnClickListener(view -> {
             AddTransactionActivity.this.finish();
@@ -106,7 +109,8 @@ public class AddTransactionActivity extends AppCompatActivity {
             transaction.put("liabilityid", liabilityID);
             transaction.put("transactiontype", transactionType);
             transaction.put("transactionamount", transactionAmount);
-            transaction.put("date",""/*add date here*/);
+            String date = String.format("%s-%s-%s", date_dp.getYear(), date_dp.getMonth()+1, date_dp.getDayOfMonth());
+            transaction.put("date",date/*add date here*/);
             internetRequest.doRequest(url+"submit_transaction.php", this, transaction, this::processTransaction);
         } catch (JSONException e) {
             e.printStackTrace();

@@ -91,9 +91,9 @@ public class AddLiabilityActivity extends AppCompatActivity {
                         transaction,
                         response -> {
                             System.out.println(response + "----------------------------------------------------------->");
-                            if (response.toUpperCase().charAt(0) == 'S') {
-                                System.out.println("successfully added loan");
-                            } else System.out.println("failed to add loan");
+                            if (response != null && response.length() > 0 && response.toUpperCase().charAt(0) == 'S') {
+                                System.out.println("successfully added transaction");
+                            } else System.out.println("failed to add transaction");
                         }
                 );
             }

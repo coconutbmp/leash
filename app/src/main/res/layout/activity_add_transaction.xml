@@ -177,6 +177,7 @@
                     android:textColor="@color/dark_grey" />
 
                 <DatePicker
+                    android:id="@+id/transaction_date_dp"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_margin="8dp"

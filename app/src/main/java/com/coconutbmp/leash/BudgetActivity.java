@@ -115,5 +115,8 @@ public class BudgetActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         display_liabilities();
+        display_transactions();
+        display_income();
+        display_budget_summary();
     }
 }

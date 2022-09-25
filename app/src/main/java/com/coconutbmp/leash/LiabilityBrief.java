@@ -37,6 +37,7 @@ public class LiabilityBrief extends BudgetComponentFragment {
 
         super.initiate_view();
         JSONObject json_rep = liability.getJsonRep();
+        System.out.println(liability.getJsonRep());
         this.name_label.setText((String) liability.getJsonRep().get("name"));
         this.details_ll.removeAllViews();
 
