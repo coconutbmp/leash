@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Data {
 
-    private static int user_id;
+    private static int user_id = -1;
     static Budget current;
     static private ArrayList<Budget> all_budgets = new ArrayList<>();
 

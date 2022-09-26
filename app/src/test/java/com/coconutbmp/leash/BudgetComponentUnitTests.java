@@ -1,6 +1,11 @@
 package com.coconutbmp.leash;
 
+import static com.coconutbmp.leash.Data.current;
+
 import com.coconutbmp.leash.BudgetComponents.Budget;
+import com.coconutbmp.leash.BudgetComponents.Income;
+import com.coconutbmp.leash.BudgetComponents.Liability;
+import com.coconutbmp.leash.BudgetComponents.Transaction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,6 +13,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -45,7 +51,8 @@ public class BudgetComponentUnitTests {
     private CountDownLatch lock = new CountDownLatch(1);
 
     @Test public void request_all_budgets() throws InterruptedException {
-        set_user();
+        if(Data.getUserID() == -1 || test_user == null)
+            set_user();
 
         InternetRequest ir = new InternetRequest();
         JSONObject budget_request = null;
@@ -74,7 +81,8 @@ public class BudgetComponentUnitTests {
     @Test
     public void create_budgets(){
         try {
-            request_all_budgets();
+            if (response == null)
+                request_all_budgets();
             JSONArray ja = new JSONArray(response);
             JSONObject jo = ja.getJSONObject(0);
             Data.addBudget(jo);
@@ -88,16 +96,17 @@ public class BudgetComponentUnitTests {
     @Test
     public void set_current_budget(){
         try{
-            create_budgets();
+            if(Data.getAll().size() == 0)
+                create_budgets();
             Data.setCurrent(Data.getAll().get(0).getJsonRep());
         } catch (Exception e){
             e.printStackTrace();
         }
-        assert Data.current != null;
+        assert current != null;
     }
 
+    //Liability Specific Tests
 
-    //Liability Tests
 
 
 }
