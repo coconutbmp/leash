@@ -6,3 +6,7 @@ ignore:
   - "app/src/main/java/com/coconutbmp/leash/AddLoanDetailsFragment.java"
   - "app/src/main/java/com/coconutbmp/leash/AddToBudgetDialogue.java"
   - "app/src/main/java/com/coconutbmp/leash/AddTransactionsActivity.java"
+  - "app/src/main/java/com/coconutbmp/leash/BudgetListLayout.java"
+  - "app/src/main/java/com/coconutbmp/leash/LiabilityHistoryLayout.java"
+  - "app/src/main/java/com/coconutbmp/leash/SummaryFragment.java"
+  - "app/src/main/java/com/coconutbmp/leash/BudgetComponentFragment.java"
