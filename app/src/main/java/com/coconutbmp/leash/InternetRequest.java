@@ -67,9 +67,6 @@ public class InternetRequest { // send and receive http requests to server
                     };
                     response_thread.start();
                 }
-
-
-
             }
         });
     }
