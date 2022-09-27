@@ -8,7 +8,6 @@ ignore:
   - "app/src/main/java/com/coconutbmp/leash/AddTransactionsActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/BudgetListLayout.java"
   - "app/src/main/java/com/coconutbmp/leash/LiabilityHistoryLayout.java"
-  - "app/src/main/java/com/coconutbmp/leash/SummaryFragment.java"
   - "app/src/main/java/com/coconutbmp/leash/HomeActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/BugetActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/AddTransactionActivity.java"
