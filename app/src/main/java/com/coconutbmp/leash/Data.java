@@ -1,5 +1,8 @@
 package com.coconutbmp.leash;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+
 import com.coconutbmp.leash.BudgetComponents.Budget;
 
 import org.json.JSONObject;
@@ -39,6 +42,46 @@ public class Data {
 
     public static ArrayList<Budget> getAll(){
         return all_budgets;
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    private static Activity current_act = null;
+    private static CompletionListener listener = null;
+
+    public static void setCurrentActivity(Activity act){
+        current_act = act;
+    }
+
+    public static void setCurrentListener(CompletionListener _listener){
+        listener = _listener;
+    }
+
+    public static CompletionListener getCurrentListener(){
+        return listener;
+    }
+
+    public static Activity getCurrentAct(){
+        return current_act;
+    }
+
+    public static void respond (boolean success){
+        if(listener != null){
+            if(current_act != null) {
+                current_act.runOnUiThread(() -> {
+                    listener.processCompletion(success);
+                    listener = null;
+                });
+            } else {
+                Thread response_thread = new Thread("Response"){
+                    @Override
+                    public void run(){
+                        listener.processCompletion(success);
+                    }
+                };
+                response_thread.start();
+            }
+        }
     }
 
 }

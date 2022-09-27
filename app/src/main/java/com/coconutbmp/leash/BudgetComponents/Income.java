@@ -35,7 +35,7 @@ public class Income extends BudgetComponent{
             while (date.isEqual(start_date) || (date.isAfter(start_date) && date.isBefore(end_date)))
                 if(f == Frequency.MONTHLY){
                     date = date.plusMonths(1);
-                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+  date.getDayOfMonth() );
+                    //System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+  date.getDayOfMonth() );
                     entries.add(new Entry((float) date.getDayOfMonth()/date.getMonth().length(date.isLeapYear()), (float) getJsonRep().getDouble("income_Amount")));
                 } else if (f == Frequency.WEEKLY){
                     date = date.plusDays(7);

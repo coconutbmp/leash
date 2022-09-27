@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.telecom.Call;
 
 import com.coconutbmp.leash.CompletionListener;
+import com.coconutbmp.leash.Data;
 import com.coconutbmp.leash.InternetRequest;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -28,26 +29,35 @@ public class Budget extends BudgetComponent{
     private CompletionListener listener = null;
     private Activity caller = null;
 
+
     void setIncomes(String response){
-        if(response == null || response.equals("")) return;
+        income_list.clear();
+        if(response == null || response.equals("")){
+            Data.respond(false);
+            return;
+        }
 
         JSONArray ja;
-        System.out.println("response = " + response);
+        //System.out.println("response = " + response);
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
                 income_list.add(new Income((JSONObject) ja.get(i)));
             }
-            System.out.println("got the array -> " + ja.toString());
+            //System.out.println("got the array -> " + ja.toString());
         }catch (Exception e){
+            Data.respond(false);
             e.printStackTrace();
         }
+
+        Data.respond(true);
 
     }
 
     public Vector<Income> getIncomes() { return income_list; };
 
     void setLiabilities(String response){
+        liability_list.clear();
         JSONArray ja;
         //System.out.println(response);
         try {
@@ -67,6 +77,7 @@ public class Budget extends BudgetComponent{
             }
         }catch (Exception e){
             e.printStackTrace();
+            Data.respond(false);
             if(listener!=null){
                 caller.runOnUiThread(new Runnable() {
                     @Override
@@ -77,27 +88,33 @@ public class Budget extends BudgetComponent{
                 });
             }
         }
+
+        Data.respond(true);
     }
 
     public Vector<Liability> getLiabilities() { return liability_list; };
 
     void setTransactions(String response){
+        transaction_list.clear();
         if(response.equals("")){
-            System.out.println("no response");
+            Data.respond(true);
+            //System.out.println("no response");
             return;
         }
         JSONArray ja;
-        System.out.println(response + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+        //System.out.println(response + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
 
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
                 transaction_list.add(new Transaction((JSONObject) ja.get(i)));
             }
-            System.out.println("got the array -> " + ja.toString());
+            //System.out.println("got the array -> " + ja.toString());
         }catch (Exception e){
+            Data.respond(false);
             e.printStackTrace();
         }
+        Data.respond(true);
     }
 
     public Vector<Transaction> getTransactions() { return transaction_list; };

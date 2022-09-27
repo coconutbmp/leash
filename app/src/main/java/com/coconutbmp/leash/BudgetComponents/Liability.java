@@ -19,7 +19,7 @@ public class Liability extends BudgetComponent{
     Vector<Transaction> liability_transactions = new Vector<Transaction>();
     InternetRequest ir = new InternetRequest();
 
-    void add_transactions(String response){
+    /*void add_transactions(String response){
         JSONArray ja;
         System.out.println(response);
         try {
@@ -32,7 +32,7 @@ public class Liability extends BudgetComponent{
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     @Override
     public void initialize(){

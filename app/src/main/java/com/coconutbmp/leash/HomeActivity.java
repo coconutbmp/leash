@@ -19,17 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import android.graphics.Color;
 
 /**
  * Controller For the Home Page
@@ -44,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     SharedPreferences prefs;
     InternetRequest internetRequest;
     LinearLayout summary_holder;
+
 
     public void processBudgetResponse(String response){
         try {
