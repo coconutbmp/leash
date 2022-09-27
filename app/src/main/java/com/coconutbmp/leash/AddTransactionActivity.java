@@ -24,6 +24,7 @@ import java.util.Vector;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
+    // declare variables
     CardView returnCard;
     RadioButton paying, receiving;
     EditText amount;
@@ -40,8 +41,10 @@ public class AddTransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_transaction);
 
         hook();
-        currentLiabilities = Data.current.getLiabilities();
+        currentLiabilities = Data.current.getLiabilities(); // get all liabilities for current budget
         int liabilitySize = currentLiabilities.size() + 1;
+
+        // create array of all budget's liabilities
         String[] liabilityNames = new String[liabilitySize];
         liabilityNames[0] = "None";
         for (int i = 0; i < liabilitySize - 1; i++){
@@ -53,12 +56,15 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Setup for spinner
+         * Assigns array, layout, colors and text color
+         */
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_text, liabilityNames);
         liabilities.setPopupBackgroundDrawable(getResources().getDrawable(R.color.smokey_white));
         liabilities.getBackground().setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
 
         liabilities.setAdapter(adapter);
-        date_dp = findViewById(R.id.transaction_date_dp);
 
         returnCard.setOnClickListener(view -> {
             AddTransactionActivity.this.finish();
@@ -69,6 +75,10 @@ public class AddTransactionActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * hook all xml components to java components
+     * @return
+     */
     private boolean hook(){
         returnCard = findViewById(R.id.transactionReturnCard);
         paying = findViewById(R.id.rbtnPaying);
@@ -76,23 +86,29 @@ public class AddTransactionActivity extends AppCompatActivity {
         amount = findViewById(R.id.edtTransactionAmount);
         liabilities = findViewById(R.id.sprLiabilities);
         save = findViewById(R.id.btnSaveTransaction);
+        date_dp = findViewById(R.id.transaction_date_dp);
         return true;
     }
 
+    /**
+     *  Make Request to store once-off transactions to Transaction table in DB
+     */
     private void addTransaction(){
         internetRequest = new InternetRequest();
+        //Initialise Variables
         String transactionType = "NULL";
         String transactionAmount = amount.getText().toString();
         String liabilityID = "NULL";
         String incomeID = "NULL";
 
-        if(paying.isChecked()){
+        if(paying.isChecked()){ // select once off transaction type
             transactionType = "once-off expense";
         }
         else if(receiving.isChecked()){
             transactionType = "once-off income";
         }
 
+        //get liability ID from array of liabilities
         int pos = liabilities.getSelectedItemPosition();
         if(pos > 0){
             try {
@@ -102,6 +118,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         }
 
+        // Create Parameter JsonObject
         JSONObject transaction = new JSONObject();
         try {
             transaction.put("budgetid", Data.current.getJsonRep().get("budget_ID"));
@@ -110,13 +127,17 @@ public class AddTransactionActivity extends AppCompatActivity {
             transaction.put("transactiontype", transactionType);
             transaction.put("transactionamount", transactionAmount);
             String date = String.format("%s-%s-%s", date_dp.getYear(), date_dp.getMonth()+1, date_dp.getDayOfMonth());
-            transaction.put("date",date/*add date here*/);
-            internetRequest.doRequest(url+"submit_transaction.php", this, transaction, this::processTransaction);
+            transaction.put("date",date);
+            internetRequest.doRequest(url+"submit_transaction.php", this, transaction, this::processTransaction);//make request
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * handle success or failure
+     * @param response
+     */
     public void processTransaction(String response){
         if(response.equals("Success")){
             Toast.makeText(this, "Transaction Recorded", Toast.LENGTH_SHORT).show();
