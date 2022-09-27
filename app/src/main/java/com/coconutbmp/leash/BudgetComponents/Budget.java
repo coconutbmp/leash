@@ -29,7 +29,10 @@ public class Budget extends BudgetComponent{
     private CompletionListener listener = null;
     private Activity caller = null;
 
-
+    /**
+     * @param response
+     * populate Incomes
+     */
     void setIncomes(String response){
         income_list.clear();
         if(response == null || response.equals("")){
@@ -56,6 +59,10 @@ public class Budget extends BudgetComponent{
 
     public Vector<Income> getIncomes() { return income_list; };
 
+    /**
+     * @param response
+     * populate Liabilities
+     */
     void setLiabilities(String response){
         liability_list.clear();
         JSONArray ja;
@@ -94,6 +101,10 @@ public class Budget extends BudgetComponent{
 
     public Vector<Liability> getLiabilities() { return liability_list; };
 
+    /**
+     * @param response
+     * populate Transactions
+     */
     void setTransactions(String response){
         transaction_list.clear();
         if(response.equals("")){
@@ -119,6 +130,15 @@ public class Budget extends BudgetComponent{
 
     public Vector<Transaction> getTransactions() { return transaction_list; };
 
+    /**
+     *
+     * @param caller activity the request comes from
+     * @param listener the function to run after refresh is complete
+     * @throws Exception
+     *
+     * refresh liabilities after creation
+     *
+     */
     public void refreshLiabilities(Activity caller, CompletionListener listener) throws Exception{
         this.listener = listener;
         this.caller = caller;
@@ -132,6 +152,10 @@ public class Budget extends BudgetComponent{
         );
     }
 
+    /**
+     * initialization function
+     * @throws Exception
+     */
     @Override
     public void initialize() throws Exception{
         JSONObject params = new JSONObject();
@@ -204,6 +228,12 @@ public class Budget extends BudgetComponent{
         subject.addEntry(new Entry(1f, total));
     }
 
+    /**
+     * Get Line data between start and end dates
+     * @param start_date
+     * @param end_date
+     * @return
+     */
     public LineData getPeriodSummary(LocalDate start_date, LocalDate end_date){
         LineData data = new LineData();
 
