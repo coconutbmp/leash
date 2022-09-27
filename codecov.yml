@@ -9,7 +9,7 @@ ignore:
   - "app/src/main/java/com/coconutbmp/leash/BudgetListLayout.java"
   - "app/src/main/java/com/coconutbmp/leash/LiabilityHistoryLayout.java"
   - "app/src/main/java/com/coconutbmp/leash/HomeActivity.java"
-  - "app/src/main/java/com/coconutbmp/leash/BugetActivity.java"
+  - "app/src/main/java/com/coconutbmp/leash/BudgetActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/AddTransactionActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/LiabilityDetailsActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/AddRecurringPaymentFragment.java"
