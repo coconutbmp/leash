@@ -115,7 +115,7 @@ public class BudgetComponentUnitTests {
         assert current != null;
     }
 
-    Boolean got_all = false; // liabilities, incomes, transactions retrieved
+    /*Boolean got_all = false; // liabilities, incomes, transactions retrieved
     @Test
     public void accept_budget_components() throws InterruptedException{
 
@@ -146,5 +146,5 @@ public class BudgetComponentUnitTests {
         assert current.getIncomes().size() > 0;
         assert current.getTransactions().size() > 0;
         are_populated = true;
-    }
+    }*/
 }
