@@ -141,14 +141,28 @@ public class AddIncomeActivity extends AppCompatActivity {
         }
     }
 
+    void awaitReload(boolean success){
+        if(success)
+            Toast.makeText(this, "Income Successfully Added", Toast.LENGTH_SHORT).show();
+        if(!success)
+            Toast.makeText(this, "An Error has Occurred", Toast.LENGTH_SHORT).show();
+        Data.setCurrentListener(null);
+        this.finish();
+    }
+
     /**
      * Handle success or failure
      * @param response
      */
     void processIncome(String response){
         if(response.equals("Success")){
-            Toast.makeText(this, "Income Successfully Added", Toast.LENGTH_SHORT).show();
-            this.finish();
+            Data.setCurrentActivity(this);
+            Data.setCurrentListener(this::awaitReload);
+            try {
+                Data.current.refreshIncomes();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
         else{
             Toast.makeText(this, "An error occurred, check your values again", Toast.LENGTH_LONG).show();

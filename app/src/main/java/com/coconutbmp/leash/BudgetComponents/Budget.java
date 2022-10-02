@@ -26,8 +26,6 @@ public class Budget extends BudgetComponent{
     Vector<Liability> liability_list = new Vector<Liability>();
     Vector<Transaction> transaction_list = new Vector<Transaction>();
     InternetRequest ir = new InternetRequest();
-    //private CompletionListener listener = null;
-    //private Activity caller = null;
 
     /**
      * @param response
@@ -41,13 +39,11 @@ public class Budget extends BudgetComponent{
         }
 
         JSONArray ja;
-        //System.out.println("response = " + response);
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
                 income_list.add(new Income((JSONObject) ja.get(i)));
             }
-            //System.out.println("got the array -> " + ja.toString());
         }catch (Exception e){
             Data.respond(false);
             e.printStackTrace();
@@ -66,7 +62,6 @@ public class Budget extends BudgetComponent{
     void setLiabilities(String response){
         liability_list.clear();
         JSONArray ja;
-        //System.out.println(response);
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
@@ -90,18 +85,15 @@ public class Budget extends BudgetComponent{
         transaction_list.clear();
         if(response.equals("")){
             Data.respond(true);
-            //System.out.println("no response");
             return;
         }
         JSONArray ja;
-        //System.out.println(response + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
 
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
                 transaction_list.add(new Transaction((JSONObject) ja.get(i)));
             }
-            //System.out.println("got the array -> " + ja.toString());
         }catch (Exception e){
             Data.respond(false);
             e.printStackTrace();
@@ -114,9 +106,9 @@ public class Budget extends BudgetComponent{
     /**
      * @throws Exception
      * refresh liabilities after creation
-     *
      */
     public void refreshLiabilities() throws Exception{
+        InternetRequest ir = new InternetRequest();
         JSONObject params = new JSONObject();
         params.put("budgetid", this.getJsonRep().get("budget_ID"));
         ir.doRequest(
@@ -127,19 +119,10 @@ public class Budget extends BudgetComponent{
         );
     }
 
-    /**
-     * initialization function
-     * @throws Exception
-     */
-    @Override
-    public void initialize() throws Exception{
+    public void refreshIncomes() throws Exception{
+        InternetRequest ir = new InternetRequest();
         JSONObject params = new JSONObject();
-        //System.out.println(this.getJsonRep().get("budget_ID") + " " + this.getJsonRep().get("budget_Name"));
-        params.put("budgetid", this.getJsonRep().get("budget_ID"));
-        ir = new InternetRequest();
 
-        //get income
-        params = new JSONObject();
         params.put("budgetid", this.getJsonRep().get("budget_ID"));
         ir.doRequest(
                 InternetRequest.std_url+"get_income.php",
@@ -147,25 +130,31 @@ public class Budget extends BudgetComponent{
                 params,
                 this::setIncomes
         );
-        //get liabilities
-        params = new JSONObject();
-        params.put("budgetid", this.getJsonRep().get("budget_ID"));
-        ir.doRequest(
-                InternetRequest.std_url+"get_liabilities.php",
-                null,
-                params,
-                this::setLiabilities
-        );
-        //get transactions
-        params = new JSONObject();
+    }
+
+    public void refreshTransactions() throws Exception{
+        InternetRequest ir = new InternetRequest();
+        JSONObject params = new JSONObject();
         params.put("budgetid", getJsonRep().get("budget_ID"));
-        //todo: add parameters for transaction request
         ir.doRequest(
                 InternetRequest.std_url+"get_all_transactions.php",
                 null,
                 params,
                 this::setTransactions
         );
+    }
+
+    /**
+     * initialization function
+     */
+    @Override
+    public void initialize() throws Exception{
+        //get income
+        refreshIncomes();
+        //get liabilities
+        refreshLiabilities();
+        //get transactions
+        refreshTransactions();
     }
 
     public Budget(JSONObject json_rep){
@@ -191,7 +180,7 @@ public class Budget extends BudgetComponent{
             min = Float.MAX_VALUE;
             for(ArrayList<Entry> list: lists){
                 for(Entry e: list){
-                    System.out.println("--{" + e.getX() + "," + e.getY() + "}--");
+                    //System.out.println("--{" + e.getX() + "," + e.getY() + "}--");
                     if(e.getX() >= x && e.getX() < min && !used.contains(e)) {
 
                         hold = e;
@@ -205,9 +194,9 @@ public class Budget extends BudgetComponent{
 
     /**
      * Get Line data between start and end dates
-     * @param start_date
-     * @param end_date
-     * @return
+     * @param start_date beginning of period
+     * @param end_date end of period
+     * @return corresponding LineData object
      */
     public LineData getPeriodSummary(LocalDate start_date, LocalDate end_date){
         LineData data = new LineData();

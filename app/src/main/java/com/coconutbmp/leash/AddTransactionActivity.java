@@ -134,14 +134,28 @@ public class AddTransactionActivity extends AppCompatActivity {
         }
     }
 
+    void awaitReload(boolean success){
+        if(success)
+            Toast.makeText(this, "Transaction Recorded", Toast.LENGTH_SHORT).show();
+        if(!success)
+            Toast.makeText(this, "An Error has Occurred", Toast.LENGTH_SHORT).show();
+        Data.setCurrentListener(null);
+        this.finish();
+    }
+
     /**
-     * handle success or failure
+     * handle success or failure and reload
      * @param response
      */
     public void processTransaction(String response){
         if(response.equals("Success")){
-            Toast.makeText(this, "Transaction Recorded", Toast.LENGTH_SHORT).show();
-            this.finish();
+            Data.setCurrentActivity(this);
+            Data.setCurrentListener(this::awaitReload);
+            try {
+                Data.current.refreshTransactions();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
         else{
             Toast.makeText(this, "Something Went Wrong, Please Check Your Details Again", Toast.LENGTH_SHORT).show();

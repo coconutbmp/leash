@@ -52,6 +52,7 @@ public class AddLiabilityActivity extends AppCompatActivity {
             Toast.makeText(this, "Liability Added", Toast.LENGTH_SHORT).show();
         if(!success)
             Toast.makeText(this, "An Error has Occurred", Toast.LENGTH_SHORT).show();
+        Data.setCurrentListener(null);
         this.finish();
     }
 
