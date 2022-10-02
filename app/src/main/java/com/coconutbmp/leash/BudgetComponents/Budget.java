@@ -112,11 +112,7 @@ public class Budget extends BudgetComponent{
     public Vector<Transaction> getTransactions() { return transaction_list; };
 
     /**
-     *
-     * @param caller activity the request comes from
-     * @param listener the function to run after refresh is complete
      * @throws Exception
-     *
      * refresh liabilities after creation
      *
      */
