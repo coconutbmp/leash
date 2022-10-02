@@ -47,18 +47,21 @@ public class AddLiabilityActivity extends AppCompatActivity {
     int budget_id;
 
 
+    void awaitReload(boolean success){
+        if(success)
+            Toast.makeText(this, "Liability Added", Toast.LENGTH_SHORT).show();
+        if(!success)
+            Toast.makeText(this, "An Error has Occurred", Toast.LENGTH_SHORT).show();
+        this.finish();
+    }
 
     void handleSubmissionResponse(String response){
         System.out.println(response);
         if (!response.equals("failed")){
+            Data.setCurrentListener(this::awaitReload);
+
             try {
-                Data.current.refreshLiabilities(this, success -> {
-                    if(success)
-                        Toast.makeText(this, "Liability Added", Toast.LENGTH_SHORT).show();
-                    if(!success)
-                        Toast.makeText(this, "An Error has Occurred", Toast.LENGTH_SHORT).show();
-                    this.finish();
-                });
+                Data.current.refreshLiabilities();
             } catch (Exception e){
                 e.printStackTrace();
             }

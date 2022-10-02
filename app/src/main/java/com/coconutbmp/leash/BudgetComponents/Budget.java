@@ -26,8 +26,8 @@ public class Budget extends BudgetComponent{
     Vector<Liability> liability_list = new Vector<Liability>();
     Vector<Transaction> transaction_list = new Vector<Transaction>();
     InternetRequest ir = new InternetRequest();
-    private CompletionListener listener = null;
-    private Activity caller = null;
+    //private CompletionListener listener = null;
+    //private Activity caller = null;
 
     /**
      * @param response
@@ -72,28 +72,9 @@ public class Budget extends BudgetComponent{
             for (int i = 0; i < ja.length(); i++){
                 liability_list.add(new Liability(this, (JSONObject) ja.get(i)));
             }
-            //System.out.println("got the array -> " + ja.toString());
-            if(listener!=null){
-                caller.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        listener.processCompletion(true);
-                        listener = null;
-                    }
-                });
-            }
         }catch (Exception e){
             e.printStackTrace();
             Data.respond(false);
-            if(listener!=null){
-                caller.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        listener.processCompletion(false);
-                        listener = null;
-                    }
-                });
-            }
         }
 
         Data.respond(true);
@@ -139,9 +120,7 @@ public class Budget extends BudgetComponent{
      * refresh liabilities after creation
      *
      */
-    public void refreshLiabilities(Activity caller, CompletionListener listener) throws Exception{
-        this.listener = listener;
-        this.caller = caller;
+    public void refreshLiabilities() throws Exception{
         JSONObject params = new JSONObject();
         params.put("budgetid", this.getJsonRep().get("budget_ID"));
         ir.doRequest(

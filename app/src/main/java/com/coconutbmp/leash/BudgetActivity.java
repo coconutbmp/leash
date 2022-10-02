@@ -69,6 +69,10 @@ public class BudgetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // give context for async resume functions to run on ui Thread
+        Data.setCurrentActivity(this);
+
         setContentView(R.layout.activity_budget);
 
         budget_title = findViewById(R.id.budget_title_label);
