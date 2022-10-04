@@ -26,7 +26,7 @@ import android.graphics.Color;
  */
 public class HomeActivity extends AppCompatActivity {
     //declaring variables
-    CardView home_return_button, btnAdd, liabilityReport, logout;
+    CardView home_return_button, btnAdd, liabilityReport, logout, profile;
     TextView day, month;
     String userID;
     String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
@@ -71,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAddSomething);
         liabilityReport = findViewById(R.id.liabilityReportCardView);
         home_return_button = findViewById(R.id.homeReturnCard);
+        profile = findViewById(R.id.btnProfile);
         logout = findViewById(R.id.logoutCard);
         day = findViewById(R.id.lblDay);
         month = findViewById(R.id.lblMonth);
@@ -100,6 +101,11 @@ public class HomeActivity extends AppCompatActivity {
             AddBudgetDialogue dialogue = new AddBudgetDialogue(this, finalUserID);
             dialogue.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialogue.show();
+        });
+
+        profile.setOnClickListener(view->{
+            Intent goToProfile = new Intent(this, ProfileActivity.class);
+            startActivity(goToProfile);
         });
 
         liabilityReport.setOnClickListener(view -> {
