@@ -64,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //initialising variables
         userID = getIntent().getStringExtra("userID");
+        Data.setUserID(Integer.parseInt(userID));
         prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         internetRequest = new InternetRequest();
