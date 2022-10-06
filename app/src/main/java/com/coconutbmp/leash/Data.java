@@ -16,6 +16,17 @@ public class Data {
     static private ArrayList<Budget> all_budgets = new ArrayList<>();
 
     public static void addBudget(JSONObject json_rep){
+        try{
+            for(Budget already_in: all_budgets){
+                if(already_in.getJsonRep().get("budget_ID").equals(json_rep.get("budget_ID"))){
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
         Budget b = new Budget(json_rep);
         all_budgets.add(b);
     }
