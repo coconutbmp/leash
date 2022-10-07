@@ -42,7 +42,7 @@ public class Budget extends BudgetComponent{
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
-                income_list.add(new Income((JSONObject) ja.get(i)));
+                income_list.add(new Income(this, (JSONObject) ja.get(i)));
             }
         }catch (Exception e){
             Data.respond(false);
@@ -92,7 +92,7 @@ public class Budget extends BudgetComponent{
         try {
             ja = new JSONArray(response);
             for (int i = 0; i < ja.length(); i++){
-                transaction_list.add(new Transaction((JSONObject) ja.get(i)));
+                transaction_list.add(new Transaction(this, (JSONObject) ja.get(i)));
             }
         }catch (Exception e){
             Data.respond(false);
@@ -242,5 +242,8 @@ public class Budget extends BudgetComponent{
         return data;
     }
 
-
+    @Override
+    public void delete(){
+        System.out.println("deleting budget");
+    }
 }

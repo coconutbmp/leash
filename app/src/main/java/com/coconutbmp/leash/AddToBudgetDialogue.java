@@ -35,7 +35,7 @@ public class AddToBudgetDialogue extends Dialog {
         // link to elements in the xml file
         add_transact_button = findViewById(R.id.add_transaction_button);
         add_income_button = findViewById(R.id.add_income_button);
-        add_liability_button = findViewById(R.id.delete_button);
+        add_liability_button = findViewById(R.id.edit_button);
         returnCard = findViewById(R.id.ReturnCard);
 
         add_liability_button.setOnClickListener(view -> {

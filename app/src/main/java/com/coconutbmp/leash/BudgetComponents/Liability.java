@@ -2,6 +2,7 @@ package com.coconutbmp.leash.BudgetComponents;
 
 import android.graphics.Color;
 
+import com.coconutbmp.leash.Data;
 import com.coconutbmp.leash.InternetRequest;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -144,5 +145,27 @@ public class Liability extends BudgetComponent{
 
     public Liability(Budget parent, JSONObject json_rep) {
         super(parent, json_rep);
+    }
+
+    @Override
+    public void delete(){
+        System.out.println("deleting liability");
+        InternetRequest ir = new InternetRequest();
+        JSONObject jo;
+        try{
+            jo = new JSONObject();
+            jo.put("liabilityid", getJsonRep().get("id"));
+        } catch (Exception e){
+            e.printStackTrace();
+            Data.respond(false);
+            return;
+        }
+
+        ir.doRequest(
+                InternetRequest.std_url + "delete_liability.php",
+                null,
+                jo,
+                this::acceptDeletionResponse
+        );
     }
 }

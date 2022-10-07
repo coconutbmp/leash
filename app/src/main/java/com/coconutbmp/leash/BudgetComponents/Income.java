@@ -1,5 +1,7 @@
 package com.coconutbmp.leash.BudgetComponents;
 
+import com.coconutbmp.leash.Data;
+import com.coconutbmp.leash.InternetRequest;
 import com.github.mikephil.charting.data.Entry;
 
 import org.json.JSONObject;
@@ -10,7 +12,7 @@ import java.util.Locale;
 
 public class Income extends BudgetComponent{
 
-    public Income(JSONObject json_rep) {
+    public Income(BudgetComponent parent, JSONObject json_rep) {
         super(json_rep);
     }
 
@@ -47,4 +49,28 @@ public class Income extends BudgetComponent{
 
         return entries;
     }
+
+    @Override
+    public void delete(){
+        System.out.println("deleting income");
+        InternetRequest ir = new InternetRequest();
+        JSONObject jo;
+        try{
+            jo = new JSONObject();
+            jo.put("incomeid", getJsonRep().get("income_ID"));
+        } catch (Exception e){
+            e.printStackTrace();
+            Data.respond(false);
+            return;
+        }
+
+        ir.doRequest(
+                InternetRequest.std_url + "delete_income.php",
+                null,
+                jo,
+                this::acceptDeletionResponse
+        );
+
+    }
+
 }

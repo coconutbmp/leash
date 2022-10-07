@@ -1,5 +1,8 @@
 package com.coconutbmp.leash.BudgetComponents;
 
+import android.widget.Toast;
+
+import com.coconutbmp.leash.Data;
 import com.coconutbmp.leash.InternetRequest;
 
 import org.json.JSONObject;
@@ -41,5 +44,18 @@ public class BudgetComponent {
     public void initialize() throws Exception{
         parent = this;
         ir = new InternetRequest();
+    }
+
+    void acceptDeletionResponse(String response){
+        if(response.equals("Success")){
+            Data.respond(true);
+            return;
+        }
+
+        Data.respond(false);
+    }
+
+    public void delete(){
+
     }
 }
