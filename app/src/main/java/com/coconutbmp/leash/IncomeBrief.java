@@ -24,5 +24,6 @@ public class IncomeBrief extends BudgetComponentFragment {
     public IncomeBrief(Context context, Income income) {
         super();
         this.income = income;
+        this.budget_comp = income;
     }
 }
