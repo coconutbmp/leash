@@ -2,6 +2,7 @@ package com.coconutbmp.leash;
 
 import static org.junit.Assert.assertEquals;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -35,7 +36,6 @@ public class InternetRequestTests {
         String json = "Success";
         HttpUrl baseUrl = this.server.url("v1/test/");
         this.server.enqueue(new MockResponse().setResponseCode(200).setBody(json));
-        JSONObject params = new JSONObject();
         Request request = new Request.Builder().url(baseUrl).build();
         OkHttpClient client = new OkHttpClient();
         String r = client.newCall(request).execute().body().string();
