@@ -1,7 +1,12 @@
 package com.coconutbmp.leash;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,13 +27,14 @@ public class ProfileActivity extends AppCompatActivity {
     TextView name, surname, email, budgets, incomes, liabilities, transactions;
     String pass;
     ArrayList<Budget> budgetList;
-    int bugdetSize;
+    int budgetSize;
+    InternetRequest ir = new InternetRequest();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         budgetList = Data.getAll();
-        bugdetSize = budgetList.size();
+        budgetSize = budgetList.size();
         hook();
         JSONObject params = new JSONObject();
         int userID = Data.getUserID();
@@ -37,7 +43,6 @@ public class ProfileActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        InternetRequest ir = new InternetRequest();
         ir.doRequest(InternetRequest.std_url + "get_user.php", this, params, new RequestHandler() {
             @Override
             public void processResponse(String response) {
@@ -45,8 +50,41 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        deleteCard.setOnClickListener(view->{
+            new AlertDialog.Builder(this, R.style.alertDialog)
+                    .setTitle("Delete Account?")
+                    .setMessage("Are You Sure?\nAll your data will be removed permanently.")
+                    .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            deleteUser();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
         returnCard.setOnClickListener(view->{
             this.finish();
+        });
+    }
+
+    public void deleteUser(){
+        JSONObject params = new JSONObject();
+        try {
+            params.put("userID", Data.getUserID());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ir.doRequest(InternetRequest.std_url + "remove_user.php", this, params, new RequestHandler() {
+            @Override
+            public void processResponse(String response) {
+                Toast.makeText(ProfileActivity.this, response, Toast.LENGTH_SHORT).show();
+                if(response.equals("success")){
+                    HomeActivity.fa.finish();
+                    ProfileActivity.this.finish();
+                }
+            }
         });
     }
 
@@ -74,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
             surname.setText("Surname: " + info.getString("user_LastName"));
             email.setText("Email: " + info.getString("user_Email"));
             pass = info.getString("user_Password");
-            budgets.setText("Active Budgets: " + String.valueOf(bugdetSize));
+            budgets.setText("Active Budgets: " + String.valueOf(budgetSize));
             for(Budget b: budgetList){
                 incomeCount += b.getIncomes().size();
                 LiabilityCount += b.getLiabilities().size();
