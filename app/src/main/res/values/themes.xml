@@ -24,4 +24,8 @@
         <item name="android:textColorPrimary">@color/shadow</item>
         <item name="android:colorControlNormal">@color/grey</item>
     </style>
+
+    <style name="alertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

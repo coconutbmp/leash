@@ -1,5 +1,6 @@
 package com.coconutbmp.leash;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     SharedPreferences prefs;
     InternetRequest internetRequest;
     LinearLayout summary_holder;
+    public static Activity fa;
 
 
     public void processBudgetResponse(String response){
@@ -105,6 +107,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         profile.setOnClickListener(view->{
+            fa = this;
             Intent goToProfile = new Intent(this, ProfileActivity.class);
             startActivity(goToProfile);
         });
