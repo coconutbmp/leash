@@ -45,6 +45,7 @@ public class BudgetBrief extends BudgetComponentFragment{
     public BudgetBrief(Context context, Budget budget) {
         super();
         this.budget = budget;
+        this.budget_comp = budget;
     }
 
 

@@ -118,5 +118,6 @@ public class LiabilityBrief extends BudgetComponentFragment {
     LiabilityBrief(Context context, Liability liability){
         super();
         this.liability = liability;
+        this.budget_comp = liability;
     }
 }

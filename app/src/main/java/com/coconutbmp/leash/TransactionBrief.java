@@ -29,5 +29,6 @@ public class TransactionBrief extends BudgetComponentFragment {
     TransactionBrief (Context context, Transaction transaction){
         super();
         this.transaction = transaction;
+        this.budget_comp = transaction;
     }
 }

@@ -36,10 +36,14 @@ public class Data {
     }
 
     public static void setCurrent(JSONObject jo){
-        for (Budget b: all_budgets) {
-            if(b.getJsonRep() == jo){
-                setCurrent(b);
+        try {
+            for (Budget b : all_budgets) {
+                if (b.getJsonRep().get("budget_ID").equals(jo.get("budget_ID"))) {
+                    setCurrent(b);
+                }
             }
+        } catch ( Exception e ){
+            e.printStackTrace();
         }
     }
 
