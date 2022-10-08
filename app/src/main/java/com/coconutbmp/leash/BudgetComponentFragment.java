@@ -52,7 +52,7 @@ public class BudgetComponentFragment extends Fragment {
         manage_button = v.findViewById(R.id.manage_button);
 
         manage_button.setOnClickListener(view -> {
-            ManageBudgetDialog dialog = new ManageBudgetDialog(v.getContext(), budget_comp);
+            ManageBudgetDialog dialog = new ManageBudgetDialog(this.getActivity(), v.getContext(), budget_comp);
             dialog.show();
         });
 

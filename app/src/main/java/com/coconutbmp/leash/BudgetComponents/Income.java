@@ -13,7 +13,7 @@ import java.util.Locale;
 public class Income extends BudgetComponent{
 
     public Income(BudgetComponent parent, JSONObject json_rep) {
-        super(json_rep);
+        super(parent, json_rep);
     }
 
     ArrayList<Entry> getPeriodSummary(LocalDate start_date, LocalDate end_date){
@@ -51,13 +51,20 @@ public class Income extends BudgetComponent{
     }
 
     @Override
+    public void acceptDeletionResponse(String response){
+        System.out.println(this.parent.getJsonRep());
+        if(response.equals("success")) ((Budget) this.parent).removeIncome(this);
+        super.acceptDeletionResponse(response);
+    }
+
+    @Override
     public void delete(){
         System.out.println("deleting income");
         InternetRequest ir = new InternetRequest();
         JSONObject jo;
         try{
             jo = new JSONObject();
-            jo.put("incomeid", getJsonRep().get("income_ID"));
+            jo.put("incomeID", getJsonRep().get("income_ID"));
         } catch (Exception e){
             e.printStackTrace();
             Data.respond(false);

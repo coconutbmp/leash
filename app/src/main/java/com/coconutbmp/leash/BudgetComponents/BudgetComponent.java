@@ -47,7 +47,8 @@ public class BudgetComponent {
     }
 
     void acceptDeletionResponse(String response){
-        if(response.equals("Success")){
+        System.out.println("deletion complete " + response);
+        if(response.equals("success")){
             Data.respond(true);
             return;
         }

@@ -13,15 +13,19 @@ public class Transaction extends BudgetComponent{
 
     }
 
-    public Transaction(BudgetComponent parent, JSONObject json_rep) {
-        super(parent, json_rep);
-        System.out.println("got transaction rep" + json_rep);
+    @Override
+    public void acceptDeletionResponse(String response){
+        if(response.equals("success")) ((Budget) this.parent).removeTransaction(this);
+        super.acceptDeletionResponse(response);
+    }
 
+    @Override
+    public void delete() {
         InternetRequest ir = new InternetRequest();
         JSONObject jo;
         try{
             jo = new JSONObject();
-            jo.put("transactionid", getJsonRep().get("transaction_ID"));
+            jo.put("transactID", getJsonRep().get("transaction_ID"));
         } catch (Exception e){
             e.printStackTrace();
             Data.respond(false);
@@ -34,5 +38,9 @@ public class Transaction extends BudgetComponent{
                 jo,
                 this::acceptDeletionResponse
         );
+    }
+
+    public Transaction(BudgetComponent parent, JSONObject json_rep) {
+        super(parent, json_rep);
     }
 }

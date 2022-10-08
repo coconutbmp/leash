@@ -1,7 +1,9 @@
 package com.coconutbmp.leash;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,9 +16,11 @@ public class ManageBudgetDialog extends Dialog {
 
     Button edit_button, delete_button;
     BudgetComponent subject;
+    Activity current_activity;
 
-    public ManageBudgetDialog(@NonNull Context context, BudgetComponent subject) {
+    public ManageBudgetDialog(Activity activity, @NonNull Context context, BudgetComponent subject) {
         super(context);
+        current_activity = activity;
         setContentView(R.layout.dialog_manage_budget_component); // link to xml file
         this.subject = subject;
     }
@@ -34,12 +38,24 @@ public class ManageBudgetDialog extends Dialog {
         });
 
         delete_button.setOnClickListener(view -> {
-            Toast.makeText(this.getContext(), "Deleting " + subject.getJsonRep(), Toast.LENGTH_LONG).show();
-            Data.setCurrentActivity(this.getOwnerActivity());
+            Data.setCurrentActivity(current_activity);
+            Data.setCurrentListener(resp ->
+            {
+                if(resp) {
+                    Toast.makeText(this.getContext(), "Deletion Successful", Toast.LENGTH_SHORT).show();
+                    ((BudgetActivity)current_activity).refresh();
+                    this.dismiss();
+                } else {
+                    Toast.makeText(this.getContext(), "Deletion Failed", Toast.LENGTH_SHORT).show();
+                }
+                this.dismiss();
+                ((BudgetActivity)current_activity).refresh();
+            });
             subject.delete();
-            this.dismiss();
         });
     }
+
+
 
 
 }

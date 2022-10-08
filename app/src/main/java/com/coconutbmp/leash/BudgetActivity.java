@@ -115,12 +115,19 @@ public class BudgetActivity extends AppCompatActivity {
         display_budget_summary();
     }
 
+    public void refresh(){
+        this.runOnUiThread(() ->{
+            display_liabilities();
+            display_transactions();
+            display_income();
+            display_budget_summary();
+        });
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        display_liabilities();
-        display_transactions();
-        display_income();
-        display_budget_summary();
+        refresh();
     }
 }

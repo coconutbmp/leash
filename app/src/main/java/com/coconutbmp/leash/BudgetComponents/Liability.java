@@ -148,13 +148,19 @@ public class Liability extends BudgetComponent{
     }
 
     @Override
+    public void acceptDeletionResponse(String response){
+        if(response.equals("success")) ((Budget) this.parent).removeLiability(this);
+        super.acceptDeletionResponse(response);
+    }
+
+    @Override
     public void delete(){
         System.out.println("deleting liability");
         InternetRequest ir = new InternetRequest();
         JSONObject jo;
         try{
             jo = new JSONObject();
-            jo.put("liabilityid", getJsonRep().get("id"));
+            jo.put("liabID", getJsonRep().get("ID"));
         } catch (Exception e){
             e.printStackTrace();
             Data.respond(false);

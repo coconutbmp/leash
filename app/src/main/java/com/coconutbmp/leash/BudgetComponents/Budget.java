@@ -246,4 +246,16 @@ public class Budget extends BudgetComponent{
     public void delete(){
         System.out.println("deleting budget");
     }
+
+    public void removeTransaction(Transaction t){
+        transaction_list.remove(t);
+    }
+
+    public void removeIncome(Income i){
+        income_list.remove(i);
+    }
+
+    public void removeLiability(Liability l){
+        liability_list.remove(l);
+    }
 }
