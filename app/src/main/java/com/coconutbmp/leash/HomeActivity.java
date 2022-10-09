@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     InternetRequest internetRequest;
     LinearLayout summary_holder;
     public static Activity fa;
+    SummaryFragment summary_frag = new SummaryFragment();
 
 
     public void processBudgetResponse(String response){
@@ -90,12 +91,13 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         summary_holder = findViewById(R.id.summaryLayout);
+        summary_holder.removeAllViews();
         FragmentManager frag_man = getSupportFragmentManager();
         FragmentTransaction frag_tran = frag_man.beginTransaction();
-
-        SummaryFragment summary_frag = new SummaryFragment();
+        if(!frag_tran.isEmpty()){
+            frag_tran.remove(summary_frag).commit();
+        }
         frag_tran.add(summary_holder.getId(), summary_frag).commit();
-
 
 
         //implementing button to add budget dialogue

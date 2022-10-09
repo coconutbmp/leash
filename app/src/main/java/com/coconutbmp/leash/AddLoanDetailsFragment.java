@@ -3,7 +3,6 @@ package com.coconutbmp.leash;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
