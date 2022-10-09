@@ -93,6 +93,24 @@
             app:srcCompat="@drawable/hexagons" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/btnManageBudget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/smokey_white"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddSomething">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                app:srcCompat="@drawable/ic_baseline_edit_24" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/btnAddSomething"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

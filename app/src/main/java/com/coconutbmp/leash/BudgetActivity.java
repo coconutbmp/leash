@@ -19,7 +19,7 @@ import com.coconutbmp.leash.BudgetComponents.Transaction;
  * Controller for the Budget Page
  */
 public class BudgetActivity extends AppCompatActivity {
-    CardView add_button, return_button;
+    CardView add_button, return_button, manage_button;
     String budget_name;
     TextView budget_title, day, month;
     LinearLayout liability_ll, income_ll, transaction_ll, budget_summary_ll;
@@ -69,7 +69,6 @@ public class BudgetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // give context for async resume functions to run on ui Thread
         Data.setCurrentActivity(this);
 
@@ -85,6 +84,7 @@ public class BudgetActivity extends AppCompatActivity {
         transaction_ll = findViewById(R.id.transaction_holder_ll);
         income_ll = findViewById(R.id.income_holder_ll);
         budget_summary_ll = findViewById(R.id.budget_summary_ll);
+        manage_button = findViewById(R.id.btnManageBudget);
 
         UXFunctions.setDate(day, month);
 
@@ -109,6 +109,11 @@ public class BudgetActivity extends AppCompatActivity {
             }
         });
 
+        manage_button.setOnClickListener(view -> {
+            ManageBudgetDialog dialog = new ManageBudgetDialog(this, this, Data.current);
+            dialog.show();
+        });
+
         display_liabilities();
         display_transactions();
         display_income();
@@ -117,10 +122,14 @@ public class BudgetActivity extends AppCompatActivity {
 
     public void refresh(){
         this.runOnUiThread(() ->{
-            display_liabilities();
-            display_transactions();
-            display_income();
-            display_budget_summary();
+            if(Data.current != null) {
+                display_liabilities();
+                display_transactions();
+                display_income();
+                display_budget_summary();
+            } else {
+                this.finish();
+            }
         });
 
     }

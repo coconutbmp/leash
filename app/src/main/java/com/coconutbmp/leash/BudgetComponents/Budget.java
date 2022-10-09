@@ -243,8 +243,32 @@ public class Budget extends BudgetComponent{
     }
 
     @Override
+    public void acceptDeletionResponse(String response){
+        if(response.equals("success")) Data.removeBudget(this);
+        super.acceptDeletionResponse(response);
+    }
+
+    @Override
     public void delete(){
         System.out.println("deleting budget");
+
+        InternetRequest ir = new InternetRequest();
+        JSONObject jo;
+        try{
+            jo = new JSONObject();
+            jo.put("budgetID", getJsonRep().get("budget_ID"));
+        } catch (Exception e){
+            e.printStackTrace();
+            Data.respond(false);
+            return;
+        }
+
+        ir.doRequest(
+                InternetRequest.std_url + "remove_budget.php",
+                null,
+                jo,
+                this::acceptDeletionResponse
+        );
     }
 
     public void removeTransaction(Transaction t){
