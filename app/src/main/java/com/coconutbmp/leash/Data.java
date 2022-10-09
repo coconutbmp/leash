@@ -99,4 +99,8 @@ public class Data {
         }
     }
 
+    public static void removeBudget(Budget budget) {
+        if (current == budget) current = null;
+        all_budgets.remove(budget);
+    }
 }
