@@ -29,6 +29,9 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayList<Budget> budgetList;
     int budgetSize;
     InternetRequest ir = new InternetRequest();
+    String myName;
+    String mySurname;
+    String myEmail;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,17 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void processResponse(String response) {
                 fillInfo(response);
+            }
+        });
+
+        editCard.setOnClickListener(view -> {
+            if(pass.equals("googlePass")){
+                Toast.makeText(this, "You cannot edit your google account from this app", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                EditProfileDialog dialog = new EditProfileDialog(this, myName, mySurname, myEmail, pass);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialog.show();
             }
         });
 
@@ -109,8 +123,11 @@ public class ProfileActivity extends AppCompatActivity {
             JSONArray jsonArray = new JSONArray(response);
             JSONObject info = jsonArray.getJSONObject(0);
             name.setText("Name: " + info.getString("user_FirstName"));
+            myName = info.getString("user_FirstName");
             surname.setText("Surname: " + info.getString("user_LastName"));
+            mySurname = info.getString("user_LastName");
             email.setText("Email: " + info.getString("user_Email"));
+            myEmail = info.getString("user_Email");
             pass = info.getString("user_Password");
             budgets.setText("Active Budgets: " + String.valueOf(budgetSize));
             for(Budget b: budgetList){
