@@ -2,6 +2,7 @@ package com.coconutbmp.leash;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,7 +25,7 @@ public class EditProfileDialog extends Dialog {
     String currName, currSurname, currEmail, currPass;
     Context context;
     SharedPreferences prefs;
-    public EditProfileDialog(@NonNull Context context, String currName, String currSurname, String currEmail, String currPass) {
+    public EditProfileDialog(Activity owner, @NonNull Context context, String currName, String currSurname, String currEmail, String currPass) {
         super(context);
         setContentView(R.layout.dialog_edit_profile);
         this.context = context;
@@ -32,6 +33,7 @@ public class EditProfileDialog extends Dialog {
         this.currSurname = currSurname;
         this.currEmail = currEmail;
         this.currPass = currPass;
+        this.setOwnerActivity(owner);
         prefs = context.getSharedPreferences("UserPrefs", MODE_PRIVATE);
     }
 
@@ -132,7 +134,10 @@ public class EditProfileDialog extends Dialog {
                 @Override
                 public void processResponse(String response) {
                     if(response.equals("success")){
-                        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                        getOwnerActivity().runOnUiThread(()->{
+                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                        });
+
                         editor.putString("email", myEmail);
                         editor.putString("pass", finalMyPass);
                         editor.commit();

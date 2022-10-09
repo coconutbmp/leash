@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(this, "You cannot edit your google account from this app", Toast.LENGTH_SHORT).show();
             }
             else{
-                EditProfileDialog dialog = new EditProfileDialog(this, myName, mySurname, myEmail, pass);
+                EditProfileDialog dialog = new EditProfileDialog(this,this, myName, mySurname, myEmail, pass);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.show();
             }
