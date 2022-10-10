@@ -134,10 +134,7 @@ public class EditProfileDialog extends Dialog {
                 @Override
                 public void processResponse(String response) {
                     if(response.equals("success")){
-                        getOwnerActivity().runOnUiThread(()->{
-                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-                        });
-
+                        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                         editor.putString("email", myEmail);
                         editor.putString("pass", finalMyPass);
                         editor.commit();
