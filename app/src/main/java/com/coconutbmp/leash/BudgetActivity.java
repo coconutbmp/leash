@@ -113,11 +113,6 @@ public class BudgetActivity extends AppCompatActivity {
             ManageBudgetDialog dialog = new ManageBudgetDialog(this, this, Data.current);
             dialog.show();
         });
-
-        display_liabilities();
-        display_transactions();
-        display_income();
-        display_budget_summary();
     }
 
     public void refresh(){
