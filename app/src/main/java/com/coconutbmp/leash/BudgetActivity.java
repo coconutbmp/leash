@@ -116,6 +116,7 @@ public class BudgetActivity extends AppCompatActivity {
     }
 
     public void refresh(){
+        System.out.println("refreshing page");
         this.runOnUiThread(() ->{
             if(Data.current != null) {
                 display_liabilities();

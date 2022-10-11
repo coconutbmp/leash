@@ -30,6 +30,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-1732270596">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_2_API_30" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1678356233">
           <value>
             <AndroidTestResultsTableState>
@@ -166,6 +179,19 @@
                   <entry key="R58M95GXT9E" value="120" />
                   <entry key="Tests" value="360" />
                   <entry key="samsung&#10; SM-N970F" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1911243951">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_2_API_30" value="120" />
+                  <entry key="Tests" value="360" />
                 </map>
               </option>
             </AndroidTestResultsTableState>

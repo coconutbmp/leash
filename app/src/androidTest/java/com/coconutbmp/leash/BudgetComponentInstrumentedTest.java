@@ -134,9 +134,9 @@ public class BudgetComponentInstrumentedTest {
 
     boolean are_populated = false;
     @Test
-    public void ensure_populated(){
+    public void test_6_ensure_populated(){
         try{
-            System.out.println(got_all);
+            System.out.println("got all " + got_all);
             test_5_accept_budget_components();
         } catch (Exception e){
             e.printStackTrace();
@@ -149,8 +149,8 @@ public class BudgetComponentInstrumentedTest {
     }
 
     @Test
-    public void test_6_can_generate_payment_data(){
-        if(!are_populated) ensure_populated();
+    public void test_7_can_generate_payment_data(){
+        if(!are_populated) test_6_ensure_populated();
 
         LineDataSet test_set = current.getLiabilities().get(0).generatePaymentSet();
 
@@ -159,13 +159,13 @@ public class BudgetComponentInstrumentedTest {
     }
 
     @Test
-    public void test_7_can_generate_over_time_analysis(){
+    public void test_8_can_generate_over_time_analysis(){
         ArrayList<LineDataSet> set_list = current.getLiabilities().get(0).generateOverTimeAnalysis();
         assert set_list != null;
     }
 
     @Test
-    public void test_8_can_generate_period_summary(){
+    public void test_9_can_generate_period_summary(){
         LocalDate start = LocalDate.of(2022,6,1);
         LocalDate end = LocalDate.of(2022,6,30);
 
