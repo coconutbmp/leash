@@ -13,3 +13,4 @@ ignore:
   - "app/src/main/java/com/coconutbmp/leash/AddTransactionActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/LiabilityDetailsActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/AddRecurringPaymentFragment.java"
+  - "app/src/main/java/com/coconutbmp/leash/LiabilityHistoryLayout.java"
