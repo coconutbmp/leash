@@ -7,7 +7,7 @@ ignore:
   - "app/src/main/java/com/coconutbmp/leash/AddToBudgetDialogue.java"
   - "app/src/main/java/com/coconutbmp/leash/AddTransactionsActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/BudgetListLayout.java"
-  - "app/src/main/java/com/coconutbmp/leash/LiabilityHistoryLayout.java"
+  - "app/src/main/java/com/coconutbmp/leash/ProfileActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/HomeActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/BudgetActivity.java"
   - "app/src/main/java/com/coconutbmp/leash/AddTransactionActivity.java"
