@@ -34,7 +34,6 @@ public class EditProfileDialog extends Dialog {
         this.currEmail = currEmail;
         this.currPass = currPass;
         this.setOwnerActivity(owner);
-        prefs = context.getSharedPreferences("UserPrefs", MODE_PRIVATE);
     }
 
     @Override
@@ -46,6 +45,7 @@ public class EditProfileDialog extends Dialog {
         surname = findViewById(R.id.edtEditSurname);
         email = findViewById(R.id.edtEditEmail);
         pass = findViewById(R.id.edtEditPass);
+        prefs = context.getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         accept.setOnClickListener(view -> {
             completeEdit(name.getText().toString(), surname.getText().toString(), email.getText().toString(), pass.getText().toString());
@@ -65,7 +65,7 @@ public class EditProfileDialog extends Dialog {
      * else if not valid, prompt correction
      * else change details
      */
-    public void completeEdit(String Name, String Surname, String Email, String Pass){
+    public boolean completeEdit(String Name, String Surname, String Email, String Pass){
         SharedPreferences.Editor editor = prefs.edit();
         InternetRequest ir = new InternetRequest();
         JSONObject params = new JSONObject();
@@ -78,7 +78,7 @@ public class EditProfileDialog extends Dialog {
             myName = Name;
             if(!loginUtils.validateName(myName)){
                 Toast.makeText(context, "Invalid Name", Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
         }
 
@@ -89,7 +89,7 @@ public class EditProfileDialog extends Dialog {
             mySurname = Surname;
             if(!loginUtils.validateName(mySurname)){
                 Toast.makeText(context, "Invalid Surname", Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
         }
 
@@ -100,7 +100,7 @@ public class EditProfileDialog extends Dialog {
             myEmail = Email;
             if(!loginUtils.validateEmail(myEmail)){
                 Toast.makeText(context, "Invalid Email", Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
         }
 
@@ -111,7 +111,7 @@ public class EditProfileDialog extends Dialog {
             myPass = currPass;
             if(!loginUtils.validatePass(Pass, null)){
                 Toast.makeText(context, "Password must be at least 8 characters and contain A-Z, a-z, 0-9", Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
             else{
                 try {
@@ -151,7 +151,8 @@ public class EditProfileDialog extends Dialog {
         }
         catch (JSONException e){
             Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
+        return true;
     }
 }

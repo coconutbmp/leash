@@ -2,9 +2,12 @@ package com.coconutbmp.leash;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -69,7 +72,9 @@ public class AddBudgetDialogue extends Dialog {
         end_dp= findViewById(R.id.budget_end_dp);
 
 
+   
         start_button.setOnClickListener(view1 -> {
+            closeKeyboard();
             UXFunctions.select_date(start_button, start_dp, begin_date_edit);
             int s_year  = start_dp.getYear();
             int s_month = start_dp.getMonth();
@@ -79,6 +84,7 @@ public class AddBudgetDialogue extends Dialog {
         });
 
         end_button.setOnClickListener(view1 -> {
+            closeKeyboard();
             UXFunctions.select_date(end_button, end_dp, end_date_edit);
             int e_year  = end_dp.getYear();
             int e_month = end_dp.getMonth();
@@ -114,8 +120,17 @@ public class AddBudgetDialogue extends Dialog {
         });
     }
 
+    private void closeKeyboard() {    //collapse the keyboard
 
+        View view = this.getCurrentFocus();    // this will give us the view which is currently in focus
 
+        if (view != null) {  //protect app from crashing if nothing is currently in focus
+            //assigning the system service to InputMethodManager
+            InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+    
     String construct_date(int year, int month,int day ){  //construct date in a lexicographically comparable format
 
         String str_month = "" + month;
