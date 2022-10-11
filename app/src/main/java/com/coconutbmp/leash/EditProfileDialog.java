@@ -34,7 +34,6 @@ public class EditProfileDialog extends Dialog {
         this.currEmail = currEmail;
         this.currPass = currPass;
         this.setOwnerActivity(owner);
-        prefs = context.getSharedPreferences("UserPrefs", MODE_PRIVATE);
     }
 
     @Override
@@ -46,6 +45,7 @@ public class EditProfileDialog extends Dialog {
         surname = findViewById(R.id.edtEditSurname);
         email = findViewById(R.id.edtEditEmail);
         pass = findViewById(R.id.edtEditPass);
+        prefs = context.getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         accept.setOnClickListener(view -> {
             completeEdit(name.getText().toString(), surname.getText().toString(), email.getText().toString(), pass.getText().toString());

@@ -1,41 +1,33 @@
 package com.coconutbmp.leash;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 public class EditProfileDialogTest {
-    private MockWebServer server;
-
-    @Before
-    public void setUp() throws IOException {
-        this.server = new MockWebServer();
-        this.server.start();
-    }
-
-    @After
-    public void tearDown() throws IOException {
-        this.server.shutdown();
+    @Test
+    public void testInvalidName() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String p = loginUtils.Hash("password");
+        EditProfileDialog profileDialog = mock(EditProfileDialog.class);
+        doNothing().when(profileDialog).completeEdit("Hello2", "Test", "failed@test.com", p);
+        profileDialog.completeEdit("Hello2", "Test", "failed@test.com", p);
+        verify(profileDialog, times(1)).completeEdit("Hello2", "Test", "failed@test.com", p);
     }
 
     @Test
-    public void Test_SUCCESS() throws Exception {
-        String json = "Success";
-        HttpUrl baseUrl = this.server.url("v1/test/");
-        this.server.enqueue(new MockResponse().setResponseCode(200).setBody(json));
-        Request request = new Request.Builder().url(baseUrl).build();
-        OkHttpClient client = new OkHttpClient();
-        String r = client.newCall(request).execute().body().string();
-        assertEquals("Success", r);
+    public void testInvalidSurname() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String p = loginUtils.Hash("password");
+        EditProfileDialog profileDialog = mock(EditProfileDialog.class);
+        doNothing().when(profileDialog).completeEdit("Hello", "Test2", "failed@test.com", p);
+        profileDialog.completeEdit("Hello", "Test2", "failed@test.com", p);
+        verify(profileDialog, times(1)).completeEdit("Hello", "Test2", "failed@test.com", p);
     }
 }
