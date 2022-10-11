@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import android.graphics.Color;
 
@@ -29,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     //declaring variables
     CardView home_return_button, btnAdd, liabilityReport, logout, profile;
     TextView day, month;
+    TextView empty;
     String userID;
     String url = "http://ec2-13-244-123-87.af-south-1.compute.amazonaws.com/";
     LinearLayout budgets;
@@ -45,6 +47,10 @@ public class HomeActivity extends AppCompatActivity {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(24, 4, 24, 4);
             JSONArray jsonArray = new JSONArray(response);
+            if (jsonArray.length() == 0){
+                budgets.addView(empty);
+                return;
+            }
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Data.addBudget(jsonObject);
@@ -80,6 +86,7 @@ public class HomeActivity extends AppCompatActivity {
         day = findViewById(R.id.lblDay);
         month = findViewById(R.id.lblMonth);
         budgets = findViewById(R.id.budgetLayout);
+        empty = findViewById(R.id.lblEmpty);
 
         UXFunctions.setDate(day, month);
 

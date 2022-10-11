@@ -523,13 +523,11 @@ public class MainActivity extends AppCompatActivity{
         signUpPassConfirm.getBackground().mutate().setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
         invalidConfirm.getLayoutParams().height = 1;
 
-        // check user preferences and add inputs back if necessary
-        StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
-
-        if(StaySignedIn.isChecked()){
-            String userEmail = prefs.getString("email", null);
-            logInEmail.setText(userEmail);
-        }
+        SignInCard.setVisibility(View.GONE);
+        SignUpCard.setVisibility(View.GONE);
+        openSignIn.setVisibility(View.VISIBLE);
+        openSignUp.setVisibility(View.VISIBLE);
+        googleLogIn.setVisibility(View.VISIBLE);
     }
 
     public void hook(){ // function to hook java components to xml components

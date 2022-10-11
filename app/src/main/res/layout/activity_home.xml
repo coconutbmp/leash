@@ -208,24 +208,19 @@
                 android:id="@+id/budgetLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/lblAccountsTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/convergence"
-                android:text="Accounts"
-                android:textColor="@color/grey"
-                android:textSize="34sp" />
-
-            <LinearLayout
-                android:id="@+id/accountLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
+                <TextView
+                    android:id="@+id/lblEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="Currently No Budgets"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/lblSummaryTitle"
