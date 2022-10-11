@@ -62,6 +62,7 @@ public class UXFunctionsTest{
     @Test
     public void select_date_test_in_save(){
         DatePicker datePicker = mock(DatePicker.class);
+        Mockito.when(sender.getHeight()).thenReturn(0);
         Mockito.when(sender.getText()).thenReturn("Save");
         Mockito.when(datePicker.getYear()).thenReturn(2022);
         Mockito.when(datePicker.getMonth()).thenReturn(6);
@@ -71,12 +72,15 @@ public class UXFunctionsTest{
         Mockito.doCallRealMethod().when(date).setText(s);
         Mockito.when(date.getText()).thenReturn(s);
         UXFunctions.select_date(sender, datePicker, date);
+        assertEquals("2022-6-12", s);
         assertEquals(s, date.getText());
+        assertEquals(0, sender.getHeight());
     }
 
     @Test
     public void select_date_test_in_set(){
         DatePicker datePicker = mock(DatePicker.class);
+        Mockito.when(sender.getHeight()).thenReturn(150);
         Mockito.when(sender.getText()).thenReturn("Set Date");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -85,6 +89,7 @@ public class UXFunctionsTest{
         UXFunctions.select_date(sender, datePicker, date);
         String  s = baos.toString();
         assertEquals("<- olo ->", s.trim());
+        assertEquals(150, sender.getHeight());
         System.out.flush();
         System.setOut(old);
     }
