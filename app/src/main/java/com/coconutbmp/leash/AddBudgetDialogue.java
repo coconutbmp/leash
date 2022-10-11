@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -32,6 +33,7 @@ public class AddBudgetDialogue extends Dialog {
     TextView begin_date_edit, end_date_edit;
     Button start_button, end_button;
     DatePicker start_dp, end_dp;
+    String s_date,e_date;
 
 
     /**
@@ -43,6 +45,7 @@ public class AddBudgetDialogue extends Dialog {
         super(act);
         userID = data;
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +68,27 @@ public class AddBudgetDialogue extends Dialog {
         start_dp = findViewById(R.id.budget_start_dp);
         end_dp= findViewById(R.id.budget_end_dp);
 
-        start_button.setOnClickListener(view1 -> UXFunctions.select_date(start_button, start_dp, begin_date_edit));
-        end_button.setOnClickListener(view1 -> UXFunctions.select_date(end_button, end_dp, end_date_edit));
+
+   
+        start_button.setOnClickListener(view1 -> {
+            closeKeyboard();
+            UXFunctions.select_date(start_button, start_dp, begin_date_edit);
+            int s_year  = start_dp.getYear();
+            int s_month = start_dp.getMonth();
+            int s_day   = start_dp.getDayOfMonth();
+
+            s_date =construct_date(s_year,s_month,s_day);
+        });
+
+        end_button.setOnClickListener(view1 -> {
+            closeKeyboard();
+            UXFunctions.select_date(end_button, end_dp, end_date_edit);
+            int e_year  = end_dp.getYear();
+            int e_month = end_dp.getMonth();
+            int e_day   = end_dp.getDayOfMonth();
+
+            e_date= construct_date(e_year,e_month,e_day);
+         });
 
 
         cancel.setOnClickListener(view -> {   //when "cancel" button is clicked
@@ -74,17 +96,54 @@ public class AddBudgetDialogue extends Dialog {
         });
 
         proceed.setOnClickListener(view -> {     // when "done" button is clicked
-            if (budget_name_edit.getText().length() > 0){
+            if (budget_name_edit.getText().length() > 0 && begin_date_edit.getText().length()>0 && end_date_edit.getText().length()>0){
 
-                //get EditText content in string format
-                name= budget_name_edit.getText().toString();
-                start_date = begin_date_edit.getText().toString();
-                end_date = end_date_edit.getText().toString();
+                    if(s_date.compareTo(e_date)<=0){
 
-                addToDatabase();
+                        //get EditText content in string format
+                        name = budget_name_edit.getText().toString();
+                        start_date = begin_date_edit.getText().toString();
+                        end_date = end_date_edit.getText().toString();
+
+                        addToDatabase();
+                    }
+                    else{
+                        Toast.makeText(getContext(), "End Date must be no earlier than Start Date", Toast.LENGTH_LONG).show();
+                    }
+            }
+            else{
+                Toast.makeText(getContext(), "Please fill in the entire form", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    private void closeKeyboard() {    //collapse the keyboard
+
+        View view = this.getCurrentFocus();    // this will give us the view which is currently in focus
+
+        if (view != null) {  //protect app from crashing if nothing is currently in focus
+            //assigning the system service to InputMethodManager
+            InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+    
+    String construct_date(int year, int month,int day ){  //construct date in a lexicographically comparable format
+
+        String str_month = "" + month;
+        String str_day   = "" + day;
+
+        if(month < 10){
+            str_month = "0"+ month;
+        }
+        if(day < 10){
+            str_day = "0" + day;
+        }
+
+        return year +"-"+ str_month +"-"+ str_day;
+    }
+
+
 
     void handle_response(String response){
         if (response.toLowerCase().charAt(0) != 'f'){ // s for success
@@ -134,5 +193,7 @@ public class AddBudgetDialogue extends Dialog {
         }
 
     }
-
+    public String addChar(String str, char ch, int position) {
+        return str.substring(0, position) + ch + str.substring(position);
+    }
 }
