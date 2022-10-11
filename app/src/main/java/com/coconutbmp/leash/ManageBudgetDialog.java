@@ -43,13 +43,11 @@ public class ManageBudgetDialog extends Dialog {
             {
                 if(resp) {
                     Toast.makeText(this.getContext(), "Deletion Successful", Toast.LENGTH_SHORT).show();
-                    ((BudgetActivity)current_activity).refresh();
-                    this.dismiss();
                 } else {
                     Toast.makeText(this.getContext(), "Deletion Failed", Toast.LENGTH_SHORT).show();
                 }
-                this.dismiss();
                 ((BudgetActivity)current_activity).refresh();
+                this.dismiss();
             });
             subject.delete();
         });
