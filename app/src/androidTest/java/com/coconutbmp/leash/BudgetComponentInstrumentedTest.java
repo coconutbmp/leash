@@ -142,8 +142,8 @@ public class BudgetComponentInstrumentedTest {
             e.printStackTrace();
         }
 
-        //assert current.getLiabilities().size() > 0;
-        //assert current.getIncomes().size() > 0;
+        assert current.getLiabilities().size() > 0;
+        assert current.getIncomes().size() > 0;
         assert current.getTransactions().size() > 0;
         are_populated = true;
     }
