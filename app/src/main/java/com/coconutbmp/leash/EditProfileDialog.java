@@ -155,4 +155,8 @@ public class EditProfileDialog extends Dialog {
         }
         return true;
     }
+
+    boolean t(int i){
+        return i == 0;
+    }
 }

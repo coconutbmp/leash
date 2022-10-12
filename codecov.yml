@@ -15,3 +15,4 @@ ignore:
   - "app/src/main/java/com/coconutbmp/leash/AddRecurringPaymentFragment.java"
   - "app/src/main/java/com/coconutbmp/leash/LiabilityHistoryLayout.java"
   - "app/src/main/java/com/coconutbmp/leash/LiabilityBrief.java"
+  - "app/src/main/java/com/coconutbmp/leash/EditProfileDialog.java"
