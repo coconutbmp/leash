@@ -19,3 +19,5 @@ ignore:
   - "app/src/main/java/com/coconutbmp/leash/TransactionBrief.java"
   - "app/src/main/java/com/coconutbmp/leash/BudgetBrief.java"
   - "app/src/main/java/com/coconutbmp/leash/EditProfileDialog.java"
+  - "app/src/main/java/com/coconutbmp/leash/ManageBudgetDialog.java"
+  
