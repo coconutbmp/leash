@@ -128,6 +128,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             transaction.put("transactionamount", transactionAmount);
             String date = String.format("%s-%s-%s", date_dp.getYear(), date_dp.getMonth()+1, date_dp.getDayOfMonth());
             transaction.put("date",date);
+            System.out.println(transaction);
             internetRequest.doRequest(url+"submit_transaction.php", this, transaction, this::processTransaction);//make request
         } catch (JSONException e) {
             e.printStackTrace();

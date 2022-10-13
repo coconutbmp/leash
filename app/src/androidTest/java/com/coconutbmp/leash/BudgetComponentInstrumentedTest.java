@@ -4,6 +4,9 @@ import static com.coconutbmp.leash.Data.current;
 
 import com.coconutbmp.leash.BudgetComponents.Budget;
 
+import com.coconutbmp.leash.BudgetComponents.Income;
+import com.coconutbmp.leash.BudgetComponents.Liability;
+import com.coconutbmp.leash.BudgetComponents.Transaction;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
@@ -26,10 +29,9 @@ public class BudgetComponentInstrumentedTest {
     Budget test_budget;
     JSONObject test_budget_json_rep;
     String test_user_string = "{\"user_ID\":\"11\",\"user_Email\":\"test@user.com\",\"user_Password\":\"1000:69026e4866e4e9f81f651f3a787cbf05:89f26a2afca111707cea3ee2cd022f1250428bc837d70dc583be1fc592e8c4d23aa428f3ae2bc89626da8ced131eaacbf0c989fd780e2b02d3753c25f2d6b227\",\"user_FirstName\":\"Test\",\"user_LastName\":\"User\"}";
-
-    String test_liability_string;
-    String test_income_string;
-    String test_transaction_string;
+    String test_income_string = "{\"incomeName\":\"Test Income\",\"amount\":\"10000\",\"startDate\":\"2022-10-13\",\"endDate\":\"2022-10-13\",\"freq\":\"monthly\",\"budgetid\":\"27\"}";
+    String test_liability_string = "{\"liability_name\":\"Test Liability\",\"category\":\"Groceries\",\"budget_id\":\"27\",\"liability_type\":\"loan\",\"principle\":10000,\"interest_type\":\"Compound\",\"rate\":5,\"calc_freq\":\"Monthly\",\"start\":\"2021-10-13\",\"end\":\"2028-10-13\",\"pay_freq\":\"Monthly\",\"payment_amt\":141.34}";
+    String test_transaction_string = "{\"budgetid\":\"27\",\"incomeid\":\"NULL\",\"liabilityid\":\"NULL\",\"transactiontype\":\"once-off income\",\"transactionamount\":\"1999\",\"date\":\"2023-10-13\"}";
     Boolean current_set;
     //Activity test_activity = new Activity();
 
@@ -39,7 +41,7 @@ public class BudgetComponentInstrumentedTest {
     private CountDownLatch lock;
 
     @Test
-    public void tes1_1_set_user(){
+    public void tes1_001_set_user(){
         Integer check = -1;
         try {
             test_user = new JSONObject(test_user_string);
@@ -57,9 +59,9 @@ public class BudgetComponentInstrumentedTest {
         lock.countDown();
     }
 
-    @Test public void test_2_request_all_budgets() throws InterruptedException {
+    @Test public void test_002_request_all_budgets() throws InterruptedException {
         if(Data.getUserID() == -1 || test_user == null)
-            tes1_1_set_user();
+            tes1_001_set_user();
 
         InternetRequest ir = new InternetRequest();
         JSONObject budget_request = null;
@@ -87,10 +89,10 @@ public class BudgetComponentInstrumentedTest {
     }
 
     @Test
-    public void test_3_create_budgets(){
+    public void test_003_create_budgets(){
         try {
             if (response == null)
-                test_2_request_all_budgets();
+                test_002_request_all_budgets();
             System.out.println("response -> " + response);
             JSONArray ja = new JSONArray(response);
             JSONObject jo = ja.getJSONObject(0);
@@ -103,10 +105,10 @@ public class BudgetComponentInstrumentedTest {
     }
 
     @Test
-    public void test_4_set_current_budget(){
+    public void test_004_set_current_budget(){
         try{
             if(Data.getAll().size() == 0)
-                test_3_create_budgets();
+                test_003_create_budgets();
             Data.setCurrent(Data.getAll().get(0).getJsonRep());
         } catch (Exception e){
             e.printStackTrace();
@@ -115,9 +117,9 @@ public class BudgetComponentInstrumentedTest {
     }
     Boolean got_all = false; // liabilities, incomes, transactions retrieved
     @Test
-    public void test_5_accept_budget_components() throws Exception {
+    public void test_005_accept_budget_components() throws Exception {
 
-        test_4_set_current_budget();
+        test_004_set_current_budget();
         if(got_all) return;
 
         lock = new CountDownLatch(3);
@@ -134,10 +136,10 @@ public class BudgetComponentInstrumentedTest {
 
     boolean are_populated = false;
     @Test
-    public void test_6_ensure_populated(){
+    public void test_006_ensure_populated(){
         try{
             System.out.println("got all " + got_all);
-            test_5_accept_budget_components();
+            test_005_accept_budget_components();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -149,8 +151,8 @@ public class BudgetComponentInstrumentedTest {
     }
 
     @Test
-    public void test_7_can_generate_payment_data(){
-        if(!are_populated) test_6_ensure_populated();
+    public void test_007_can_generate_payment_data(){
+        if(!are_populated) test_006_ensure_populated();
 
         LineDataSet test_set = current.getLiabilities().get(0).generatePaymentSet();
 
@@ -159,19 +161,58 @@ public class BudgetComponentInstrumentedTest {
     }
 
     @Test
-    public void test_8_can_generate_over_time_analysis(){
+    public void test_008_can_generate_over_time_analysis(){
         ArrayList<LineDataSet> set_list = current.getLiabilities().get(0).generateOverTimeAnalysis();
         assert set_list != null;
     }
 
     @Test
-    public void test_9_can_generate_period_summary(){
+    public void test_009_can_generate_period_summary(){
         LocalDate start = LocalDate.of(2022,6,1);
         LocalDate end = LocalDate.of(2022,6,30);
 
         LineData ld = current.getPeriodSummary(start, end);
         assert ld != null;
         assert ld.getEntryCount() > 0;
+    }
+
+
+    @Test
+    public void test_010_add_test_things() throws Exception{
+        lock = new CountDownLatch(3);
+        InternetRequest ir = new InternetRequest();
+        ir.doRequest(InternetRequest.std_url + "submit_income.php", null, new JSONObject(test_income_string), resp -> {lock.countDown();});
+        ir.doRequest(InternetRequest.std_url + "submit_liability.php", null, new JSONObject(test_liability_string), resp -> {lock.countDown();});
+        ir.doRequest(InternetRequest.std_url + "submit_transaction.php", null, new JSONObject(test_transaction_string), resp -> {lock.countDown();});
+
+        assert lock.await(5, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void test_011_refresh() throws Exception {
+        lock = new CountDownLatch(3);
+        Data.setCurrentListener(resp -> {if (resp) lock.countDown();});
+        current.refreshIncomes();
+        current.refreshLiabilities();
+        current.refreshTransactions();
+
+        assert lock.await(5, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void test_011_delete() throws Exception {
+        lock = new CountDownLatch(3);
+        Data.setCurrentListener(resp -> {if (resp) lock.countDown();});
+
+        Income test_income = current.getIncomes().lastElement();
+        Liability test_liability = current.getLiabilities().lastElement();
+        Transaction test_transaction = current.getTransactions().lastElement();
+
+        test_income.delete();
+        test_liability.delete();
+        test_transaction.delete();
+
+        assert lock.await(5, TimeUnit.SECONDS);
     }
 
 
