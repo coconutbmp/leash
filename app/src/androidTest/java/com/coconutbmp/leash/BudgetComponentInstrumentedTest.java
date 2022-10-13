@@ -29,9 +29,10 @@ public class BudgetComponentInstrumentedTest {
     Budget test_budget;
     JSONObject test_budget_json_rep;
     String test_user_string = "{\"user_ID\":\"11\",\"user_Email\":\"test@user.com\",\"user_Password\":\"1000:69026e4866e4e9f81f651f3a787cbf05:89f26a2afca111707cea3ee2cd022f1250428bc837d70dc583be1fc592e8c4d23aa428f3ae2bc89626da8ced131eaacbf0c989fd780e2b02d3753c25f2d6b227\",\"user_FirstName\":\"Test\",\"user_LastName\":\"User\"}";
-    String test_income_string = "{\"incomeName\":\"Test Income\",\"amount\":\"10000\",\"startDate\":\"2022-10-13\",\"endDate\":\"2022-10-13\",\"freq\":\"monthly\",\"budgetid\":\"27\"}";
-    String test_liability_string = "{\"liability_name\":\"Test Liability\",\"category\":\"Groceries\",\"budget_id\":\"27\",\"liability_type\":\"loan\",\"principle\":10000,\"interest_type\":\"Compound\",\"rate\":5,\"calc_freq\":\"Monthly\",\"start\":\"2021-10-13\",\"end\":\"2028-10-13\",\"pay_freq\":\"Monthly\",\"payment_amt\":141.34}";
-    String test_transaction_string = "{\"budgetid\":\"27\",\"incomeid\":\"NULL\",\"liabilityid\":\"NULL\",\"transactiontype\":\"once-off income\",\"transactionamount\":\"1999\",\"date\":\"2023-10-13\"}";
+    String test_income_string = "{\"incomeName\":\"Test Income\",\"amount\":\"10000\",\"startDate\":\"2022-10-13\",\"endDate\":\"2022-10-13\",\"freq\":\"monthly\",\"budgetid\":\"96\"}";
+    String test_liability_string = "{\"liability_name\":\"Test Liability\",\"category\":\"Groceries\",\"budget_id\":\"96\",\"liability_type\":\"loan\",\"principle\":10000,\"interest_type\":\"Compound\",\"rate\":5,\"calc_freq\":\"Monthly\",\"start\":\"2021-10-13\",\"end\":\"2028-10-13\",\"pay_freq\":\"Monthly\",\"payment_amt\":141.34}";
+    String test_transaction_string = "{\"budgetid\":\"96\",\"incomeid\":\"NULL\",\"liabilityid\":\"NULL\",\"transactiontype\":\"once-off income\",\"transactionamount\":\"1999\",\"date\":\"2023-10-13\"}";
+    String test_budget_string = "{\"userid\":\"11\",\"name\":\"Temp Test Budget\",\"startdate\":\"2022-01-01\",\"enddate\":\"2023-01-01\"}";
     Boolean current_set;
     //Activity test_activity = new Activity();
 
@@ -139,12 +140,13 @@ public class BudgetComponentInstrumentedTest {
     public void test_006_ensure_populated(){
         try{
             System.out.println("got all " + got_all);
-            test_005_accept_budget_components();
+            if(!got_all)
+                test_005_accept_budget_components();
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        //assert current.getLiabilities().size() > 0;
+        assert current.getLiabilities().size() > 0;
         assert current.getIncomes().size() > 0;
         assert current.getTransactions().size() > 0;
         are_populated = true;
@@ -213,6 +215,81 @@ public class BudgetComponentInstrumentedTest {
         test_transaction.delete();
 
         assert lock.await(5, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void test_012_add_duplicate_budget() throws Exception{
+        int count = Data.getAll().size();
+
+        JSONObject jo = new JSONObject(current.getJsonRep().toString());
+        Data.addBudget(jo);
+
+        assert count == Data.getAll().size();
+    }
+
+    @Test
+    public void test_013_add_rubbish_budget() throws Exception{
+        int count = Data.getAll().size();
+
+        JSONObject jo = new JSONObject();
+        Data.addBudget(jo);
+
+        assert count == Data.getAll().size();
+    }
+
+    public void accept_budgets(String response){
+        try {
+            JSONArray jsonArray = new JSONArray(response);
+            if (jsonArray.length() == 0){
+                return;
+            }
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Data.addBudget(jsonObject);
+            }
+
+            lock.countDown();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test_014_create_new_budget() throws Exception{
+        InternetRequest ir = new InternetRequest();
+        lock = new CountDownLatch(1);
+
+        ir.doRequest(InternetRequest.std_url + "add_budget.php", null, new JSONObject(test_budget_string), resp -> {lock.countDown();});
+
+        assert lock.await(5, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void test_015_get_all_budgets() throws Exception{
+        int count = Data.getAll().size();
+        InternetRequest ir = new InternetRequest();
+        lock = new CountDownLatch(1);
+
+        ir.doRequest(InternetRequest.std_url + "get_budget.php", null, new JSONObject("{\"userid\":\"11\"}"), this::accept_budgets);
+
+        assert lock.await(5, TimeUnit.SECONDS);
+        assert count < Data.getAll().size();
+    }
+
+    @Test
+   public void test_016_delete_budget() throws Exception{
+        int count = Data.getAll().size();
+        lock = new CountDownLatch(1);
+        Data.setCurrentListener(resp -> {if(resp) lock.countDown();});
+
+        if (Data.getAll().size() > 1) {
+            Data.setCurrent(Data.getAll().get(Data.getAll().size()-1));
+            if(current.getJsonRep().getString("budget_Name").equals("Temp Test Budget"))current.delete();
+        } else {
+            System.out.println("not large enough");
+        }
+
+        assert lock.await(5,TimeUnit.SECONDS);
     }
 
 
