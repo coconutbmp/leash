@@ -218,20 +218,6 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
-                        <Button
-                            android:id="@+id/more_summaries_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:layout_weight="0"
-                            android:backgroundTint="@color/smokey_white"
-                            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
-                            android:enabled="false"
-                            android:fontFamily="@font/convergence"
-                            android:text="More"
-                            android:textAllCaps="false"
-                            android:textColor="@color/shadow"
-                            app:cornerRadius="16dp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -289,7 +275,7 @@
                             android:layout_weight="0"
                             android:backgroundTint="@color/smokey_white"
                             android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
-                            android:enabled="false"
+                            android:enabled="true"
                             android:fontFamily="@font/convergence"
                             android:text="More"
                             android:textAllCaps="false"
@@ -352,7 +338,7 @@
                             android:layout_weight="0"
                             android:backgroundTint="@color/smokey_white"
                             android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
-                            android:enabled="false"
+                            android:enabled="true"
                             android:fontFamily="@font/convergence"
                             android:text="More"
                             android:textAllCaps="false"
@@ -414,7 +400,7 @@
                             android:layout_weight="0"
                             android:backgroundTint="@color/smokey_white"
                             android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
-                            android:enabled="false"
+                            android:enabled="true"
                             android:fontFamily="@font/convergence"
                             android:text="More"
                             android:textAllCaps="false"

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class BudgetActivity extends AppCompatActivity {
     String budget_name;
     TextView budget_title, day, month;
     LinearLayout liability_ll, income_ll, transaction_ll, budget_summary_ll;
+    Button more_liabilities_btn, more_transactions_btn, more_income_btn;
 
     String getBudgetName(){
         return  budget_name;
@@ -31,30 +33,42 @@ public class BudgetActivity extends AppCompatActivity {
     void display_liabilities(){
         Budget current = Data.current;
         liability_ll.removeAllViews();
+        int count = 0;
+
         for (Liability l: current.getLiabilities()) {
+            if (more_liabilities_btn.getText().equals("More") && count == 3) break;
             FragmentManager frag_man = getSupportFragmentManager();
             FragmentTransaction frag_tran = frag_man.beginTransaction();
             frag_tran.add(liability_ll.getId(), new LiabilityBrief(this, l)).commit();
+            count ++;
         }
     }
 
     void display_transactions(){
         Budget current = Data.current;
         transaction_ll.removeAllViews();
+        int count = 0;
+
         for(Transaction t: current.getTransactions()){
+            if (more_transactions_btn.getText().equals("More") && count == 3) break;
             FragmentManager frag_man = getSupportFragmentManager();
             FragmentTransaction frag_tran = frag_man.beginTransaction();
             frag_tran.add(transaction_ll.getId(),new TransactionBrief(this, t)).commit();
+            count++;
         }
     }
 
     void display_income(){
         Budget current = Data.current;
         income_ll.removeAllViews();
+        int count = 0;
+
         for (Income i: current.getIncomes()) {
+            if (more_income_btn.getText().equals("More") && count == 3) break;
             FragmentManager frag_man = getSupportFragmentManager();
             FragmentTransaction frag_tran = frag_man.beginTransaction();
             frag_tran.add(income_ll.getId(), new IncomeBrief(this, i)).commit();
+            count++;
         }
     }
 
@@ -64,6 +78,14 @@ public class BudgetActivity extends AppCompatActivity {
         FragmentManager frag_man = getSupportFragmentManager();
         FragmentTransaction frag_tran = frag_man.beginTransaction();
         frag_tran.add(budget_summary_ll.getId(), new BudgetBrief(this, Data.current)).commit();
+    }
+
+    void toggleMoreLess(Button b){
+        if (b.getText().equals("More")){
+            b.setText("Less");
+        } else {
+            b.setText("More");
+        }
     }
 
     @Override
@@ -85,6 +107,25 @@ public class BudgetActivity extends AppCompatActivity {
         income_ll = findViewById(R.id.income_holder_ll);
         budget_summary_ll = findViewById(R.id.budget_summary_ll);
         manage_button = findViewById(R.id.btnManageBudget);
+
+        more_transactions_btn = findViewById(R.id.more_transactions_button);
+        more_income_btn = findViewById(R.id.more_income_button);
+        more_liabilities_btn = findViewById(R.id.more_liabilities_button);
+
+        more_transactions_btn.setOnClickListener(view -> {
+            toggleMoreLess(more_transactions_btn);
+            display_transactions();
+        });
+
+        more_income_btn.setOnClickListener(view -> {
+            toggleMoreLess(more_income_btn);
+            display_income();
+        });
+
+        more_liabilities_btn.setOnClickListener(view -> {
+            toggleMoreLess(more_liabilities_btn);
+            display_liabilities();
+        });
 
         UXFunctions.setDate(day, month);
 
