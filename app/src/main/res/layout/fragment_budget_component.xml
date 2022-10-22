@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/beige"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp">
 
@@ -43,7 +43,8 @@
                     android:id="@+id/manageCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/beige"
+                    android:layout_margin="4dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
