@@ -8,12 +8,9 @@ import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 
 public class AddToBudgetDialogue extends Dialog {
-
-    CardView returnCard;
-    Button add_transact_button, add_liability_button, add_income_button;
+    Button add_transact_button, add_liability_button, add_income_button, cancel_button;
     String budget_name;
 
     /**
@@ -29,14 +26,14 @@ public class AddToBudgetDialogue extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // dont show default title for this dialog
-        setContentView(R.layout.add_to_budget_dialog); // link to xml file
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // don't show default title for this dialog
+        setContentView(R.layout.dialog_add_to_budget); // link to xml file
 
         // link to elements in the xml file
         add_transact_button = findViewById(R.id.add_transaction_button);
         add_income_button = findViewById(R.id.add_income_button);
         add_liability_button = findViewById(R.id.edit_button);
-        returnCard = findViewById(R.id.ReturnCard);
+        cancel_button = findViewById(R.id.btnCancelAddTo);
 
         add_liability_button.setOnClickListener(view -> {
             Intent i = new Intent(this.getContext(), AddLiabilityActivity.class);
@@ -59,10 +56,8 @@ public class AddToBudgetDialogue extends Dialog {
             this.dismiss();
         });
 
-        returnCard.setOnClickListener(view -> {
+        cancel_button.setOnClickListener(view -> {
             AddToBudgetDialogue.this.dismiss();
         });
-
-        //todo: set up transitions to the transaction page.
     }
 }

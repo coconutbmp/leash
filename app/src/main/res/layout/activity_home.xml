@@ -214,10 +214,11 @@
                     android:id="@+id/lblEmpty"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
+                    android:layout_margin="8dp"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:text="Currently No Budgets"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/dark_grey"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -237,8 +238,7 @@
                 android:id="@+id/summaryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
 
         </LinearLayout>
     </ScrollView>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/beige"
     android:orientation="horizontal"
     tools:context=".AddLiabilityActivity">
 
@@ -59,7 +59,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/beige"
             android:dividerPadding="10pt"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp">
 
@@ -125,7 +125,7 @@
                         <Spinner
                             android:id="@+id/category_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:contentDescription="@string/select_cat"
                             android:entries="@array/predefined_categories"
@@ -136,12 +136,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
-                            android:backgroundTint="@color/smokey_white"
+                            android:backgroundTint="@color/beige"
                             android:contentDescription="@string/create_cat"
+                            android:drawableRight="@drawable/ic_baseline_add_24"
                             android:fontFamily="@font/convergence"
                             android:text="Add"
                             android:textAllCaps="false"
-                            app:cornerRadius="16dp" />
+                            app:cornerRadius="24dp" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -150,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp">
 
@@ -172,7 +173,7 @@
                     <Spinner
                         android:id="@+id/liability_type_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:contentDescription="@string/select_liability_type"

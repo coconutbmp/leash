@@ -5,7 +5,7 @@
     android:id="@+id/loan_fl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/beige"
     android:orientation="vertical"
     tools:context=".AddLoanDetailsFragment">
 
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
@@ -190,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
@@ -237,8 +237,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/convergence"
-                                android:text="00/00/0000"
+                                android:hint="Pick a date"
                                 android:textColor="@color/grey"
+                                android:textColorHint="@color/light_brown"
                                 android:textSize="20sp" />
 
                             <Button
@@ -247,7 +248,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_weight="0"
-                                android:backgroundTint="@color/smokey_white"
+                                android:backgroundTint="@color/beige"
+                                android:drawableRight="@drawable/ic_baseline_calendar_today_24"
                                 android:fontFamily="@font/convergence"
                                 android:text="Set Date"
                                 android:textAllCaps="false"
@@ -364,8 +366,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/convergence"
-                                android:text="00/00/0000"
+                                android:hint="Pick a date"
                                 android:textColor="@color/grey"
+                                android:textColorHint="@color/light_brown"
                                 android:textSize="20sp" />
 
                             <Button
@@ -374,7 +377,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_weight="0"
-                                android:backgroundTint="@color/smokey_white"
+                                android:backgroundTint="@color/beige"
+                                android:drawableRight="@drawable/ic_baseline_calendar_today_24"
                                 android:fontFamily="@font/convergence"
                                 android:text="Set Date"
                                 android:textAllCaps="false"

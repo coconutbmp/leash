@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/budget_title_label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="1dp"
+            android:fontFamily="@font/convergence"
+            android:text="What are You Adding?"
+            android:textColor="@color/grey"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/add_income_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="0"
+            android:backgroundTint="@color/beige"
+            android:contentDescription="@string/create_cat"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/convergence"
+            android:text="Add New Income"
+            android:textAllCaps="false"
+            app:cornerRadius="24dp" />
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="0"
+            android:backgroundTint="@color/beige"
+            android:contentDescription="@string/create_cat"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/convergence"
+            android:text="Add New Liability"
+            android:textAllCaps="false"
+            app:cornerRadius="24dp" />
+
+        <Button
+            android:id="@+id/add_transaction_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="0"
+            android:backgroundTint="@color/beige"
+            android:contentDescription="@string/create_cat"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/convergence"
+            android:text="Add New Transaction"
+            android:textAllCaps="false"
+            app:cornerRadius="24dp" />
+
+        <Button
+            android:id="@+id/btnCancelAddTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/beige"
+            android:drawableLeft="@drawable/ic_baseline_cancel_24"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            app:cornerRadius="16dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -104,86 +104,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/profileDetailsCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:cardBackgroundColor="@color/smokey_white"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblProfileTitle">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="Details"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/lblProfileName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="8dp"
-                    android:fontFamily="@font/convergence"
-                    android:text="FirstName"
-                    android:textColor="@color/grey"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/lblProfileSurname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="8dp"
-                    android:fontFamily="@font/convergence"
-                    android:text="LastName"
-                    android:textColor="@color/grey"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/lblProfileEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/convergence"
-                    android:text="Email"
-                    android:textColor="@color/grey"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
             android:id="@+id/profileStatsCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             app:cardBackgroundColor="@color/smokey_white"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileDetailsCard">
+            app:layout_constraintTop_toBottomOf="@+id/lblProfileEmail">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -250,6 +182,75 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-150dp"
+            android:layout_marginBottom="-50dp"
+            android:adjustViewBounds="true"
+            android:rotation="30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileStatsCard"
+            app:srcCompat="@drawable/samsungmoneycard" />
+
+        <ImageView
+            android:id="@+id/imageView18"
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-125dp"
+            android:layout_marginBottom="-75dp"
+            android:adjustViewBounds="true"
+            android:rotation="-5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView14"
+            app:srcCompat="@drawable/samsungmoneycard" />
+
+        <TextView
+            android:id="@+id/lblProfileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/convergence"
+            android:text="FirstName"
+            android:textColor="@color/grey"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/lblProfileSurname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblProfileTitle" />
+
+        <TextView
+            android:id="@+id/lblProfileSurname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/convergence"
+            android:text="LastName"
+            android:textColor="@color/grey"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lblProfileName"
+            app:layout_constraintTop_toBottomOf="@+id/lblProfileTitle" />
+
+        <TextView
+            android:id="@+id/lblProfileEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/convergence"
+            android:text="Email"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblProfileName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

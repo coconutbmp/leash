@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/beige"
     tools:context=".BudgetActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,7 +57,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/beige"
             android:dividerPadding="10pt"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp">
 
@@ -133,7 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp">
 
@@ -167,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/beige"
+                app:cardBackgroundColor="@color/smokey_white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
 
@@ -181,13 +181,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="8dp"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/lblRecurringStart"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
                             android:text="Start Date:"
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
@@ -205,8 +205,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/convergence"
-                                android:text="0000/00/00"
+                                android:hint="Pick a date"
                                 android:textColor="@color/grey"
+                                android:textColorHint="@color/light_brown"
                                 android:textSize="20sp" />
 
                             <Button
@@ -215,7 +216,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_weight="0"
-                                android:backgroundTint="@color/smokey_white"
+                                android:backgroundTint="@color/beige"
+                                android:drawableRight="@drawable/ic_baseline_calendar_today_24"
                                 android:fontFamily="@font/convergence"
                                 android:text="Set Date"
                                 android:textAllCaps="false"
@@ -242,9 +244,9 @@
 
                         <TextView
                             android:id="@+id/loan_end_date_label"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
+                            android:layout_margin="4dp"
                             android:text="End Date:"
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
@@ -262,9 +264,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/convergence"
-                                android:text="0000/00/00"
                                 android:textColor="@color/grey"
-                                android:textSize="20sp" />
+                                android:textColorHint="@color/light_brown"
+                                android:textSize="20sp"
+                                android:hint="Pick a date" />
 
                             <Button
                                 android:id="@+id/end_button"
@@ -272,7 +275,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:layout_weight="0"
-                                android:backgroundTint="@color/smokey_white"
+                                android:backgroundTint="@color/beige"
+                                android:drawableRight="@drawable/ic_baseline_calendar_today_24"
                                 android:fontFamily="@font/convergence"
                                 android:text="Set Date"
                                 android:textAllCaps="false"
@@ -298,7 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:backgroundTint="@color/beige"
+                android:backgroundTint="@color/smokey_white"
                 android:drawableEnd="@drawable/ic_baseline_save_24"
                 android:fontFamily="@font/convergence"
                 android:text="Save"
