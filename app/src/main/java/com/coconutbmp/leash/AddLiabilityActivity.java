@@ -30,23 +30,22 @@ import java.util.Objects;
  */
 public class AddLiabilityActivity extends AppCompatActivity {
 
+    // Declare Necessary Objects
     Button continue_button;
     CardView cancel_button;
-
     Spinner liability_type_spinner;
     Spinner category_spinner;
-
     EditText name_edit;
-
     LinearLayout frag_container;
-
     FragmentManager frag_man;
     FragmentTransaction frag_tran;
     JSONObject json_rep;
     LiabilityDetails ld_container;
-    int budget_id;
 
-
+    /**
+     * Wait for Liability to be added to database
+     * @param success
+     */
     void awaitReload(boolean success){
         if(success)
             Toast.makeText(this, "Liability Added", Toast.LENGTH_SHORT).show();
@@ -56,6 +55,10 @@ public class AddLiabilityActivity extends AppCompatActivity {
         this.finish();
     }
 
+    /**
+     * Handle response from server
+     * @param response
+     */
     void handleSubmissionResponse(String response){
         System.out.println(response);
         if (!response.equals("failed")){
@@ -72,6 +75,11 @@ public class AddLiabilityActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param final_rep
+     * @return true/fasle
+     */
     private boolean submitLiability(JSONObject final_rep){
         System.out.println(final_rep.toString());
         InternetRequest ir = new InternetRequest();

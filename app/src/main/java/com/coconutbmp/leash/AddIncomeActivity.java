@@ -141,6 +141,10 @@ public class AddIncomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Wait for incomes to be added to database
+     * @param success
+     */
     void awaitReload(boolean success){
         if(success)
             Toast.makeText(this, "Income Successfully Added", Toast.LENGTH_SHORT).show();

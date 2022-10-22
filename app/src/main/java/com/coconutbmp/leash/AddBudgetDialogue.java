@@ -109,9 +109,9 @@ public class AddBudgetDialogue extends Dialog {
         });
     }
 
-    private void closeKeyboard() {    //collapse the keyboard
+    private void closeKeyboard() { //collapse the keyboard
 
-        View view = this.getCurrentFocus();    // this will give us the view which is currently in focus
+        View view = this.getCurrentFocus(); // this will give us the view which is currently in focus
 
         if (view != null) {  //protect app from crashing if nothing is currently in focus
             //assigning the system service to InputMethodManager
@@ -185,6 +185,7 @@ public class AddBudgetDialogue extends Dialog {
         }
 
     }
+
     public String addChar(String str, char ch, int position) {
         return str.substring(0, position) + ch + str.substring(position);
     }
