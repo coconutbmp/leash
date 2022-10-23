@@ -50,15 +50,14 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_loan_details, container, false);
 
+        // Hook Components
         principal_amt_edit = view.findViewById(R.id.principal_amt_edit);
         interest_rate_edit = view.findViewById(R.id.interest_rate_edit);
         interest_type_spinner = view.findViewById(R.id.interest_type_spinner);
@@ -109,49 +108,49 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         try {
             rep.put("principle", Double.parseDouble(String.valueOf(principal_amt_edit.getText())));
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Principle Amount Missing.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Principle Amount Missing", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try {
             rep.put("interest_type", interest_type_spinner.getSelectedItem());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select Interest Type.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select Interest Type", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try{
             rep.put("rate", Double.parseDouble(String.valueOf(interest_rate_edit.getText())));
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Interest Rate Missing.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Interest Rate Missing", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try{
             rep.put("calc_freq", calculation_freq_spinner.getSelectedItem());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select Calculation Frequency.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select Calculation Frequency", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try{
             rep.put("start", begin_date_label.getText());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select a Start Date.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select a Start Date", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try {
             rep.put("end", end_date_label.getText());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select an End Date.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select an End Date", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try{
         rep.put("pay_freq", payment_freq_spinner.getSelectedItem().toString());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select a Payment Frequency.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select a Payment Frequency", Toast.LENGTH_SHORT).show();
             throw e;
         }
 

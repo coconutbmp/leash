@@ -59,8 +59,6 @@ public class AddBudgetDialogue extends Dialog {
 
         start_dp = findViewById(R.id.budget_start_dp);
         end_dp= findViewById(R.id.budget_end_dp);
-
-
    
         start_button.setOnClickListener(view1 -> {
             closeKeyboard();
@@ -89,19 +87,16 @@ public class AddBudgetDialogue extends Dialog {
 
         proceed.setOnClickListener(view -> {     // when "done" button is clicked
             if (budget_name_edit.getText().length() > 0 && begin_date_edit.getText().length()>0 && end_date_edit.getText().length()>0){
-
-                    if(s_date.compareTo(e_date)<=0){
-
-                        //get EditText content in string format
-                        name = budget_name_edit.getText().toString();
-                        start_date = begin_date_edit.getText().toString();
-                        end_date = end_date_edit.getText().toString();
-
-                        addToDatabase();
-                    }
-                    else{
-                        Toast.makeText(getContext(), "End Date must be no earlier than Start Date", Toast.LENGTH_LONG).show();
-                    }
+                if(s_date.compareTo(e_date)<=0){
+                    //get EditText content in string format
+                    name = budget_name_edit.getText().toString();
+                    start_date = begin_date_edit.getText().toString();
+                    end_date = end_date_edit.getText().toString();
+                    addToDatabase();
+                }
+                else{
+                    Toast.makeText(getContext(), "End Date must be no earlier than Start Date", Toast.LENGTH_LONG).show();
+                }
             }
             else{
                 Toast.makeText(getContext(), "Please fill in the entire form", Toast.LENGTH_SHORT).show();
@@ -139,7 +134,6 @@ public class AddBudgetDialogue extends Dialog {
 
     void handle_response(String response){
         if (response.toLowerCase().charAt(0) != 'f'){ // s for success
-
             //create intent, pass information and start Budget activity
             Intent i = new Intent(this.getContext(), BudgetActivity.class);
             JSONObject json_rep;
@@ -150,13 +144,13 @@ public class AddBudgetDialogue extends Dialog {
             } catch (Exception e){
                 e.printStackTrace();
             }
-
-
             this.getContext().startActivity(i);
         } else {
-            // todo: show error message
+            getOwnerActivity().runOnUiThread(()->{
+                Toast.makeText(getOwnerActivity(), "Something went wrong. Please try again", Toast.LENGTH_SHORT).show();
+                dismiss();
+            });
         }
-
         this.cancel();
     }
 

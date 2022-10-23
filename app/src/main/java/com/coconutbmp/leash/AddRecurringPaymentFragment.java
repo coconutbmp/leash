@@ -80,27 +80,27 @@ public class AddRecurringPaymentFragment extends Fragment implements LiabilityDe
         try {
             rep.put("payment_amt", Double.parseDouble(String.valueOf(rp_edit.getText())));
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select a Payment Amount.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select a Payment Amount", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try{
             rep.put("pay_freq", payment_freq_spinner.getSelectedItem());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select a Payment Frequency.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select a Payment Frequency", Toast.LENGTH_SHORT).show();
             throw e;
         }
         try {
             rep.put("start", begin_date_edit.getText());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select a Start Date.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select a Start Date", Toast.LENGTH_SHORT).show();
             throw e;
         }
 
         try {
             rep.put("end", end_date_edit.getText());
         } catch (Exception e){
-            Toast.makeText(getActivity(), "Select an End Date.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Select an End Date", Toast.LENGTH_SHORT).show();
             throw e;
         }
 

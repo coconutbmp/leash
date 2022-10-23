@@ -85,10 +85,10 @@ public class AddLiabilityActivity extends AppCompatActivity {
         InternetRequest ir = new InternetRequest();
 
         ir.doRequest(
-                InternetRequest.std_url + "submit_liability.php",
-                this,
-                final_rep,
-                this::handleSubmissionResponse
+            InternetRequest.std_url + "submit_liability.php",
+            this,
+            final_rep,
+            this::handleSubmissionResponse
         );
 
         try {
@@ -98,22 +98,24 @@ public class AddLiabilityActivity extends AppCompatActivity {
                 transaction.put("transactiontype", "once-off income");
                 transaction.put("transactionamount", Double.toString((Double) final_rep.get("payment_amt")));
                 ir.doRequest(
-                        InternetRequest.std_url + "submit_transaction.php",
-                        this,
-                        transaction,
-                        response -> {
-                            System.out.println(response + "----------------------------------------------------------->");
-                            if (response != null && response.length() > 0 && response.toUpperCase().charAt(0) == 'S') {
-                                System.out.println("successfully added transaction");
-                            } else System.out.println("failed to add transaction");
+                    InternetRequest.std_url + "submit_transaction.php",
+                    this,
+                    transaction,
+                    response -> {
+                        System.out.println(response + "----------------------------------------------------------->");
+                        if (response != null && response.length() > 0 && response.toUpperCase().charAt(0) == 'S') {
+                            Toast.makeText(this, "Successfully added transaction", Toast.LENGTH_SHORT).show();
+                            System.out.println("successfully added transaction");
+                        } else {
+                            Toast.makeText(this, "Failed to add transaction", Toast.LENGTH_SHORT).show();
+                            System.out.println("failed to add transaction");
                         }
+                    }
                 );
             }
         } catch (Exception e){
             e.printStackTrace();
         }
-
-
         return true;
     }
 
