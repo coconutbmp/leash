@@ -1,31 +1,19 @@
 package com.coconutbmp.leash;
 
 import android.content.Context;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.coconutbmp.leash.BudgetComponents.Budget;
 import com.coconutbmp.leash.BudgetComponents.Income;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.DataSet;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class BudgetBrief extends BudgetComponentFragment{
     private Budget budget;
     private LineChart chart;
-    boolean ispie = false;
+
 
     @Override
     void initiate_view() throws Exception{
