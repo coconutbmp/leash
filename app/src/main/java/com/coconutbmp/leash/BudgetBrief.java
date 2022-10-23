@@ -1,14 +1,24 @@
 package com.coconutbmp.leash;
 
 import android.content.Context;
+import android.os.Build;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.coconutbmp.leash.BudgetComponents.Budget;
 import com.coconutbmp.leash.BudgetComponents.Income;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class BudgetBrief extends BudgetComponentFragment{
     private Budget budget;
@@ -23,7 +33,7 @@ public class BudgetBrief extends BudgetComponentFragment{
         name_label.setText("Last Month Summary");
 
         LocalDate date = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             date = LocalDate.now().minusMonths(1);
             date = date.minusDays(date.getDayOfMonth()-1);
 
