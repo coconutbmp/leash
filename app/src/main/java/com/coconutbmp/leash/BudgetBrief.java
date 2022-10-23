@@ -1,19 +1,31 @@
 package com.coconutbmp.leash;
 
 import android.content.Context;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.coconutbmp.leash.BudgetComponents.Budget;
 import com.coconutbmp.leash.BudgetComponents.Income;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.DataSet;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class BudgetBrief extends BudgetComponentFragment{
     private Budget budget;
     private LineChart chart;
-
+    boolean ispie = false;
 
     @Override
     void initiate_view() throws Exception{
@@ -39,8 +51,46 @@ public class BudgetBrief extends BudgetComponentFragment{
         chart.setVisibleXRangeMaximum(1f);
         chart.setVisibleXRangeMinimum(1f);
 
+        PieChart pc = new PieChart(getContext());
+        PieDataSet pds = new PieDataSet(new ArrayList<PieEntry>(), "");
 
-        details_ll.addView(chart);
+        ArrayList<Integer> colors = new ArrayList<>();
+        LineData ld = chart.getLineData();
+        for (ILineDataSet lds: ld.getDataSets()){
+            pds.addEntry(new PieEntry(lds.getEntryForIndex(lds.getEntryCount()-1).getY(), lds.getLabel()));
+            colors.add(lds.getColor());
+        }
+
+        pds.setColors(colors);
+
+        PieData pd = new PieData(pds);
+
+        pc.setData(pd);
+        pc.setMinimumHeight(600);
+        pds.setSliceSpace(3f);
+
+        details_ll.addView(new TextView(getContext()));
+
+        RadioGroup rg = new RadioGroup(getContext());
+        RadioButton rb = new RadioButton(getContext());
+        rb.setText("Line Chart");
+        rg.addView(rb);
+        rb = new RadioButton(getContext());
+        rb.setText("Pie Chart");
+        rg.addView(rb);
+
+        rg.setOnCheckedChangeListener((group, index) -> {
+            System.out.println(index);
+            details_ll.removeView(details_ll.getChildAt(0));
+            if(index == 1) {
+                details_ll.addView(chart, 0);
+            } else {
+                details_ll.addView(pc, 0);
+            }
+        });
+        details_ll.addView(rg);
+
+        rg.check(1);
     }
     public BudgetBrief(Context context, Budget budget) {
         super();
