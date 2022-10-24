@@ -39,7 +39,7 @@
                         android:id="@+id/name_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Income Allocation Summary"
+                        android:text="Monthly Income Summary"
                         android:textColor="@color/dark_grey"
                         android:textSize="20sp" />
 
@@ -68,7 +68,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Loan Repayment Forcast"
+                        android:text="Monthly Spending Summary"
                         android:textColor="@color/dark_grey"
                         android:textSize="20sp" />
 

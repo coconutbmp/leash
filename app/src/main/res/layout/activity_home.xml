@@ -179,7 +179,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -190,7 +190,7 @@
         <LinearLayout
             android:id="@+id/homeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -204,24 +204,30 @@
                 android:textColor="@color/grey"
                 android:textSize="34sp" />
 
-            <LinearLayout
-                android:id="@+id/budgetLayout"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_weight="10000">
 
-                <TextView
-                    android:id="@+id/lblEmpty"
+                <LinearLayout
+                    android:id="@+id/budgetLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_margin="8dp"
-                    android:fontFamily="sans-serif"
-                    android:gravity="center"
-                    android:text="Currently No Budgets"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="Currently No Budgets"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </ScrollView>
 
             <TextView
                 android:id="@+id/lblSummaryTitle"
@@ -237,9 +243,10 @@
             <LinearLayout
                 android:id="@+id/summaryLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp"
                 android:orientation="vertical"></LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
