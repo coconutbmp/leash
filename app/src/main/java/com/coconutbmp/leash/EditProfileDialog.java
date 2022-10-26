@@ -24,6 +24,7 @@ public class EditProfileDialog extends Dialog {
     EditText name, surname, email, pass;
     String currName, currSurname, currEmail, currPass;
     Context context;
+
     SharedPreferences prefs;
     public EditProfileDialog(Activity owner, @NonNull Context context, String currName, String currSurname, String currEmail, String currPass) {
         super(context);
@@ -34,6 +35,7 @@ public class EditProfileDialog extends Dialog {
         this.currEmail = currEmail;
         this.currPass = currPass;
         this.setOwnerActivity(owner);
+        prefs = owner.getSharedPreferences("UserPrefs", MODE_PRIVATE);
     }
 
     @Override
@@ -45,7 +47,6 @@ public class EditProfileDialog extends Dialog {
         surname = findViewById(R.id.edtEditSurname);
         email = findViewById(R.id.edtEditEmail);
         pass = findViewById(R.id.edtEditPass);
-        prefs = context.getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         accept.setOnClickListener(view -> {
             completeEdit(name.getText().toString(), surname.getText().toString(), email.getText().toString(), pass.getText().toString());
@@ -66,7 +67,6 @@ public class EditProfileDialog extends Dialog {
      * else change details
      */
     public boolean completeEdit(String Name, String Surname, String Email, String Pass){
-        SharedPreferences.Editor editor = prefs.edit();
         InternetRequest ir = new InternetRequest();
         JSONObject params = new JSONObject();
         String myName, mySurname, myEmail, myPass;
@@ -135,16 +135,22 @@ public class EditProfileDialog extends Dialog {
                 public void processResponse(String response) {
                     if(response.equals("success")){
                         getOwnerActivity().runOnUiThread(()->{
-                            editor.putString("email", myEmail);
-                            editor.putString("pass", finalMyPass);
-                            editor.commit();
                             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("email", null);
+                            editor.putString("pass", null);
+                            editor.putBoolean("StaySignedIn", false);
+                            editor.commit();
+                            HomeActivity.fa.finish();
+                            getOwnerActivity().finish();
                             dismiss();
                         });
                     }
                     else{
-                        Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                        return;
+                        getOwnerActivity().runOnUiThread(()->{
+                            Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                            return;
+                        });
                     }
                 }
             });

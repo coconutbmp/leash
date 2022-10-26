@@ -108,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:cardBackgroundColor="@color/smokey_white"
             app:cardCornerRadius="24dp"
@@ -187,6 +187,7 @@
             android:id="@+id/imageView14"
             android:layout_width="450dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="-150dp"
             android:layout_marginBottom="-50dp"
             android:adjustViewBounds="true"
@@ -194,6 +195,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileStatsCard"
+            app:layout_constraintVertical_bias="0.528"
             app:srcCompat="@drawable/samsungmoneycard" />
 
         <ImageView
@@ -214,12 +216,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/convergence"
             android:text="FirstName"
             android:textColor="@color/grey"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/lblProfileSurname"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblProfileTitle" />
 
@@ -227,15 +230,16 @@
             android:id="@+id/lblProfileSurname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/convergence"
             android:text="LastName"
             android:textColor="@color/grey"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lblProfileName"
-            app:layout_constraintTop_toBottomOf="@+id/lblProfileTitle" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblProfileName" />
 
         <TextView
             android:id="@+id/lblProfileEmail"
@@ -247,10 +251,10 @@
             android:fontFamily="@font/convergence"
             android:text="Email"
             android:textColor="@color/grey"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblProfileName" />
+            app:layout_constraintTop_toBottomOf="@+id/lblProfileSurname" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

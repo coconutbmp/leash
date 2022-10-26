@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     String myName;
     String mySurname;
     String myEmail;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,16 +68,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         deleteCard.setOnClickListener(view->{
             new AlertDialog.Builder(this, R.style.alertDialog)
-                    .setTitle("Delete Account?")
-                    .setMessage("Are You Sure?\nAll your data will be removed permanently.")
-                    .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            deleteUser();
-                        }
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
+                .setTitle("Delete Account?")
+                .setMessage("Are You Sure?\nAll your data will be removed permanently.")
+                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteUser();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
         });
 
         returnCard.setOnClickListener(view->{

@@ -73,8 +73,6 @@ public class MainActivity extends AppCompatActivity{
         prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE); // initialise and fetch user preferences
         hook(); // hook all components to related xml components
 
-        // check if user wants to to be remembered when logging in
-        StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
         internetRequest = new InternetRequest(); // instantiate Internet Request instance
 
         // instantiate result handler for google login and set function to handle result
@@ -96,9 +94,10 @@ public class MainActivity extends AppCompatActivity{
         openSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String email;
                 String pass;
+                // check if user wants to to be remembered when logging in
+                StaySignedIn.setChecked(prefs.getBoolean("StaySignedIn", false));
                 if(StaySignedIn.isChecked()&& (prefs.getString("email", null)!=null) && (prefs.getString("pass", null)!=null)){
                     email = prefs.getString("email", null);
                     pass = prefs.getString("pass", null);
