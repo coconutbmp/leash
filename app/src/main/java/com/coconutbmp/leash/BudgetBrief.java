@@ -1,5 +1,6 @@
 package com.coconutbmp.leash;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.widget.RadioButton;
@@ -27,6 +28,7 @@ public class BudgetBrief extends BudgetComponentFragment{
     private LineChart chart;
 
 
+    @SuppressLint("ResourceType")
     @Override
     void initiate_view() throws Exception{
         super.initiate_view();
@@ -76,9 +78,11 @@ public class BudgetBrief extends BudgetComponentFragment{
 
         rb.setText("Line Chart");
         rg.addView(rb);
+        rb.setId(1);
         rb = new RadioButton(getContext());
         rb.setText("Pie Chart");
         rg.addView(rb);
+        rb.setId(2);
 
         rg.setOnCheckedChangeListener((group, index) -> {
             System.out.println(index);

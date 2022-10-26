@@ -32,12 +32,8 @@ public class Budget extends BudgetComponent{
      * populate Incomes
      */
     void setIncomes(String response){
+        Data.countDown();
         income_list.clear();
-        if(response == null || response.equals("")){
-            Data.respond(false);
-            return;
-        }
-
         JSONArray ja;
         try {
             ja = new JSONArray(response);
@@ -50,7 +46,6 @@ public class Budget extends BudgetComponent{
         }
 
         Data.respond(true);
-
     }
 
     public Vector<Income> getIncomes() { return income_list; };
@@ -60,6 +55,7 @@ public class Budget extends BudgetComponent{
      * populate Liabilities
      */
     void setLiabilities(String response){
+        Data.countDown();
         liability_list.clear();
         JSONArray ja;
         try {
@@ -82,6 +78,7 @@ public class Budget extends BudgetComponent{
      * populate Transactions
      */
     void setTransactions(String response){
+        Data.countDown();
         transaction_list.clear();
         if(response.equals("")){
             Data.respond(true);

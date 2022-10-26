@@ -1,5 +1,7 @@
 package com.coconutbmp.leash;
 
+import static java.lang.Thread.sleep;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +25,8 @@ import org.w3c.dom.Text;
 
 import android.graphics.Color;
 
+import com.github.mikephil.charting.charts.RadarChart;
+
 /**
  * Controller For the Home Page
  */
@@ -39,7 +43,6 @@ public class HomeActivity extends AppCompatActivity {
     LinearLayout summary_holder;
     public static Activity fa;
     SummaryFragment summary_frag = new SummaryFragment();
-
 
     public void processBudgetResponse(String response){
         try {
@@ -149,6 +152,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         JSONObject userParams = new JSONObject();
         try {
             userParams.put("userid", userID);
