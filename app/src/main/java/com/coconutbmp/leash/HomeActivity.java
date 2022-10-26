@@ -160,6 +160,8 @@ public class HomeActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        summary_frag.refresh();
     }
 }
 

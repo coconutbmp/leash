@@ -28,7 +28,7 @@ public class BudgetBrief extends BudgetComponentFragment{
     private LineChart chart;
 
 
-    @SuppressLint("ResourceType")
+    @SuppressLint({"ResourceType", "SetTextI18n"})
     @Override
     void initiate_view() throws Exception{
         super.initiate_view();

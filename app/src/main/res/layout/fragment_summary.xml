@@ -73,9 +73,11 @@
                         android:textColor="@color/dark_grey"
                         android:textSize="20sp" />
 
-                    <com.github.mikephil.charting.charts.LineChart
+                    <com.github.mikephil.charting.charts.RadarChart
+                        android:id="@+id/spending_summary"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
