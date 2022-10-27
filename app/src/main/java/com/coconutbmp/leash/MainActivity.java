@@ -64,12 +64,13 @@ public class MainActivity extends AppCompatActivity{
     CardView SignInCard, SignUpCard, googleLogIn;
     CheckBox StaySignedIn;
     EditText logInEmail, logInPass, signUpName, signUpSurname, signUpEmail, signUpPass, signUpPassConfirm;
-
+    public static Activity ma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ma = this;
         prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE); // initialise and fetch user preferences
         hook(); // hook all components to related xml components
 

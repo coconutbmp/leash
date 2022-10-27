@@ -1,6 +1,8 @@
 package com.coconutbmp.leash;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -136,13 +138,24 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         logout.setOnClickListener(view -> {
-            SharedPreferences.Editor editor = prefs.edit();
-            boolean staySignedIn = prefs.getBoolean("StaySignedIn", false);
-            if(staySignedIn) {
-                editor.putBoolean("StaySignedIn", false);
-            }
-            editor.commit();
-            this.finish();
+            new AlertDialog.Builder(this, R.style.alertDialog)
+                .setTitle("Log Out")
+                .setMessage("Are You Sure You Want to Log Out?\nYou will need to sign in again before you can enter the app")
+                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        boolean staySignedIn = prefs.getBoolean("StaySignedIn", false);
+                        if(staySignedIn) {
+                            editor.putBoolean("StaySignedIn", false);
+                        }
+                        editor.commit();
+                        getParent().finish();
+                        MainActivity.ma.finish();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
         });
     }
 
