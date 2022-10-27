@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.time.LocalDate;
@@ -52,7 +53,8 @@ public class SummaryFragment extends Fragment {
     }
 
     void display_income_summary(){
-        income_rc.setMinimumHeight(600);
+        income_rc.setMinimumHeight(800);
+        income_rc.setMinimumWidth(800);
 
         ArrayList<RadarEntry> re_list = new ArrayList<>();
         RadarDataSet rds = new RadarDataSet(re_list, "Income");
@@ -78,14 +80,15 @@ public class SummaryFragment extends Fragment {
 
         income_rc.setData(new RadarData(rds));
         income_rc.getData().setLabels();
+        income_rc.getYAxis().setDrawLabels(false);
 
         income_rc.getYAxis().setAxisMinimum(0f);
 
         income_rc.getDescription().setText("Income Chart");
-        income_rc.getXAxis().setValueFormatter(new IndexAxisValueFormatter() {
+        income_rc.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
-            public String getFormattedValue(float value, AxisBase axis){
-                String res = "";
+            public String getAxisLabel(float value, AxisBase axis){
+                String res = Float.toString(value);
                 try {
                     res = (String) Data.getAll().get((int)value).getJsonRep().get("budget_Name");
                 }catch (Exception e) {
@@ -98,7 +101,8 @@ public class SummaryFragment extends Fragment {
     }
 
     void display_spending_summary(){
-        spending_rc.setMinimumHeight(600);
+        spending_rc.setMinimumHeight(800);
+        spending_rc.setMinimumWidth(800);
 
         ArrayList<RadarEntry> re_list = new ArrayList<>();
         RadarDataSet rds = new RadarDataSet(re_list, "Costs");
@@ -124,14 +128,15 @@ public class SummaryFragment extends Fragment {
 
         spending_rc.setData(new RadarData(rds));
         spending_rc.getData().setLabels();
+        spending_rc.getYAxis().setDrawLabels(false);
 
         spending_rc.getYAxis().setAxisMinimum(0f);
         spending_rc.getDescription().setText("Spending Chart");
 
-        spending_rc.getXAxis().setValueFormatter(new IndexAxisValueFormatter() {
+        spending_rc.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
-            public String getFormattedValue(float value, AxisBase axis){
-                String res = "";
+            public String getAxisLabel(float value, AxisBase axis){
+                String res = Float.toString(value);
                 try {
                     res = (String) Data.getAll().get((int)value).getJsonRep().get("budget_Name");
                 }catch (Exception e) {
