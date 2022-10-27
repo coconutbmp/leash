@@ -15,6 +15,7 @@ import com.coconutbmp.leash.BudgetComponents.Budget;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.RadarData;
@@ -80,6 +81,7 @@ public class SummaryFragment extends Fragment {
 
         income_rc.getYAxis().setAxisMinimum(0f);
 
+        income_rc.getDescription().setText("Income Chart");
         income_rc.getXAxis().setValueFormatter(new IndexAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis){
@@ -99,7 +101,7 @@ public class SummaryFragment extends Fragment {
         spending_rc.setMinimumHeight(600);
 
         ArrayList<RadarEntry> re_list = new ArrayList<>();
-        RadarDataSet rds = new RadarDataSet(re_list, "Income");
+        RadarDataSet rds = new RadarDataSet(re_list, "Costs");
         for(int i = 0; i < line_data_list.size(); i++){
             LineData data = line_data_list.get(i);
             ILineDataSet lds = data.getDataSets().get(1);
@@ -124,6 +126,7 @@ public class SummaryFragment extends Fragment {
         spending_rc.getData().setLabels();
 
         spending_rc.getYAxis().setAxisMinimum(0f);
+        spending_rc.getDescription().setText("Spending Chart");
 
         spending_rc.getXAxis().setValueFormatter(new IndexAxisValueFormatter() {
             @Override

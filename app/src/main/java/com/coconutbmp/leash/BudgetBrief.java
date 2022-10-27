@@ -52,9 +52,11 @@ public class BudgetBrief extends BudgetComponentFragment{
         axis.setAxisLineWidth(1);
         chart.setVisibleXRangeMaximum(1f);
         chart.setVisibleXRangeMinimum(1f);
+        chart.getDescription().setText("Income vs Expenditure");
 
         PieChart pc = new PieChart(getContext());
         PieDataSet pds = new PieDataSet(new ArrayList<PieEntry>(), "");
+        pc.getDescription().setText("Income vs Expenditure");
 
         ArrayList<Integer> colors = new ArrayList<>();
         LineData ld = chart.getLineData();
