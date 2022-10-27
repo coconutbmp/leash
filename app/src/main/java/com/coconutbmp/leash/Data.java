@@ -8,12 +8,14 @@ import com.coconutbmp.leash.BudgetComponents.Budget;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 public class Data {
 
     private static int user_id = -1;
     static Budget current;
     static private ArrayList<Budget> all_budgets = new ArrayList<>();
+    static private CountDownLatch lock = new CountDownLatch(0);
 
     public static void addBudget(JSONObject json_rep){
         try{
@@ -22,6 +24,9 @@ public class Data {
                     return;
                 }
             }
+
+            lock = new CountDownLatch((int) (lock.getCount() + 3));
+
         } catch (Exception e) {
             e.printStackTrace();
             return;
@@ -29,6 +34,15 @@ public class Data {
 
         Budget b = new Budget(json_rep);
         all_budgets.add(b);
+    }
+
+    public static void countDown(){
+        System.out.println("counting down");
+        lock.countDown();
+    }
+
+    public static int getLockCount(){
+        return (int)lock.getCount();
     }
 
     public static void setCurrent(Budget budget){
