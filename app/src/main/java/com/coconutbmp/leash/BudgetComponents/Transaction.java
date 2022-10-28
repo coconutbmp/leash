@@ -10,15 +10,21 @@ public class Transaction extends BudgetComponent{
 
     @Override
     public void initialize(){
-
     }
 
+    /**
+     * complete deletion based on response
+     * @param response
+     */
     @Override
     public void acceptDeletionResponse(String response){
         if(response.equals("success")) ((Budget) this.parent).removeTransaction(this);
         super.acceptDeletionResponse(response);
     }
 
+    /**
+     * initiate deletion process
+     */
     @Override
     public void delete() {
         InternetRequest ir = new InternetRequest();
@@ -40,6 +46,11 @@ public class Transaction extends BudgetComponent{
         );
     }
 
+    /**
+     * constructor
+     * @param parent owner
+     * @param json_rep representation
+     */
     public Transaction(BudgetComponent parent, JSONObject json_rep) {
         super(parent, json_rep);
     }
