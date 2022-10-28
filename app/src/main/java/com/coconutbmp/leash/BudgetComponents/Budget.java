@@ -295,7 +295,7 @@ public class Budget extends BudgetComponent{
             jo = new JSONObject();
             jo.put("budgetID", getJsonRep().get("budget_ID"));
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             Data.respond(false);
             return;
         }

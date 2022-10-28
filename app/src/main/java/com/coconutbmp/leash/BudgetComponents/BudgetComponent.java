@@ -26,7 +26,7 @@ public class BudgetComponent {
             initialize();
             parent = this;
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -41,7 +41,7 @@ public class BudgetComponent {
            initialize();
            this.parent = parent;
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

@@ -67,9 +67,9 @@ public class Liability extends BudgetComponent{
                 if (f == Frequency.MONTHLY) {
                     date = date.plusMonths(1);
                     entries.add(new Entry((float) date.getDayOfMonth() / date.getMonth().length(date.isLeapYear()), (float) getJsonRep().getDouble("payment_amount")));
-                } else if (f == Frequency.WEEKLY) {
+                } /*else if (f == Frequency.WEEKLY) {
                     date = date.plusDays(7);
-                }
+                }*/
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,7 +110,7 @@ public class Liability extends BudgetComponent{
             }
             return liability_data_set;
         } catch ( Exception e ) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
     }
@@ -149,7 +149,7 @@ public class Liability extends BudgetComponent{
             }
             return  remainder_set;
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }
@@ -193,6 +193,7 @@ public class Liability extends BudgetComponent{
      */
     @Override
     public void delete(){
+        super.delete();
         System.out.println("deleting liability");
         InternetRequest ir = new InternetRequest();
         JSONObject jo;
@@ -200,7 +201,7 @@ public class Liability extends BudgetComponent{
             jo = new JSONObject();
             jo.put("liabID", getJsonRep().get("ID"));
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             Data.respond(false);
             return;
         }
