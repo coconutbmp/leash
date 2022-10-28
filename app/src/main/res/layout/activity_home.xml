@@ -223,7 +223,7 @@
                         android:fontFamily="sans-serif"
                         android:gravity="center"
                         android:text="Currently No Budgets"
-                        android:textAlignment="viewStart"
+                        android:textAlignment="center"
                         android:textColor="@color/dark_grey"
                         android:textSize="20sp" />
                 </LinearLayout>

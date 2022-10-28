@@ -80,6 +80,10 @@ public class BudgetActivity extends AppCompatActivity {
         frag_tran.add(budget_summary_ll.getId(), new BudgetBrief(this, Data.current)).commit();
     }
 
+    /**
+     * handles toggling of button
+     * @param b button
+     */
     void toggleMoreLess(Button b){
         if (b.getText().equals("More")){
             b.setText("Less");

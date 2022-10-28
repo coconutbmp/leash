@@ -45,6 +45,7 @@ public class BudgetBrief extends BudgetComponentFragment{
             chart.setData(budget.getPeriodSummary(date, date.plusMonths(1)));
         }
 
+        // style axis
         chart.setMinimumHeight(600);
         XAxis axis = chart.getXAxis();
         axis.setGranularity(1f);

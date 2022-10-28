@@ -39,6 +39,9 @@ public class SummaryFragment extends Fragment {
     View thisveiw;
     ArrayList<LineData> line_data_list = new ArrayList<>();
 
+    /**
+     * add data from budget summaries into line_data_list for access
+     */
     void retrieve_data(){
         ArrayList<Budget> budgets = Data.getAll();
 
@@ -52,6 +55,9 @@ public class SummaryFragment extends Fragment {
         }
     }
 
+    /**
+     * populate Income Radar chart
+     */
     void display_income_summary(){
         income_rc.setMinimumHeight(800);
         income_rc.setMinimumWidth(800);
@@ -61,13 +67,15 @@ public class SummaryFragment extends Fragment {
         for(int i = 0; i < line_data_list.size(); i++){
             LineData data = line_data_list.get(i);
             ILineDataSet lds = data.getDataSets().get(0);
-            try {
+            try { // add radar entry
                 RadarEntry re = new RadarEntry(lds.getEntryForIndex(lds.getEntryCount() - 1).getY(), Data.getAll().get(i).getJsonRep().get("budget_Name"));
                 rds.addEntry(re);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+
+        // general styling
 
         if(line_data_list.size() > 0){
             ILineDataSet lds = line_data_list.get(0).getDataSetByIndex(0);
@@ -90,6 +98,7 @@ public class SummaryFragment extends Fragment {
             public String getAxisLabel(float value, AxisBase axis){
                 String res = Float.toString(value);
                 try {
+                    // display budget name
                     res = (String) Data.getAll().get((int)value).getJsonRep().get("budget_Name");
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -110,12 +119,15 @@ public class SummaryFragment extends Fragment {
             LineData data = line_data_list.get(i);
             ILineDataSet lds = data.getDataSets().get(1);
             try {
+                // add entry
                 RadarEntry re = new RadarEntry(lds.getEntryForIndex(lds.getEntryCount() - 1).getY(), Data.getAll().get(i).getJsonRep().get("budget_Name"));
                 rds.addEntry(re);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+
+        // general styling
 
         if(line_data_list.size() > 0){
             ILineDataSet lds = line_data_list.get(0).getDataSetByIndex(1);
@@ -138,6 +150,7 @@ public class SummaryFragment extends Fragment {
             public String getAxisLabel(float value, AxisBase axis){
                 String res = Float.toString(value);
                 try {
+                    // display budget name
                     res = (String) Data.getAll().get((int)value).getJsonRep().get("budget_Name");
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -149,7 +162,9 @@ public class SummaryFragment extends Fragment {
     }
 
 
-
+    /**
+     * Displays summaries but only after every budget has been loaded
+     */
     void display_summaries() throws InterruptedException {
 
         sleep(500);
@@ -190,6 +205,7 @@ public class SummaryFragment extends Fragment {
     }
 
     public void refresh(){
+        // run this on a new thread to avoid blocking during sleep
         Thread summary_thread = new Thread(){
 
             @Override

@@ -37,7 +37,7 @@ public class ManageBudgetDialog extends Dialog {
             this.dismiss();
         });
 
-        delete_button.setOnClickListener(view -> {
+        delete_button.setOnClickListener(view -> { // what happens when deletion is started
             Data.setCurrentActivity(current_activity);
             Data.setCurrentListener(resp ->
             {

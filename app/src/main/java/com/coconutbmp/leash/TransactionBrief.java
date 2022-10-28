@@ -10,14 +10,18 @@ public class TransactionBrief extends BudgetComponentFragment {
 
     private Transaction transaction;
 
+    /**
+     * Initiate view for transaction
+     * @throws Exception possible json exception
+     */
     @Override
     void initiate_view() throws Exception{
         super.initiate_view();
         details_ll.removeAllViews();
         TextView more_tv = new TextView(this.getContext());
         try {
-            name_label.setText(transaction.getJsonRep().getString("transaction_Type"));
-            more_tv.setText(String.format("Paid :R %s On %s", transaction.getJsonRep().get("transaction_Amount"), transaction.getJsonRep().get("transaction_Date")));
+            name_label.setText(transaction.getJsonRep().getString("transaction_Type")); // display transaction type
+            more_tv.setText(String.format("Paid :R %s On %s", transaction.getJsonRep().get("transaction_Amount"), transaction.getJsonRep().get("transaction_Date"))); // get amount and date
             // + transaction.getJsonRep().getString("transaction_Name"));
         } catch (Exception e){
             e.printStackTrace();

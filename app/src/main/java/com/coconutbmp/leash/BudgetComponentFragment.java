@@ -37,16 +37,10 @@ public class BudgetComponentFragment extends Fragment {
         //Required Interface for super class
     }
 
-    /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_budget_component, container, false);
+        // get xml elements
         name_label = v.findViewById(R.id.name_label);
         details_ll = v.findViewById(R.id.ComponentDetails);
         card = v.findViewById(R.id.component_card_view);
