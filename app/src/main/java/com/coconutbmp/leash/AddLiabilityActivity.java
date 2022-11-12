@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -172,7 +173,6 @@ public class AddLiabilityActivity extends AppCompatActivity {
         category_spinner = findViewById(R.id.category_spinner);
         name_edit = findViewById(R.id.name_edit);
         frag_container = findViewById(R.id.frag_container_ll);
-
         cancel_button.setOnClickListener(view -> finish()); // close this activity when cancel clicked
 
         continue_button.setOnClickListener(view -> {
@@ -183,7 +183,6 @@ public class AddLiabilityActivity extends AppCompatActivity {
                 System.out.println("json parsing failed");
                 e.printStackTrace();
             }
-
         });
 
         String[] cats = getResources().getStringArray(R.array.predefined_categories);

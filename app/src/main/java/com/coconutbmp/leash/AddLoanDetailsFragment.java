@@ -70,6 +70,12 @@ public class AddLoanDetailsFragment extends Fragment implements LiabilityDetails
         end_button = view.findViewById(R.id.end_button);
         start_dp = view.findViewById(R.id.loan_start_dp);
         end_dp = view.findViewById(R.id.loan_end_dp);
+        custom_repayment_switch = view.findViewById(R.id.custom_value_switch);
+
+        custom_repayment_switch.setOnCheckedChangeListener((v, checked) ->{
+            repayment_amount_edit.setEnabled(checked);
+        });
+
 
         String[] type = getResources().getStringArray(R.array.interest_types);
         String[] freq = getResources().getStringArray(R.array.calculation_frequencies);
