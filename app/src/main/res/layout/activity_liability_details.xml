@@ -72,29 +72,6 @@
                     android:layout_height="16dp" />
 
                 <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="Repayment Summary"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="8dp">
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
