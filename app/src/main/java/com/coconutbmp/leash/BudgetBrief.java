@@ -3,6 +3,7 @@ package com.coconutbmp.leash;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class BudgetBrief extends BudgetComponentFragment{
     @SuppressLint({"ResourceType", "SetTextI18n"})
     @Override
     void initiate_view() throws Exception{
+        ((LinearLayout)manage_button.getParent()).removeView(manage_button);
         super.initiate_view();
         details_ll.removeAllViews();
 

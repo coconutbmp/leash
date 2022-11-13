@@ -29,13 +29,7 @@ public class ManageBudgetDialog extends Dialog {
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
 
-        edit_button = findViewById(R.id.edit_button);
         delete_button = findViewById(R.id.delete_button);
-
-        edit_button.setOnClickListener(view -> {
-            Toast.makeText(this.getContext(), "Editing is currently unavailable.", Toast.LENGTH_LONG).show();
-            this.dismiss();
-        });
 
         delete_button.setOnClickListener(view -> { // what happens when deletion is started
             Data.setCurrentActivity(current_activity);

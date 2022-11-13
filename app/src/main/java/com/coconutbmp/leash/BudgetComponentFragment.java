@@ -29,8 +29,6 @@ public class BudgetComponentFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     void initiate_view() throws Exception{

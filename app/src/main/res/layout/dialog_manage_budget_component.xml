@@ -29,23 +29,6 @@
             android:textSize="28sp" />
 
         <Button
-            android:id="@+id/edit_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="0"
-            android:backgroundTint="@color/beige"
-            android:contentDescription="@string/create_cat"
-            android:drawableRight="@drawable/ic_baseline_edit_24"
-            android:fontFamily="@font/convergence"
-            android:text="Edit"
-            android:textAllCaps="false"
-            app:cornerRadius="24dp" />
-
-        <Button
             android:id="@+id/delete_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
